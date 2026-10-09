@@ -544,10 +544,12 @@ main#top[data-theme="light"] .project-card-button .card-hint { color: rgba(23,23
   flex-wrap: nowrap;
   max-width: calc(100vw - 32px);
   color: #f2f0e9;
-  font-size: clamp(17px, 3vw, 27px);
-  font-weight: 650;
-  line-height: 1.2;
-  letter-spacing: .12em;
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(26px, 5.5vw, 58px);
+  font-weight: 800;
+  line-height: .98;
+  letter-spacing: -.075em;
+  text-transform: none;
 }
 .loader-letter {
   display: inline-block;
@@ -556,7 +558,7 @@ main#top[data-theme="light"] .project-card-button .card-hint { color: rgba(23,23
   transform: translateY(13px);
   animation: letter-in-out 3.7s cubic-bezier(.2,.75,.25,1) calc(.65s + var(--letter-index) * 0.045s) both;
 }
-.loader-space { width: .45em; }
+.loader-space { width: .28em; }
 @keyframes logo-pop {
   0% { opacity: 0; transform: scale(0) rotate(-14deg); }
   58% { opacity: 1; transform: scale(1.08) rotate(3deg); }
@@ -574,5 +576,5 @@ main#top[data-theme="light"] .project-card-button .card-hint { color: rgba(23,23
 @media (max-width: 600px) {
   .intro-loader { gap: 20px; }
   .loader-logo-wrap { width: 125px; }
-  .loader-wordmark { font-size: clamp(15px, 4vw, 21px); letter-spacing: .09em; }
+  .loader-wordmark { font-size: clamp(25px, 7vw, 40px); letter-spacing: -.075em; }
 }
