@@ -732,3 +732,15 @@ main#top .intro-loader .loader-wordmark {
 .portfolio-intro-content { gap: 0 !important; }
 .portfolio-intro-logo-wrap,
 .portfolio-intro-logo { display: none !important; }
+
+
+/* Text-only loader: smooth positional reveal, no scaling */
+.portfolio-intro-screen .portfolio-intro-letter {
+  animation: portfolio-letter-position 2.2s cubic-bezier(.22,.7,.25,1) calc(.1s + var(--letter-index) * .045s) both !important;
+  transform-origin: center;
+}
+@keyframes portfolio-letter-position {
+  0% { opacity: 0; transform: translateY(14px); filter: blur(3px); }
+  24%, 70% { opacity: 1; transform: translateY(0); filter: blur(0); }
+  100% { opacity: 0; transform: translateY(-8px); filter: blur(1px); }
+}
