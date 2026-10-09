@@ -368,3 +368,137 @@ main[data-theme="light"] .design-page-note, main[data-theme="light"] .honest-not
 @media (max-width: 760px) {
   .design-modal-thumbnail { aspect-ratio: 1.35 / 1; }
 }
+
+
+/* Global dark-first palette: off-black canvas and warm off-white type */
+:root {
+  color-scheme: dark;
+  color: #f2f0e9;
+  background: #171715;
+  --ink: #f2f0e9;
+  --paper: #171715;
+  --paper-light: #f2f0e9;
+  --stone: #a19f96;
+  --line: rgba(242,240,233,.2);
+}
+html, body, #root { min-height: 100%; background: #171715; }
+body { color: #f2f0e9; }
+main#top { min-height: 100vh; background: #171715; color: #f2f0e9; }
+main#top .intro,
+main#top .projects-section,
+main#top .work-section,
+main#top .social-section { background: #171715; color: #f2f0e9; }
+main#top .intro-copy p,
+main#top .intro-copy .intro-lead { color: #d0cec6; }
+main#top .interest-line span,
+main#top .interest-line i,
+main#top .eyebrow,
+main#top .section-label,
+main#top .project-type,
+main#top .project-card-top,
+main#top .project-stack,
+main#top .honest-note { color: #a19f96; }
+main#top .section-label,
+main#top .behance-bottom,
+main#top .modal-detail,
+main#top .design-info-grid { border-color: rgba(242,240,233,.2); }
+main#top .section-heading > p,
+main#top .row-main p,
+main#top .project-description,
+main#top .modal-description,
+main#top .design-modal-description { color: #c4c1b8; }
+main#top .site-footer { background: #171715; color: #a19f96; border-color: rgba(242,240,233,.2); }
+main#top .project-modal,
+main#top .design-modal { background: #201f1c; color: #f2f0e9; border: 1px solid rgba(242,240,233,.14); }
+main#top .design-modal-top { background: #201f1c; color: #a19f96; }
+main#top .design-modal-title-row .eyebrow,
+main#top .design-info-grid span,
+main#top .design-modal-footer { color: #a19f96; }
+main#top .design-info-grid p,
+main#top .modal-detail p { color: #f2f0e9; }
+main#top .design-modal-footer button { color: #f2f0e9; }
+main#top .modal-close,
+main#top .design-modal-close { border-color: rgba(242,240,233,.22); color: #f2f0e9; }
+main#top .modal-repo-link,
+main#top .behance-external { background: #f2f0e9; color: #171715; }
+main#top .behance-card { color: #f2f0e9; }
+main#top .behance-card-desc { color: #c4c1b8; }
+main#top .behance-bottom a { color: #f2f0e9; }
+main#top .home-contact .social-links a { color: #f2f0e9; border-color: rgba(242,240,233,.2); }
+main#top .home-contact .social-links a small { color: #a19f96; }
+main#top .home-contact .social-links a:hover { background: rgba(242,240,233,.07); }
+main#top .project-modal-backdrop,
+main#top .design-modal-backdrop { background: rgba(8,8,7,.82); }
+
+/* Light mode applies to every route and both project-detail modals */
+main#top[data-theme="light"] {
+  color-scheme: light;
+  color: #191917;
+  background: #f1efe8;
+  --ink: #191917;
+  --paper: #f1efe8;
+  --paper-light: #191917;
+  --stone: #77756e;
+  --line: rgba(23,23,21,.2);
+}
+main#top[data-theme="light"],
+main#top[data-theme="light"] .intro,
+main#top[data-theme="light"] .projects-section,
+main#top[data-theme="light"] .work-section,
+main#top[data-theme="light"] .social-section { background: #f1efe8; color: #191917; }
+main#top[data-theme="light"] .intro-copy p,
+main#top[data-theme="light"] .intro-copy .intro-lead,
+main#top[data-theme="light"] .section-heading > p,
+main#top[data-theme="light"] .row-main p,
+main#top[data-theme="light"] .project-description,
+main#top[data-theme="light"] .modal-description,
+main#top[data-theme="light"] .design-modal-description { color: #62615a; }
+main#top[data-theme="light"] .section-label,
+main#top[data-theme="light"] .interest-line span,
+main#top[data-theme="light"] .interest-line i,
+main#top[data-theme="light"] .eyebrow,
+main#top[data-theme="light"] .project-type,
+main#top[data-theme="light"] .project-card-top,
+main#top[data-theme="light"] .project-stack,
+main#top[data-theme="light"] .honest-note,
+main#top[data-theme="light"] .behance-card-meta,
+main#top[data-theme="light"] .behance-bottom { color: #77756e; }
+main#top[data-theme="light"] .section-label,
+main#top[data-theme="light"] .behance-bottom,
+main#top[data-theme="light"] .modal-detail,
+main#top[data-theme="light"] .design-info-grid { border-color: rgba(23,23,21,.2); }
+main#top[data-theme="light"] .site-footer { background: #e6e3db; color: #77756e; border-color: rgba(23,23,21,.15); }
+main#top[data-theme="light"] .project-modal,
+main#top[data-theme="light"] .design-modal { background: #f1efe8; color: #191917; border-color: rgba(23,23,21,.15); }
+main#top[data-theme="light"] .design-modal-top { background: #f1efe8; color: #77756e; }
+main#top[data-theme="light"] .design-modal-title-row .eyebrow,
+main#top[data-theme="light"] .design-info-grid span,
+main#top[data-theme="light"] .design-modal-footer { color: #77756e; }
+main#top[data-theme="light"] .design-info-grid p,
+main#top[data-theme="light"] .modal-detail p { color: #191917; }
+main#top[data-theme="light"] .design-modal-footer button { color: #191917; }
+main#top[data-theme="light"] .modal-close,
+main#top[data-theme="light"] .design-modal-close { border-color: rgba(23,23,21,.22); color: #191917; }
+main#top[data-theme="light"] .modal-repo-link,
+main#top[data-theme="light"] .behance-external { background: #191917; color: #f1efe8; }
+main#top[data-theme="light"] .behance-card { color: #191917; }
+main#top[data-theme="light"] .behance-card-desc { color: #62615a; }
+main#top[data-theme="light"] .behance-bottom a { color: #191917; }
+main#top[data-theme="light"] .home-contact .social-links a { color: #191917; border-color: rgba(23,23,21,.2); }
+main#top[data-theme="light"] .home-contact .social-links a small { color: #77756e; }
+main#top[data-theme="light"] .home-contact .social-links a:hover { background: rgba(23,23,21,.05); }
+main#top[data-theme="light"] .floating-nav { background: rgba(242,240,233,.96); border-color: rgba(23,23,21,.16); color: #191917; }
+main#top[data-theme="light"] .nav-item { color: rgba(23,23,21,.62); }
+main#top[data-theme="light"] .nav-item:hover { color: #191917; background: rgba(23,23,21,.06); }
+main#top[data-theme="light"] .nav-item.is-active { color: #191917; }
+main#top[data-theme="light"] .active-mark { background: #191917; }
+main#top[data-theme="light"] .theme-toggle { color: #191917; background: rgba(23,23,21,.08); }
+main#top[data-theme="light"] .nav-separator { background: rgba(23,23,21,.2); }
+main#top[data-theme="light"] .project-modal-backdrop,
+main#top[data-theme="light"] .design-modal-backdrop { background: rgba(40,39,35,.35); }
+main#top[data-theme="light"] .project-card-button { color: #191917; }
+main#top[data-theme="light"] .project-card-button .project-description { color: rgba(23,23,21,.78); }
+main#top[data-theme="light"] .project-card-button .project-card-top,
+main#top[data-theme="light"] .project-card-button .project-type,
+main#top[data-theme="light"] .project-card-button .project-stack,
+main#top[data-theme="light"] .project-card-button .card-hint { color: rgba(23,23,21,.72); }
