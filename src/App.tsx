@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowDownRight, ArrowUpRight, Github, Instagram, Linkedin, Palette, Code2, X, ExternalLink, Mail, House } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, Github, Instagram, Linkedin, Palette, Code2, X, ExternalLink, Mail, Sun, Moon } from "lucide-react";
 
 type PageId = "home" | "design" | "builds";
 type Project = { number: string; title: string; type: string; description: string; stack: string; focus: string; url?: string };
@@ -16,7 +16,6 @@ const designProjects: DesignProject[] = [
   { number: "03", title: "VitaFizz", subtitle: "PACKAGING / BRANDING", description: "A bright, playful identity concept for a fizzy beverage brand.", year: "2023", role: "Branding / packaging concept", tools: "Branding · Packaging · Art direction", url: "https://www.behance.net/gallery/179377597/Vita-Fizz-COmp", embed: "https://www.behance.net/embed/project/179377597?url=https%3A%2F%2Fwww.behance.net%2Fgallery%2F179377597%2FVita-Fizz-COmp", tone: "vitafizz" },
   { number: "04", title: "Designly Rebrand", subtitle: "DISCORD BANNER", description: "A banner design created for the Designly Discord community.", year: "2023", role: "Banner design", tools: "Graphic design · Digital composition", url: "https://www.behance.net/gallery/181584011/Designly-rebarnd-comp", embed: "https://www.behance.net/embed/project/181584011?url=https%3A%2F%2Fwww.behance.net%2Fgallery%2F181584011%2FDesignly-rebarnd-comp", tone: "designly" },
   { number: "05", title: "The Myth", subtitle: "DISCORD BANNER", description: "A themed digital banner exploring a darker, myth-inspired visual direction.", year: "2022", role: "Banner design", tools: "Graphic design · Digital composition", url: "https://www.behance.net/gallery/174810451/The-myth", embed: "https://www.behance.net/embed/project/174810451?url=https%3A%2F%2Fwww.behance.net%2Fgallery%2F174810451%2FThe-myth", tone: "myth" },
-  { number: "06", title: "Designly Winter", subtitle: "DISCORD BANNER", description: "A seasonal banner design for the Designly community.", year: "2023", role: "Banner design", tools: "Graphic design · Digital composition", url: "https://www.behance.net/gallery/185813645/Designly-winter-comp", embed: "https://www.behance.net/embed/project/185813645?url=https%3A%2F%2Fwww.behance.net%2Fgallery%2F185813645%2FDesignly-winter-comp", tone: "winter" },
 ];
 const projects: Project[] = [
   { number: "01", title: "Reed AI", type: "AI STUDY ASSISTANT", description: "A study companion that turns personal notes into a searchable, conversational learning space.", stack: "FastAPI · Qdrant · Ollama · Sentence Transformers", focus: "Document ingestion, chunking, embeddings, retrieval, and local LLM-powered study workflows.", url: "https://github.com/shayan-wasLazy/Reed" },
@@ -32,8 +31,8 @@ function FloatingLeaves() {
   return <div className="leaf-layer" aria-hidden="true">{leaves.map((leaf) => <span className="leaf" key={leaf.id} style={{ left: leaf.left, animationDelay: leaf.delay, animationDuration: leaf.duration, width: leaf.size, height: `calc(${leaf.size} * .62)`, transform: `rotate(${leaf.rotate})` }} />)}</div>;
 }
 
-function Navigation({ active }: { active: PageId }) {
-  return <nav className="floating-nav" aria-label="Main navigation">{navItems.map((item) => <a key={item.id} className={`nav-item ${active === item.id ? "is-active" : ""}`} href={item.href} aria-current={active === item.id ? "page" : undefined}><span>{item.label}</span>{active === item.id && <motion.span className="active-mark" layoutId="active-mark" transition={{ type: "spring", stiffness: 380, damping: 30 }} />}</a>)}</nav>;
+function Navigation({ active, theme, onToggleTheme }: { active: PageId; theme: "dark" | "light"; onToggleTheme: () => void }) {
+  return <nav className="floating-nav" aria-label="Main navigation"><div className="nav-links">{navItems.map((item) => <a key={item.id} className={`nav-item ${active === item.id ? "is-active" : ""}`} href={item.href} aria-current={active === item.id ? "page" : undefined}><span>{item.label}</span>{active === item.id && <motion.span className="active-mark" layoutId="active-mark" transition={{ type: "spring", stiffness: 380, damping: 30 }} />}</a>)}</div><span className="nav-separator" aria-hidden="true" /><button className="theme-toggle" onClick={onToggleTheme} aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`} title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}>{theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}</button></nav>;
 }
 function Hero() {
   return <section className="hero home-hero" aria-label="Portfolio cover"><div className="hero-image" role="img" aria-label="Monochrome Japanese mountain valley illustration" /><div className="hero-vignette" /><div className="hero-grain" /><FloatingLeaves /></section>;
@@ -79,7 +78,7 @@ function DesignPage() {
         <div className="design-modal-title-row"><div><span className="eyebrow">{selected.subtitle}</span><h2 id="design-modal-title">{selected.title}</h2></div><a href={selected.url} target="_blank" rel="noreferrer" className="behance-external">OPEN ON BEHANCE <ExternalLink size={14} /></a></div>
         <p className="design-modal-description">{selected.description}</p>
         <div className="design-info-grid"><div><span>ROLE</span><p>{selected.role}</p></div><div><span>TOOLS / FOCUS</span><p>{selected.tools}</p></div><div><span>YEAR</span><p>{selected.year}</p></div></div>
-        <div className="design-modal-footer"><button onClick={() => { const i = designProjects.findIndex((p) => p.number === selected.number); const next = (i - 1 + designProjects.length) % designProjects.length; setSelected(designProjects[next]); }}>← PREVIOUS PROJECT</button><span>{designProjects.findIndex((p) => p.number === selected.number) + 1} / {designProjects.length}</span><button onClick={() => { const i = designProjects.findIndex((p) => p.number === selected.number); const next = (i + 1) % designProjects.length; setSelected(designProjects[next]); setSlide(0); }}>NEXT PROJECT →</button></div>
+        <div className="design-modal-footer"><button onClick={() => { const i = designProjects.findIndex((p) => p.number === selected.number); const next = (i - 1 + designProjects.length) % designProjects.length; setSelected(designProjects[next]); }}>← PREVIOUS PROJECT</button><span>{designProjects.findIndex((p) => p.number === selected.number) + 1} / {designProjects.length}</span><button onClick={() => { const i = designProjects.findIndex((p) => p.number === selected.number); const next = (i + 1) % designProjects.length; setSelected(designProjects[next]); }}>NEXT PROJECT →</button></div>
       </div>
     </motion.section>
   </div>}
@@ -98,7 +97,8 @@ function Footer() { const reduceMotion = useReducedMotion(); return <footer clas
 
 export default function App() {
   const [path, setPath] = useState(window.location.pathname);
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
   useEffect(() => { const update = () => setPath(window.location.pathname); window.addEventListener("popstate", update); return () => window.removeEventListener("popstate", update); }, []);
   const active: PageId = path.startsWith("/design") ? "design" : path.startsWith("/builds") ? "builds" : "home";
-  return <main id="top"><Navigation active={active} />{active === "design" ? <DesignPage /> : active === "builds" ? <BuildsPage /> : <HomePage />}<Footer /></main>;
+  return <main id="top" data-theme={theme}><Navigation active={active} theme={theme} onToggleTheme={() => setTheme((current) => current === "dark" ? "light" : "dark")} />{active === "design" ? <DesignPage /> : active === "builds" ? <BuildsPage /> : <HomePage />}<Footer /></main>;
 }
