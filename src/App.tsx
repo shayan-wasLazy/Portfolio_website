@@ -49,7 +49,6 @@ function HomePage() {
 }
 function DesignPage() {
   const [selected, setSelected] = useState<DesignProject | null>(null);
-  const [slide, setSlide] = useState(0);
   const reduceMotion = useReducedMotion();
   useEffect(() => {
     if (!selected) return;
@@ -58,7 +57,7 @@ function DesignPage() {
     document.body.style.overflow = "hidden";
     return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
   }, [selected]);
-  const openProject = (project: DesignProject) => { setSelected(project); setSlide(0); };
+  const openProject = (project: DesignProject) => { setSelected(project); };
   return <><section id="content" className="work-section section-shell design-page">
     <SectionLabel left="01 / THE VISUAL SIDE" right="SELECTED WORK · 2022—2024" />
     <div className="section-heading"><div><span className="eyebrow"><Palette size={14} /> SELECTED PROJECTS</span><h2>Made with <em>intent.</em></h2></div><p>A collection of identity explorations, packaging, and digital banners. One gallery, no boxes around the kind of work.</p></div>
@@ -80,7 +79,7 @@ function DesignPage() {
         <div className="design-modal-title-row"><div><span className="eyebrow">{selected.subtitle}</span><h2 id="design-modal-title">{selected.title}</h2></div><a href={selected.url} target="_blank" rel="noreferrer" className="behance-external">OPEN ON BEHANCE <ExternalLink size={14} /></a></div>
         <p className="design-modal-description">{selected.description}</p>
         <div className="design-info-grid"><div><span>ROLE</span><p>{selected.role}</p></div><div><span>TOOLS / FOCUS</span><p>{selected.tools}</p></div><div><span>YEAR</span><p>{selected.year}</p></div></div>
-        <div className="design-modal-footer"><button onClick={() => { const i = designProjects.findIndex((p) => p.number === selected.number); const next = (i - 1 + designProjects.length) % designProjects.length; setSelected(designProjects[next]); setSlide(0); }}>← PREVIOUS PROJECT</button><span>{designProjects.findIndex((p) => p.number === selected.number) + 1} / {designProjects.length}</span><button onClick={() => { const i = designProjects.findIndex((p) => p.number === selected.number); const next = (i + 1) % designProjects.length; setSelected(designProjects[next]); setSlide(0); }}>NEXT PROJECT →</button></div>
+        <div className="design-modal-footer"><button onClick={() => { const i = designProjects.findIndex((p) => p.number === selected.number); const next = (i - 1 + designProjects.length) % designProjects.length; setSelected(designProjects[next]); }}>← PREVIOUS PROJECT</button><span>{designProjects.findIndex((p) => p.number === selected.number) + 1} / {designProjects.length}</span><button onClick={() => { const i = designProjects.findIndex((p) => p.number === selected.number); const next = (i + 1) % designProjects.length; setSelected(designProjects[next]); setSlide(0); }}>NEXT PROJECT →</button></div>
       </div>
     </motion.section>
   </div>}
