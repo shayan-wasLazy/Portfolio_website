@@ -298,7 +298,7 @@ footer a { text-decoration: none; }
 .design-modal-top { position: sticky; top: 0; z-index: 3; background: var(--paper-light); }
 .design-modal-embed { margin: 0 clamp(10px, 2vw, 22px); width: calc(100% - clamp(20px, 4vw, 44px)); overflow: hidden; }
 .design-modal-embed iframe { display: block; }
-main[data-theme="light"] { --ink: #f1efe8; --paper: #f1efe8; --paper-light: #191917; --stone: #77756e; --line: rgba(23,23,21,.2); color: #191917; background: #f1efe8; }
+main[data-theme="light"] { color: #191917; background: #f1efe8; }
 main[data-theme="light"] .work-section, main[data-theme="light"] .social-section { background: #f1efe8; color: #191917; }
 main[data-theme="light"] .work-section .section-label, main[data-theme="light"] .social-section .section-label { color: #77756e; border-color: rgba(23,23,21,.2); }
 main[data-theme="light"] .section-heading > p, main[data-theme="light"] .behance-card-desc { color: #62615a; }
