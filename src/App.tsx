@@ -106,14 +106,28 @@ function BuildsPage() {
 function Footer() { const reduceMotion = useReducedMotion(); return <footer className="site-footer section-shell"><span>© 2026 SHAYAN MANDREKAR</span><span>BUILT WITH CURIOSITY, NOT A TEMPLATE.</span><a href="/" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" }); window.history.pushState({}, "", "/"); window.dispatchEvent(new PopStateEvent("popstate")); }}>BACK TO HOME ↑</a></footer>; }
 
 export default function App() {
-  const [path, setPath] = useState(window.location.hash || "#/");
+  const initialPath = window.location.hash || "#/";
+  const [path, setPath] = useState(initialPath);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
-  const [isLoading, setIsLoading] = useState(true);
+  // Show the intro on a fresh visit only when the visitor lands on Home.
+  const [isLoading, setIsLoading] = useState(!initialPath.startsWith("#/design") && !initialPath.startsWith("#/builds"));
   useEffect(() => {
+    if (!isLoading) return;
     const timeout = window.setTimeout(() => setIsLoading(false), 3000);
     return () => window.clearTimeout(timeout);
+  }, [isLoading]);
+  useEffect(() => {
+    const update = () => {
+      const nextPath = window.location.hash || "#/";
+      setPath(nextPath);
+      // Inner pages should open immediately, without the intro overlay.
+      if (nextPath.startsWith("#/design") || nextPath.startsWith("#/builds")) {
+        setIsLoading(false);
+      }
+    };
+    window.addEventListener("hashchange", update);
+    return () => window.removeEventListener("hashchange", update);
   }, []);
-  useEffect(() => { const update = () => setPath(window.location.hash || "#/"); window.addEventListener("hashchange", update); return () => window.removeEventListener("hashchange", update); }, []);
   const active: PageId = path.startsWith("#/design") ? "design" : path.startsWith("#/builds") ? "builds" : "home";
-  return <main id="top" data-theme={theme}>{isLoading && <LoadingScreen />}<Navigation active={active} theme={theme} onToggleTheme={() => setTheme((current) => current === "dark" ? "light" : "dark")} />{active === "design" ? <DesignPage /> : active === "builds" ? <BuildsPage /> : <HomePage />}<Footer /></main>;
+  return <main id="top" data-theme={theme}>{isLoading && active === "home" && <LoadingScreen />}<Navigation active={active} theme={theme} onToggleTheme={() => setTheme((current) => current === "dark" ? "light" : "dark")} />{active === "design" ? <DesignPage /> : active === "builds" ? <BuildsPage /> : <HomePage />}<Footer /></main>;
 }
