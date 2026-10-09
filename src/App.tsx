@@ -38,15 +38,14 @@ function Hero() {
   return <section className="hero home-hero" aria-label="Portfolio cover"><div className="hero-image" role="img" aria-label="Monochrome Japanese mountain valley illustration" /><div className="hero-vignette" /><div className="hero-grain" /><FloatingLeaves /></section>;
 }
 function LoadingScreen() {
-  const name = "SHAYAN MANDREKAR";
+  const firstName = "Shayan";
+  const lastName = "Mandrekar";
   return <motion.div className="intro-loader" role="status" aria-label="Loading portfolio"
-    initial={{ opacity: 1 }} animate={{ opacity: [1, 1, 1, 0] }}
-    transition={{ duration: 5, times: [0, .84, .9, 1], ease: "easeInOut" }}>
-    <div className="loader-logo-wrap">
-      <img className="loader-logo" src="/assets/lazy-logo.png" alt="" />
-    </div>
-    <div className="loader-wordmark" aria-label={name}>
-      {Array.from(name).map((char, index) => <span aria-hidden="true" className={char === " " ? "loader-letter loader-space" : "loader-letter"} key={index} style={{ "--letter-index": index } as React.CSSProperties}>{char === " " ? "\u00a0" : char}</span>)}
+    initial={{ opacity: 1 }} animate={{ opacity: [1, 1, 0] }}
+    transition={{ duration: 3, times: [0, .78, 1], ease: "easeInOut" }}>
+    <div className="loader-wordmark" aria-label="Shayan Mandrekar">
+      <span className="loader-name-part loader-name-bold">{Array.from(firstName).map((char, index) => <span aria-hidden="true" className="loader-letter" key={index} style={{ "--letter-index": index } as React.CSSProperties}>{char}</span>)}</span>
+      <span className="loader-name-part loader-name-italic">{Array.from(lastName).map((char, index) => <span aria-hidden="true" className="loader-letter" key={index} style={{ "--letter-index": index + firstName.length } as React.CSSProperties}>{char}</span>)}</span>
     </div>
   </motion.div>;
 }
@@ -113,7 +112,7 @@ export default function App() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    const timeout = window.setTimeout(() => setIsLoading(false), 5000);
+    const timeout = window.setTimeout(() => setIsLoading(false), 3000);
     return () => window.clearTimeout(timeout);
   }, []);
   useEffect(() => { const update = () => setPath(window.location.pathname); window.addEventListener("popstate", update); return () => window.removeEventListener("popstate", update); }, []);
