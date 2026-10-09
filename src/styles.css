@@ -568,3 +568,30 @@ main#top[data-theme="light"] .project-card-button .card-hint { color: rgba(23,23
   .loader-name-bold { font-size: clamp(58px, 16vw, 98px); }
   .loader-name-italic { font-size: clamp(52px, 14.5vw, 88px); }
 }
+
+
+/* Force the surname to use the same italic serif as the site's editorial headings */
+main#top .intro-loader .loader-wordmark .loader-name-italic {
+  font-family: Georgia, 'Times New Roman', serif !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  font-size: clamp(66px, 15vw, 164px);
+  line-height: .82;
+  letter-spacing: -.085em;
+  color: #77756e;
+}
+main#top .intro-loader .loader-wordmark .loader-name-bold {
+  font-family: 'Manrope', sans-serif !important;
+  font-weight: 800 !important;
+}
+main#top .intro-loader .loader-wordmark {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  text-align: left;
+}
+@media (max-width: 600px) {
+  main#top .intro-loader .loader-wordmark .loader-name-italic {
+    font-size: clamp(54px, 14.5vw, 92px);
+  }
+}
