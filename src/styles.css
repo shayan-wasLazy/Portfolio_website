@@ -323,3 +323,25 @@ main[data-theme="light"] .design-page-note, main[data-theme="light"] .honest-not
   .theme-toggle { width: 38px; height: 38px; }
   .design-modal-embed { margin: 0 10px; width: calc(100% - 20px); }
 }
+
+
+/* Keep custom GIF/MP4 thumbnails inside a consistent landscape frame */
+.behance-card-visual {
+  aspect-ratio: 1.65 / 1;
+  width: 100%;
+  min-width: 0;
+}
+.behance-card-visual > img,
+.behance-card-visual > video {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: inherit;
+}
+@media (max-width: 760px) {
+  .behance-card-visual { aspect-ratio: 1.45 / 1; }
+}
