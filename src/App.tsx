@@ -38,17 +38,16 @@ function Hero() {
   return <section className="hero home-hero" aria-label="Portfolio cover"><div className="hero-image" role="img" aria-label="Monochrome Japanese mountain valley illustration" /><div className="hero-vignette" /><div className="hero-grain" /><FloatingLeaves /></section>;
 }
 function LoadingScreen() {
+  const name = "SHAYAN MANDREKAR";
   return <motion.div className="intro-loader" role="status" aria-label="Loading portfolio"
-    initial={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: .45, ease: "easeInOut" }}>
-    <div className="loader-scene" aria-hidden="true">
-      <span className="loader-orbit loader-orbit-one" />
-      <span className="loader-orbit loader-orbit-two" />
-      <span className="loader-slash" />
-      <div className="loader-logo-wrap"><img className="loader-logo" src="/assets/lazy-logo.png" alt="" /></div>
+    initial={{ opacity: 1 }} animate={{ opacity: [1, 1, 1, 0] }}
+    transition={{ duration: 5, times: [0, .84, .9, 1], ease: "easeInOut" }}>
+    <div className="loader-logo-wrap">
+      <img className="loader-logo" src="/assets/lazy-logo.png" alt="" />
     </div>
-    <div className="loader-wordmark"><span className="loader-kicker">PERSONAL PORTFOLIO · 2026</span><span className="loader-name">SHAYAN <em>MANDREKAR</em></span><span className="loader-status"><i /> ENTERING THE ARCHIVE</span></div>
-    <div className="loader-progress"><span /></div>
-    <span className="loader-kanji" aria-hidden="true">静 · 影 · 作</span>
+    <div className="loader-wordmark" aria-label={name}>
+      {Array.from(name).map((char, index) => <span aria-hidden="true" className={char === " " ? "loader-letter loader-space" : "loader-letter"} key={index} style={{ "--letter-index": index } as React.CSSProperties}>{char === " " ? "\u00a0" : char}</span>)}
+    </div>
   </motion.div>;
 }
 function SectionLabel({ left, right }: { left: string; right: string }) { return <div className="section-label"><span>{left}</span><span>{right}</span></div>; }
