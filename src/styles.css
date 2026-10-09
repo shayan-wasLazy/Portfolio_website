@@ -744,3 +744,72 @@ main#top .intro-loader .loader-wordmark {
   24%, 70% { opacity: 1; transform: translateY(0); filter: blur(0); }
   100% { opacity: 0; transform: translateY(-8px); filter: blur(1px); }
 }
+
+
+/* Builds: match the restrained editorial portfolio palette in both themes */
+main#top .project-card-button {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  padding: clamp(22px, 3.2vw, 38px);
+  color: #f2f0e9 !important;
+  background: #201f1c !important;
+  border: 1px solid rgba(242,240,233,.17) !important;
+  border-radius: 18px;
+  box-shadow: none;
+  transition: background .25s ease, border-color .25s ease, transform .25s ease;
+}
+main#top .project-card-button:hover {
+  background: #262520 !important;
+  border-color: rgba(242,240,233,.38) !important;
+}
+main#top .project-card-button .project-card-top,
+main#top .project-card-button .project-type,
+main#top .project-card-button .project-stack,
+main#top .project-card-button .card-hint { color: #a19f96 !important; }
+main#top .project-card-button .project-card-title {
+  color: #f2f0e9 !important;
+  margin: 15px 0 12px;
+}
+main#top .project-card-button .project-description { color: #c4c1b8 !important; }
+main#top .project-card-button .project-stack { margin-top: auto; padding-top: 22px; }
+main#top .project-card-button .project-card-top { padding-bottom: 25px; }
+main#top .project-card-button .card-hint { display: flex; align-items: center; gap: 6px; margin-top: 20px; }
+main#top .project-modal {
+  border-radius: 20px;
+  border-color: rgba(242,240,233,.15);
+}
+main#top .project-modal .modal-done {
+  border-radius: 999px;
+}
+main#top[data-theme="light"] .project-card-button {
+  color: #191917 !important;
+  background: #e8e5dd !important;
+  border-color: rgba(23,23,21,.16) !important;
+}
+main#top[data-theme="light"] .project-card-button:hover {
+  background: #dfdcd3 !important;
+  border-color: rgba(23,23,21,.35) !important;
+}
+main#top[data-theme="light"] .project-card-button .project-card-top,
+main#top[data-theme="light"] .project-card-button .project-type,
+main#top[data-theme="light"] .project-card-button .project-stack,
+main#top[data-theme="light"] .project-card-button .card-hint { color: #77756e !important; }
+main#top[data-theme="light"] .project-card-button .project-card-title { color: #191917 !important; }
+main#top[data-theme="light"] .project-card-button .project-description { color: #62615a !important; }
+main#top[data-theme="light"] .project-modal {
+  background: #f1efe8 !important;
+  color: #191917 !important;
+  border-color: rgba(23,23,21,.16) !important;
+}
+main#top[data-theme="light"] .project-modal .modal-description,
+main#top[data-theme="light"] .project-modal .modal-detail p { color: #62615a !important; }
+main#top[data-theme="light"] .project-modal .modal-topline,
+main#top[data-theme="light"] .project-modal .modal-detail span { color: #77756e !important; }
+main#top[data-theme="light"] .project-modal .modal-close { color: #191917 !important; border-color: rgba(23,23,21,.22) !important; }
+main#top[data-theme="light"] .project-modal .modal-repo-link { background: #191917 !important; color: #f1efe8 !important; }
+@media (max-width: 600px) {
+  main#top .project-card-button { min-height: 255px; border-radius: 15px; }
+}
