@@ -46,7 +46,7 @@ function LoadingScreen({ page }: { page: PageId }) {
     <div className="portfolio-intro-content"><div className="portfolio-intro-wordmark" aria-label={`${firstLine} ${secondLine}`}>
       <span className="portfolio-intro-first">{Array.from(firstLine).map((char, index) => <span aria-hidden="true" className="portfolio-intro-letter" key={index} style={{ "--letter-index": index } as React.CSSProperties}>{char}</span>)}</span>
       <span className="portfolio-intro-last">{Array.from(secondLine).map((char, index) => <span aria-hidden="true" className="portfolio-intro-letter" key={index} style={{ "--letter-index": index + firstLine.length } as React.CSSProperties}>{char}</span>)}</span>
-    </div></div>
+    </div>{page !== "home" && <p className="portfolio-intro-tagline">{page === "design" ? "A curated collection of visual work, shaped over the years." : "Experiments, tools, and ideas brought to life through code."}</p>}</div>
   </motion.div>;
 }
 function SectionLabel({ left, right }: { left: string; right: string }) { return <div className="section-label"><span>{left}</span><span>{right}</span></div>; }
