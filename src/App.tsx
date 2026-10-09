@@ -114,7 +114,7 @@ export default function App() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    const timeout = window.setTimeout(() => setIsLoading(false), 2200);
+    const timeout = window.setTimeout(() => setIsLoading(false), 5000);
     return () => window.clearTimeout(timeout);
   }, []);
   useEffect(() => { const update = () => setPath(window.location.pathname); window.addEventListener("popstate", update); return () => window.removeEventListener("popstate", update); }, []);
