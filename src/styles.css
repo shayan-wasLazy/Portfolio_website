@@ -595,3 +595,69 @@ main#top .intro-loader .loader-wordmark {
     font-size: clamp(54px, 14.5vw, 92px);
   }
 }
+
+
+/* Isolated loader class names prevent older wordmark styles from overriding this layout */
+.portfolio-intro-screen {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 9999 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden;
+  color: #f2f0e9;
+  background: #171715 !important;
+  opacity: 1;
+  will-change: opacity;
+}
+.portfolio-intro-wordmark {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: center;
+  width: max-content;
+  max-width: calc(100vw - 28px);
+  white-space: nowrap;
+  line-height: .8;
+  text-align: left;
+}
+.portfolio-intro-first {
+  display: block;
+  color: #f2f0e9;
+  font-family: 'Manrope', sans-serif !important;
+  font-size: clamp(68px, 15vw, 164px);
+  font-style: normal !important;
+  font-weight: 800 !important;
+  letter-spacing: -.095em;
+  line-height: .86;
+}
+.portfolio-intro-last {
+  display: block;
+  margin-left: -.025em;
+  color: #77756e;
+  font-family: Georgia, 'Times New Roman', serif !important;
+  font-size: clamp(66px, 15vw, 164px);
+  font-style: italic !important;
+  font-weight: 400 !important;
+  letter-spacing: -.085em;
+  line-height: .82;
+}
+.portfolio-intro-letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(17px);
+  animation: portfolio-intro-letter-motion 2.2s cubic-bezier(.2,.75,.25,1) calc(.1s + var(--letter-index) * .045s) both;
+}
+@keyframes portfolio-intro-letter-motion {
+  0% { opacity: 0; transform: translateY(17px); filter: blur(5px); }
+  22%, 68% { opacity: 1; transform: translateY(0); filter: blur(0); }
+  100% { opacity: 0; transform: translateY(-10px); filter: blur(3px); }
+}
+@media (max-width: 600px) {
+  .portfolio-intro-first { font-size: clamp(58px, 16vw, 98px); }
+  .portfolio-intro-last { font-size: clamp(54px, 14.5vw, 92px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-intro-letter { animation-duration: .01ms !important; animation-delay: 0ms !important; }
+}
