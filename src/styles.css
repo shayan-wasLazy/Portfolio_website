@@ -896,3 +896,13 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
   .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .home-hero .hero-image { background-position: center center; }
 }
+
+/* Phone-specific hero artwork supplied by the portfolio owner */
+@media (max-width: 600px) {
+  .home-hero .hero-image {
+    background-image: url('/Portfolio_website/assets/hero-mobile.png') !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+  }
+}
