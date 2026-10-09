@@ -61,7 +61,7 @@ function DesignPage() {
   return <><section id="content" className="work-section section-shell design-page">
     <SectionLabel left="01 / THE VISUAL SIDE" right="SELECTED WORK · 2022—2024" />
     <div className="section-heading"><div><span className="eyebrow"><Palette size={14} /> SELECTED PROJECTS</span><h2>Made with <em>intent.</em></h2></div><p>A collection of identity explorations, packaging, and digital banners. One gallery, no boxes around the kind of work.</p></div>
-    <div className="behance-gallery">{designProjects.map((project, index) =>
+    <div className="behance-gallery">{designProjects.map((project) =>
       <motion.button type="button" className={`behance-card behance-card-${project.tone}`} key={project.number} onClick={() => openProject(project)} whileHover={reduceMotion ? undefined : { y: -5 }} transition={{ duration: .2 }}>
         <span className="behance-card-visual"><iframe src={project.embed} title={`${project.title} Behance preview`} loading="lazy" tabIndex={-1} aria-hidden="true"/><span className="behance-preview-wash" /><span className="behance-open"><ArrowUpRight size={19} /></span></span>
         <span className="behance-card-meta"><span>{project.number} / {project.subtitle}</span><span>{project.year}</span></span>
