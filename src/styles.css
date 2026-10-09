@@ -988,3 +988,66 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
 @media (prefers-reduced-motion: reduce) {
   .portfolio-intro-tagline { animation: none; opacity: 1; }
 }
+
+
+/* Mobile: persistent bottom navigation, sized for thumb reach */
+@media (max-width: 760px) {
+  .floating-nav {
+    position: fixed;
+    top: auto !important;
+    right: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom)) !important;
+    left: 12px;
+    transform: none;
+    width: auto;
+    max-width: none;
+    justify-content: space-between;
+    gap: 4px;
+    padding: 7px;
+    border-radius: 22px;
+    background: rgba(23, 23, 21, .97);
+    border: 1px solid rgba(242, 240, 233, .18);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, .32);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .floating-nav .nav-links {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    justify-content: space-around;
+    gap: 3px;
+  }
+  .floating-nav .nav-item {
+    flex: 1;
+    min-width: 0;
+    min-height: 44px;
+    padding: 12px 8px;
+    font-size: 12px;
+    line-height: 1;
+    border-radius: 15px;
+  }
+  .floating-nav .active-mark { bottom: 4px; }
+  .floating-nav .nav-separator {
+    flex: 0 0 1px;
+    height: 23px;
+    margin: 0 3px;
+    background: rgba(242, 240, 233, .2);
+  }
+  .floating-nav .theme-toggle {
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 14px;
+    color: #f2f0e9;
+    background: rgba(242, 240, 233, .09);
+  }
+  .site-footer { padding-bottom: calc(110px + env(safe-area-inset-bottom)); }
+}
+@media (max-width: 390px) {
+  .floating-nav { right: 9px; left: 9px; padding: 6px; }
+  .floating-nav .nav-item { padding-right: 5px; padding-left: 5px; font-size: 11px; }
+}
