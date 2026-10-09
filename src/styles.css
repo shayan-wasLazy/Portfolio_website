@@ -813,3 +813,86 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
 @media (max-width: 600px) {
   main#top .project-card-button { min-height: 255px; border-radius: 15px; }
 }
+
+
+/* Mobile-first refinement: preserve the hero artwork and make project content readable */
+@media (max-width: 600px) {
+  html { scroll-padding-top: 76px; }
+  body { overflow-x: hidden; }
+  .home-hero {
+    height: 76svh !important;
+    min-height: 560px !important;
+    max-height: 820px;
+    background: #171715;
+  }
+  .home-hero .hero-image {
+    inset: 0;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    transform: none;
+    animation: none;
+  }
+  .home-hero .hero-vignette {
+    background: linear-gradient(180deg, rgba(12,12,11,.18), transparent 18%, transparent 75%, rgba(12,12,11,.25));
+  }
+  .floating-nav {
+    top: calc(8px + env(safe-area-inset-top)) !important;
+    bottom: auto !important;
+    max-width: calc(100vw - 24px);
+    gap: 2px;
+    padding: 5px;
+  }
+  .nav-item {
+    min-height: 42px;
+    padding: 11px clamp(13px, 4vw, 21px) !important;
+    font-size: 12px !important;
+  }
+  .theme-toggle { width: 40px; height: 40px; }
+  .section-shell { padding-left: 22px; padding-right: 22px; }
+  .intro { padding-top: 66px; padding-bottom: 72px; }
+  .section-label { font-size: 9px; gap: 10px; letter-spacing: .06em; }
+  .intro-grid { grid-template-columns: 1fr; gap: 24px; padding-top: 30px; }
+  .intro h1 { font-size: clamp(64px, 17vw, 92px); line-height: .88; }
+  .intro-copy p { font-size: 15px; line-height: 1.8; }
+  .intro-copy .intro-lead { font-size: 19px; line-height: 1.55; }
+  .interest-line { font-size: 12px; gap: 9px; }
+  .interest-line span { font-size: 10px; }
+  .work-section, .projects-section { padding-top: 58px; padding-bottom: 76px; }
+  .section-heading { flex-direction: column; align-items: flex-start; gap: 18px; padding: 32px 0 34px; }
+  .section-heading h2, .social-layout h2 { font-size: clamp(48px, 12.5vw, 70px); line-height: .93; }
+  .eyebrow { font-size: 10px; margin-bottom: 17px; }
+  .section-heading > p { max-width: none; font-size: 14px; line-height: 1.75; }
+  .behance-gallery { grid-template-columns: minmax(0, 1fr) !important; gap: 32px !important; }
+  .behance-card { width: 100%; min-width: 0; }
+  .behance-card-visual { aspect-ratio: 1.55 / 1 !important; }
+  .behance-card-meta { font-size: 10px; }
+  .behance-card-title { font-size: 24px !important; line-height: 1.15; }
+  .behance-card-desc { font-size: 14px !important; line-height: 1.65 !important; }
+  .behance-bottom { font-size: 10px; gap: 12px; }
+  .project-grid { grid-template-columns: minmax(0, 1fr) !important; gap: 14px; }
+  main#top .project-card-button { min-height: 245px; padding: 24px; }
+  main#top .project-card-button .project-card-top,
+  main#top .project-card-button .project-type,
+  main#top .project-card-button .project-stack,
+  main#top .project-card-button .card-hint { font-size: 10px; }
+  main#top .project-card-button .project-card-title { font-size: 27px; line-height: 1.12; }
+  main#top .project-card-button .project-description { font-size: 14px; line-height: 1.7; }
+  .honest-note { font-size: 12px; line-height: 1.65; }
+  .home-contact { padding-top: 42px; margin-top: 46px; }
+  .home-contact > div:first-child > p { font-size: 14px; line-height: 1.75; }
+  .social-links a { min-height: 58px; }
+  .social-links a span { font-size: 15px; }
+  .site-footer { gap: 14px; padding-bottom: 100px; font-size: 9px; }
+  .design-modal-backdrop, .project-modal-backdrop { padding: 10px; }
+  .design-modal, .project-modal { max-height: 86svh; overflow-y: auto; }
+  .design-modal-title-row { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .design-modal-title-row h2 { font-size: 36px; }
+  .design-modal-description, .modal-description { font-size: 14px; line-height: 1.7; }
+}
+@media (min-width: 601px) and (max-width: 900px) {
+  .section-shell { padding-left: 5vw; padding-right: 5vw; }
+  .behance-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .home-hero .hero-image { background-position: center center; }
+}
