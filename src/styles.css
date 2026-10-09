@@ -181,3 +181,7 @@ footer a { text-decoration: none; }
   .home-contact .social-links a small { display: none; }
   .project-modal-backdrop { padding: 12px; }
 }
+
+/* Separate-page navigation */
+.floating-nav .nav-item { text-decoration: none; }
+.design-page-note { margin: 24px 0 0; color: #a19f96; font-size: 11px; line-height: 1.7; }
