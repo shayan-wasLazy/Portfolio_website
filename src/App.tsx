@@ -73,7 +73,7 @@ function DesignPage() {
   {selected && <div className="design-modal-backdrop" role="presentation" onMouseDown={(e) => { if (e.target === e.currentTarget) setSelected(null); }}>
     <motion.section className="design-modal" role="dialog" aria-modal="true" aria-labelledby="design-modal-title" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .22 }}>
       <div className="design-modal-top"><span>{selected.number} / PROJECT DETAILS</span><button className="design-modal-close" onClick={() => setSelected(null)} aria-label="Close project"><X size={19} /></button></div>
-      <div className="design-modal-embed"><iframe src={selected.embed} title={`${selected.title} project on Behance`} allowFullScreen loading="lazy" /></div>
+      <div className="design-modal-thumbnail">{selected.media === "video" ? <video src={selected.thumbnail} autoPlay muted loop playsInline controls aria-label={`${selected.title} thumbnail video`} /> : <img src={selected.thumbnail} alt={`${selected.title} project thumbnail`} />}</div><div className="design-modal-embed"><iframe src={selected.embed} title={`${selected.title} slides on Behance`} allowFullScreen loading="lazy" /></div>
       <div className="design-modal-info">
         <div className="design-modal-title-row"><div><span className="eyebrow">{selected.subtitle}</span><h2 id="design-modal-title">{selected.title}</h2></div><a href={selected.url} target="_blank" rel="noreferrer" className="behance-external">OPEN ON BEHANCE <ExternalLink size={14} /></a></div>
         <p className="design-modal-description">{selected.description}</p>
