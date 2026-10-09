@@ -41,10 +41,10 @@ function LoadingScreen() {
   return <motion.div className="portfolio-intro-screen" role="status" aria-label="Loading Shayan Mandrekar portfolio"
     initial={{ opacity: 1 }} animate={{ opacity: [1, 1, 0] }}
     transition={{ duration: 3, times: [0, .78, 1], ease: "easeInOut" }}>
-    <div className="portfolio-intro-wordmark" aria-label="Shayan Mandrekar">
+    <div className="portfolio-intro-content"><div className="portfolio-intro-logo-wrap"><img className="portfolio-intro-logo" src="/assets/lazy-logo.png" alt="" /></div><div className="portfolio-intro-wordmark" aria-label="Shayan Mandrekar">
       <span className="portfolio-intro-first">{Array.from("Shayan").map((char, index) => <span aria-hidden="true" className="portfolio-intro-letter" key={index} style={{ "--letter-index": index } as React.CSSProperties}>{char}</span>)}</span>
       <span className="portfolio-intro-last">{Array.from("Mandrekar").map((char, index) => <span aria-hidden="true" className="portfolio-intro-letter" key={index} style={{ "--letter-index": index + 6 } as React.CSSProperties}>{char}</span>)}</span>
-    </div>
+    </div></div>
   </motion.div>;
 }
 function SectionLabel({ left, right }: { left: string; right: string }) { return <div className="section-label"><span>{left}</span><span>{right}</span></div>; }
