@@ -697,3 +697,32 @@ main#top .intro-loader .loader-wordmark {
   .portfolio-intro-content { gap: 20px; }
   .portfolio-intro-logo-wrap { width: 62px; height: 62px; }
 }
+
+
+/* Loader timing refinement: logo bounces in, then the stacked name assembles */
+.portfolio-intro-logo-wrap {
+  animation: portfolio-logo-bounce 1.25s cubic-bezier(.2,.85,.25,1.25) both;
+}
+.portfolio-intro-logo {
+  animation: portfolio-logo-float 1.8s 1.1s ease-in-out both;
+}
+.portfolio-intro-letter {
+  animation: portfolio-name-letter-in .72s cubic-bezier(.16,1,.3,1) calc(.48s + var(--letter-index) * .055s) both;
+}
+@keyframes portfolio-logo-bounce {
+  0% { opacity: 0; transform: scale(0) rotate(-12deg); }
+  48% { opacity: 1; transform: scale(1.13) rotate(3deg); }
+  66% { opacity: 1; transform: scale(.94) rotate(-1.5deg); }
+  82% { opacity: 1; transform: scale(1.035) rotate(.6deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+@keyframes portfolio-logo-float {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  35% { transform: translateY(-4px) rotate(-2deg); }
+  70% { transform: translateY(1px) rotate(1deg); }
+}
+@keyframes portfolio-name-letter-in {
+  0% { opacity: 0; transform: translateY(18px) scale(.94); filter: blur(4px); }
+  75% { opacity: 1; transform: translateY(-2px) scale(1.015); filter: blur(0); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
