@@ -661,3 +661,39 @@ main#top .intro-loader .loader-wordmark {
 @media (prefers-reduced-motion: reduce) {
   .portfolio-intro-letter { animation-duration: .01ms !important; animation-delay: 0ms !important; }
 }
+
+
+/* Logo restored above the stacked name; transparent background assumed for the PNG */
+.portfolio-intro-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(18px, 3.5vh, 34px);
+  width: max-content;
+  max-width: calc(100vw - 28px);
+}
+.portfolio-intro-logo-wrap {
+  width: clamp(64px, 9vw, 96px);
+  height: clamp(64px, 9vw, 96px);
+  margin-left: .05em;
+  transform-origin: center;
+  animation: portfolio-logo-bounce 1.05s cubic-bezier(.2,.85,.25,1.25) both;
+}
+.portfolio-intro-logo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 5px 14px rgba(0,0,0,.12));
+}
+@keyframes portfolio-logo-bounce {
+  0% { opacity: 0; transform: scale(0) rotate(-13deg); }
+  58% { opacity: 1; transform: scale(1.12) rotate(3deg); }
+  76% { opacity: 1; transform: scale(.94) rotate(-1.5deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+@media (max-width: 600px) {
+  .portfolio-intro-content { gap: 20px; }
+  .portfolio-intro-logo-wrap { width: 62px; height: 62px; }
+}
