@@ -345,3 +345,26 @@ main[data-theme="light"] .design-page-note, main[data-theme="light"] .honest-not
 @media (max-width: 760px) {
   .behance-card-visual { aspect-ratio: 1.45 / 1; }
 }
+
+
+/* Custom project thumbnails are also shown at the top of the detail modal */
+.design-modal-thumbnail {
+  width: calc(100% - clamp(20px, 4vw, 44px));
+  margin: 0 clamp(10px, 2vw, 22px) 22px;
+  aspect-ratio: 1.65 / 1;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #242421;
+}
+.design-modal-thumbnail img,
+.design-modal-thumbnail video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.design-modal-embed { margin-top: 0; }
+@media (max-width: 760px) {
+  .design-modal-thumbnail { aspect-ratio: 1.35 / 1; }
+}
