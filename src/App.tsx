@@ -37,6 +37,20 @@ function Navigation({ active, theme, onToggleTheme }: { active: PageId; theme: "
 function Hero() {
   return <section className="hero home-hero" aria-label="Portfolio cover"><div className="hero-image" role="img" aria-label="Monochrome Japanese mountain valley illustration" /><div className="hero-vignette" /><div className="hero-grain" /><FloatingLeaves /></section>;
 }
+function LoadingScreen() {
+  return <motion.div className="intro-loader" role="status" aria-label="Loading portfolio"
+    initial={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: .45, ease: "easeInOut" }}>
+    <div className="loader-scene" aria-hidden="true">
+      <span className="loader-orbit loader-orbit-one" />
+      <span className="loader-orbit loader-orbit-two" />
+      <span className="loader-slash" />
+      <div className="loader-logo-wrap"><img className="loader-logo" src="/assets/lazy-logo.png" alt="" /></div>
+    </div>
+    <div className="loader-wordmark"><span className="loader-kicker">PERSONAL PORTFOLIO · 2026</span><span className="loader-name">SHAYAN <em>MANDREKAR</em></span><span className="loader-status"><i /> ENTERING THE ARCHIVE</span></div>
+    <div className="loader-progress"><span /></div>
+    <span className="loader-kanji" aria-hidden="true">静 · 影 · 作</span>
+  </motion.div>;
+}
 function SectionLabel({ left, right }: { left: string; right: string }) { return <div className="section-label"><span>{left}</span><span>{right}</span></div>; }
 function HomePage() {
   return <><Hero /><section id="content" className="intro section-shell"><SectionLabel left="HOME / 001" right="MUMBAI, INDIA" /><div className="intro-grid"><h1>Curious by<br /><em>default.</em></h1><div className="intro-copy"><p className="intro-lead">I’m Shayan — a data science student who likes building things that sit somewhere between logic and feeling.</p><p>From machine learning experiments to motion graphics, I enjoy pulling ideas apart, figuring out how they work, and making something of my own. Usually with music on and too many tabs open.</p><div className="interest-line"><span>CURRENT CURIOSITIES</span><b>AI / ML</b><i>✳</i><b>Visual storytelling</b><i>✳</i><b>Anime</b></div></div></div>
@@ -98,7 +112,12 @@ function Footer() { const reduceMotion = useReducedMotion(); return <footer clas
 export default function App() {
   const [path, setPath] = useState(window.location.pathname);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    const timeout = window.setTimeout(() => setIsLoading(false), 2200);
+    return () => window.clearTimeout(timeout);
+  }, []);
   useEffect(() => { const update = () => setPath(window.location.pathname); window.addEventListener("popstate", update); return () => window.removeEventListener("popstate", update); }, []);
   const active: PageId = path.startsWith("/design") ? "design" : path.startsWith("/builds") ? "builds" : "home";
-  return <main id="top" data-theme={theme}><Navigation active={active} theme={theme} onToggleTheme={() => setTheme((current) => current === "dark" ? "light" : "dark")} />{active === "design" ? <DesignPage /> : active === "builds" ? <BuildsPage /> : <HomePage />}<Footer /></main>;
+  return <main id="top" data-theme={theme}>{isLoading && <LoadingScreen />}<Navigation active={active} theme={theme} onToggleTheme={() => setTheme((current) => current === "dark" ? "light" : "dark")} />{active === "design" ? <DesignPage /> : active === "builds" ? <BuildsPage /> : <HomePage />}<Footer /></main>;
 }
