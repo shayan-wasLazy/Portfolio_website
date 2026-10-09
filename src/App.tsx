@@ -5,17 +5,17 @@ import { ArrowDownRight, ArrowUpRight, Github, Instagram, Linkedin, Palette, Cod
 type PageId = "home" | "design" | "builds";
 type Project = { number: string; title: string; type: string; description: string; stack: string; focus: string; url?: string };
 const navItems: { id: PageId; label: string; href: string }[] = [
-  { id: "home", label: "Home", href: "/" },
-  { id: "design", label: "Design", href: "/design" },
-  { id: "builds", label: "Builds", href: "/builds" },
+  { id: "home", label: "Home", href: import.meta.env.BASE_URL },
+  { id: "design", label: "Design", href: `${import.meta.env.BASE_URL}#/design` },
+  { id: "builds", label: "Builds", href: `${import.meta.env.BASE_URL}#/builds` },
 ];
 type DesignProject = { number: string; title: string; subtitle: string; description: string; year: string; role: string; tools: string; url: string; embed: string; tone: string; thumbnail: string; media: "image" | "video" };
 const designProjects: DesignProject[] = [
-  { number: "01", title: "Hyperloop", subtitle: "BRAND IDENTITY", description: "A visual identity concept exploring the future-facing character of high-speed transportation.", year: "2024", role: "Brand identity / visual design", tools: "Branding · Typography · Visual systems", url: "https://www.behance.net/gallery/201498491/HyperLoop-brand-identity", embed: "https://www.behance.net/embed/project/201498491?url=https%3A%2F%2Fwww.behance.net%2Fgallery%2F201498491%2FHyperLoop-brand-identity", tone: "hyperloop", thumbnail: "/assets/hyperloop.gif", media: "image" },
-  { number: "02", title: "Green Oasis", subtitle: "BRAND IDENTITY", description: "A brand identity built around a greener, calmer visual language.", year: "2024", role: "Brand identity / visual design", tools: "Branding · Logo · Visual system", url: "https://www.behance.net/gallery/201579531/Green-Oasis-Brand-identity", embed: "https://www.behance.net/embed/project/201579531?url=https%3A%2F%2Fwww.behance.net%2Fgallery%2F201579531%2FGreen-Oasis-Brand-identity", tone: "oasis", thumbnail: "/assets/green-oasis.gif", media: "image" },
-  { number: "03", title: "VitaFizz", subtitle: "PACKAGING / BRANDING", description: "A bright, playful identity concept for a fizzy beverage brand.", year: "2023", role: "Branding / packaging concept", tools: "Branding · Packaging · Art direction", url: "https://www.behance.net/gallery/179377597/Vita-Fizz-COmp", embed: "https://www.behance.net/embed/project/179377597?url=https%3A%2F%2Fwww.behance.net%2Fgallery%2F179377597%2FVita-Fizz-COmp", tone: "vitafizz", thumbnail: "/assets/vitafizz.gif", media: "image" },
-  { number: "04", title: "Designly Rebrand", subtitle: "DISCORD BANNER", description: "A banner design created for the Designly Discord community.", year: "2023", role: "Banner design", tools: "Graphic design · Digital composition", url: "https://www.behance.net/gallery/181584011/Designly-rebarnd-comp", embed: "https://www.behance.net/embed/project/181584011?url=https%3A%2F%2Fwww.behance.net%2Fgallery%2F181584011%2FDesignly-rebarnd-comp", tone: "designly", thumbnail: "/assets/designly.mp4", media: "video" },
-  { number: "05", title: "The Myth", subtitle: "DISCORD BANNER", description: "A themed digital banner exploring a darker, myth-inspired visual direction.", year: "2022", role: "Banner design", tools: "Graphic design · Digital composition", url: "https://www.behance.net/gallery/174810451/The-myth", embed: "https://www.behance.net/embed/project/174810451?url=https%3A%2F%2Fwww.behance.net%2Fgallery%2F174810451%2FThe-myth", tone: "myth", thumbnail: "/assets/the-myth.mp4", media: "video" },
+  { number: "01", title: "Hyperloop", subtitle: "BRAND IDENTITY", description: "A visual identity concept exploring the future-facing character of high-speed transportation.", year: "2024", role: "Brand identity / visual design", tools: "Branding · Typography · Visual systems", url: "https://www.behance.net/gallery/201498491/HyperLoop-brand-identity", embed: "https://www.behance.net/embed/project/201498491?url=https%3A%2F%2Fwww.behance.net%2Fgallery%2F201498491%2FHyperLoop-brand-identity", tone: "hyperloop", thumbnail: `${import.meta.env.BASE_URL}assets/hyperloop.gif`, media: "image" },
+  { number: "02", title: "Green Oasis", subtitle: "BRAND IDENTITY", description: "A brand identity built around a greener, calmer visual language.", year: "2024", role: "Brand identity / visual design", tools: "Branding · Logo · Visual system", url: "https://www.behance.net/gallery/201579531/Green-Oasis-Brand-identity", embed: "https://www.behance.net/embed/project/201579531?url=https%3A%2F%2Fwww.behance.net%2Fgallery%2F201579531%2FGreen-Oasis-Brand-identity", tone: "oasis", thumbnail: `${import.meta.env.BASE_URL}assets/green-oasis.gif`, media: "image" },
+  { number: "03", title: "VitaFizz", subtitle: "PACKAGING / BRANDING", description: "A bright, playful identity concept for a fizzy beverage brand.", year: "2023", role: "Branding / packaging concept", tools: "Branding · Packaging · Art direction", url: "https://www.behance.net/gallery/179377597/Vita-Fizz-COmp", embed: "https://www.behance.net/embed/project/179377597?url=https%3A%2F%2Fwww.behance.net%2Fgallery%2F179377597%2FVita-Fizz-COmp", tone: "vitafizz", thumbnail: `${import.meta.env.BASE_URL}assets/vitafizz.gif`, media: "image" },
+  { number: "04", title: "Designly Rebrand", subtitle: "DISCORD BANNER", description: "A banner design created for the Designly Discord community.", year: "2023", role: "Banner design", tools: "Graphic design · Digital composition", url: "https://www.behance.net/gallery/181584011/Designly-rebarnd-comp", embed: "https://www.behance.net/embed/project/181584011?url=https%3A%2F%2Fwww.behance.net%2Fgallery%2F181584011%2FDesignly-rebarnd-comp", tone: "designly", thumbnail: `${import.meta.env.BASE_URL}assets/designly.mp4`, media: "video" },
+  { number: "05", title: "The Myth", subtitle: "DISCORD BANNER", description: "A themed digital banner exploring a darker, myth-inspired visual direction.", year: "2022", role: "Banner design", tools: "Graphic design · Digital composition", url: "https://www.behance.net/gallery/174810451/The-myth", embed: "https://www.behance.net/embed/project/174810451?url=https%3A%2F%2Fwww.behance.net%2Fgallery%2F174810451%2FThe-myth", tone: "myth", thumbnail: `${import.meta.env.BASE_URL}assets/the-myth.mp4`, media: "video" },
 ];
 const projects: Project[] = [
   { number: "01", title: "Reed AI", type: "AI STUDY ASSISTANT", description: "A study companion that turns personal notes into a searchable, conversational learning space.", stack: "FastAPI · Qdrant · Ollama · Sentence Transformers", focus: "Document ingestion, chunking, embeddings, retrieval, and local LLM-powered study workflows.", url: "https://github.com/shayan-wasLazy/Reed" },
@@ -106,14 +106,14 @@ function BuildsPage() {
 function Footer() { const reduceMotion = useReducedMotion(); return <footer className="site-footer section-shell"><span>© 2026 SHAYAN MANDREKAR</span><span>BUILT WITH CURIOSITY, NOT A TEMPLATE.</span><a href="/" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" }); window.history.pushState({}, "", "/"); window.dispatchEvent(new PopStateEvent("popstate")); }}>BACK TO HOME ↑</a></footer>; }
 
 export default function App() {
-  const [path, setPath] = useState(window.location.pathname);
+  const [path, setPath] = useState(window.location.hash || "#/");
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const timeout = window.setTimeout(() => setIsLoading(false), 3000);
     return () => window.clearTimeout(timeout);
   }, []);
-  useEffect(() => { const update = () => setPath(window.location.pathname); window.addEventListener("popstate", update); return () => window.removeEventListener("popstate", update); }, []);
-  const active: PageId = path.startsWith("/design") ? "design" : path.startsWith("/builds") ? "builds" : "home";
+  useEffect(() => { const update = () => setPath(window.location.hash || "#/"); window.addEventListener("hashchange", update); return () => window.removeEventListener("hashchange", update); }, []);
+  const active: PageId = path.startsWith("#/design") ? "design" : path.startsWith("#/builds") ? "builds" : "home";
   return <main id="top" data-theme={theme}>{isLoading && <LoadingScreen />}<Navigation active={active} theme={theme} onToggleTheme={() => setTheme((current) => current === "dark" ? "light" : "dark")} />{active === "design" ? <DesignPage /> : active === "builds" ? <BuildsPage /> : <HomePage />}<Footer /></main>;
 }
