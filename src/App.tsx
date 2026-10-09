@@ -38,14 +38,12 @@ function Hero() {
   return <section className="hero home-hero" aria-label="Portfolio cover"><div className="hero-image" role="img" aria-label="Monochrome Japanese mountain valley illustration" /><div className="hero-vignette" /><div className="hero-grain" /><FloatingLeaves /></section>;
 }
 function LoadingScreen() {
-  const firstName = "Shayan";
-  const lastName = "Mandrekar";
-  return <motion.div className="intro-loader" role="status" aria-label="Loading portfolio"
+  return <motion.div className="intro-loader" role="status" aria-label="Loading Shayan Mandrekar portfolio"
     initial={{ opacity: 1 }} animate={{ opacity: [1, 1, 0] }}
     transition={{ duration: 3, times: [0, .78, 1], ease: "easeInOut" }}>
     <div className="loader-wordmark" aria-label="Shayan Mandrekar">
-      <span className="loader-name-part loader-name-bold">{Array.from(firstName).map((char, index) => <span aria-hidden="true" className="loader-letter" key={index} style={{ "--letter-index": index } as React.CSSProperties}>{char}</span>)}</span>
-      <span className="loader-name-part loader-name-italic">{Array.from(lastName).map((char, index) => <span aria-hidden="true" className="loader-letter" key={index} style={{ "--letter-index": index + firstName.length } as React.CSSProperties}>{char}</span>)}</span>
+      <span className="loader-name-bold">{Array.from("Shayan").map((char, index) => <span aria-hidden="true" className="loader-letter" key={index} style={{ "--letter-index": index } as React.CSSProperties}>{char}</span>)}</span>
+      <span className="loader-name-italic">{Array.from("Mandrekar").map((char, index) => <span aria-hidden="true" className="loader-letter" key={index} style={{ "--letter-index": index + 6 } as React.CSSProperties}>{char}</span>)}</span>
     </div>
   </motion.div>;
 }
