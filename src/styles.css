@@ -906,3 +906,49 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
     background-position: center center !important;
   }
 }
+
+
+/* Final mobile hero + navigation corrections */
+@media (max-width: 600px) {
+  .hero {
+    height: 100svh !important;
+    min-height: 100svh !important;
+    max-height: none;
+    overflow: hidden;
+  }
+  .hero .hero-image {
+    background-image: url('/Portfolio_website/assets/hero-mobile.png') !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    transform: none !important;
+    animation: none !important;
+  }
+  .hero .hero-vignette {
+    background: linear-gradient(180deg, rgba(15,15,14,.10), transparent 22%, transparent 78%, rgba(15,15,14,.16)) !important;
+  }
+  .floating-nav {
+    position: fixed !important;
+    top: calc(12px + env(safe-area-inset-top)) !important;
+    bottom: auto !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: max-content !important;
+    max-width: calc(100vw - 24px) !important;
+    padding: 6px !important;
+    gap: 3px !important;
+    border-radius: 999px !important;
+  }
+  .floating-nav .nav-item {
+    min-width: clamp(68px, 19vw, 100px) !important;
+    min-height: 42px !important;
+    padding: 12px clamp(10px, 3.4vw, 18px) !important;
+    font-size: 12px !important;
+    line-height: 1 !important;
+  }
+  .floating-nav .theme-toggle,
+  .floating-nav button:last-child {
+    min-width: 42px !important;
+    min-height: 42px !important;
+  }
+}
