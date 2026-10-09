@@ -9,10 +9,14 @@ const navItems: { id: PageId; label: string; href: string }[] = [
   { id: "design", label: "Design", href: "/design" },
   { id: "builds", label: "Builds", href: "/builds" },
 ];
-const designWork = [
-  { number: "01", title: "Motion & Edit", type: "AFTER EFFECTS / PREMIERE PRO", description: "Kinetic typography, rhythmic cuts, and motion-led visual storytelling." },
-  { number: "02", title: "Graphic Design", type: "PHOTOSHOP / FIGMA", description: "Posters, visual systems, and compositions built around type, contrast, and detail." },
-  { number: "03", title: "Visual Experiments", type: "ART DIRECTION / PERSONAL WORK", description: "A playground for visual references, anime-inspired edits, and ideas worth exploring." },
+type DesignProject = { number: string; title: string; subtitle: string; description: string; year: string; role: string; tools: string; url: string; embed: string; tone: string };
+const designProjects: DesignProject[] = [
+  { number: "01", title: "Hyperloop", subtitle: "BRAND IDENTITY", description: "A visual identity concept exploring the future-facing character of high-speed transportation.", year: "2024", role: "Brand identity / visual design", tools: "Branding · Typography · Visual systems", url: "https://www.behance.net/gallery/201498491/HyperLoop-brand-identity", embed: "https://www.behance.net/embed/project/201498491?url=https%3A%2F%2Fwww.behance.net%2Fgallery%2F201498491%2FHyperLoop-brand-identity", tone: "hyperloop" },
+  { number: "02", title: "Green Oasis", subtitle: "BRAND IDENTITY", description: "A brand identity built around a greener, calmer visual language.", year: "2024", role: "Brand identity / visual design", tools: "Branding · Logo · Visual system", url: "https://www.behance.net/gallery/201579531/Green-Oasis-Brand-identity", embed: "https://www.behance.net/embed/project/201579531?url=https%3A%2F%2Fwww.behance.net%2Fgallery%2F201579531%2FGreen-Oasis-Brand-identity", tone: "oasis" },
+  { number: "03", title: "VitaFizz", subtitle: "PACKAGING / BRANDING", description: "A bright, playful identity concept for a fizzy beverage brand.", year: "2023", role: "Branding / packaging concept", tools: "Branding · Packaging · Art direction", url: "https://www.behance.net/gallery/179377597/Vita-Fizz-COmp", embed: "https://www.behance.net/embed/project/179377597?url=https%3A%2F%2Fwww.behance.net%2Fgallery%2F179377597%2FVita-Fizz-COmp", tone: "vitafizz" },
+  { number: "04", title: "Designly Rebrand", subtitle: "DISCORD BANNER", description: "A banner design created for the Designly Discord community.", year: "2023", role: "Banner design", tools: "Graphic design · Digital composition", url: "https://www.behance.net/gallery/181584011/Designly-rebarnd-comp", embed: "https://www.behance.net/embed/project/181584011?url=https%3A%2F%2Fwww.behance.net%2Fgallery%2F181584011%2FDesignly-rebarnd-comp", tone: "designly" },
+  { number: "05", title: "The Myth", subtitle: "DISCORD BANNER", description: "A themed digital banner exploring a darker, myth-inspired visual direction.", year: "2022", role: "Banner design", tools: "Graphic design · Digital composition", url: "https://www.behance.net/gallery/174810451/The-myth", embed: "https://www.behance.net/embed/project/174810451?url=https%3A%2F%2Fwww.behance.net%2Fgallery%2F174810451%2FThe-myth", tone: "myth" },
+  { number: "06", title: "Designly Winter", subtitle: "DISCORD BANNER", description: "A seasonal banner design for the Designly community.", year: "2023", role: "Banner design", tools: "Graphic design · Digital composition", url: "https://www.behance.net/gallery/185813645/Designly-winter-comp", embed: "https://www.behance.net/embed/project/185813645?url=https%3A%2F%2Fwww.behance.net%2Fgallery%2F185813645%2FDesignly-winter-comp", tone: "winter" },
 ];
 const projects: Project[] = [
   { number: "01", title: "Reed AI", type: "AI STUDY ASSISTANT", description: "A study companion that turns personal notes into a searchable, conversational learning space.", stack: "FastAPI · Qdrant · Ollama · Sentence Transformers", focus: "Document ingestion, chunking, embeddings, retrieval, and local LLM-powered study workflows.", url: "https://github.com/shayan-wasLazy/Reed" },
@@ -44,11 +48,43 @@ function HomePage() {
   <a href="https://www.behance.net/" target="_blank" rel="noreferrer"><Palette size={18} /><span>Behance</span><small>CREATIVE WORK</small><ArrowUpRight size={17} /></a></div></div></section></>;
 }
 function DesignPage() {
-  return <><section id="content" className="work-section section-shell"><SectionLabel left="01 / THE VISUAL SIDE" right="DESIGN & MOTION" /><div className="section-heading"><div><span className="eyebrow"><Palette size={14} /> SELECTED CREATIVE INTERESTS</span><h2>Made to <em>move.</em></h2></div><p>Frames, shapes, timing, and tiny details. The visual side of my brain lives here.</p></div>
-  <div className="design-gallery">{designWork.map((work, index) => <motion.a className={`design-tile design-tile-${index + 1}`} key={work.number} href="https://shayanportfolio-2be31.web.app" target="_blank" rel="noreferrer" whileHover={{ y: -5 }} transition={{ duration: .2 }}><div className="design-art"><span className="design-art-mark">{["MOTION / 01", "GRAPHIC / 02", "EXPERIMENT / 03"][index]}</span><span className="design-art-symbol">{["✳", "↗", "◈"][index]}</span><span className="design-art-number">0{index + 1}</span></div><div className="design-tile-caption"><span className="chapter-label">CHAPTER 0{index + 1}</span><h3>{work.title}</h3><p>{work.description}</p><small>{work.type}</small></div></motion.a>)}</div>
-  <div className="section-footnote"><span>TOOLS I REACH FOR</span><p>After Effects / Photoshop / Premiere Pro / Figma</p></div>
-  <a className="design-portfolio-link" href="https://shayanportfolio-2be31.web.app" target="_blank" rel="noreferrer"><span><small>FULL DESIGN PORTFOLIO</small><strong>Explore my visual work</strong></span><ArrowUpRight size={22} /></a>
-  <p className="design-page-note">This page is a curated index. The linked portfolio contains the fuller visual showcase.</p></section></>;
+  const [selected, setSelected] = useState<DesignProject | null>(null);
+  const [slide, setSlide] = useState(0);
+  const reduceMotion = useReducedMotion();
+  useEffect(() => {
+    if (!selected) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setSelected(null); };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
+  }, [selected]);
+  const openProject = (project: DesignProject) => { setSelected(project); setSlide(0); };
+  return <><section id="content" className="work-section section-shell design-page">
+    <SectionLabel left="01 / THE VISUAL SIDE" right="SELECTED WORK · 2022—2024" />
+    <div className="section-heading"><div><span className="eyebrow"><Palette size={14} /> SELECTED PROJECTS</span><h2>Made with <em>intent.</em></h2></div><p>A collection of identity explorations, packaging, and digital banners. One gallery, no boxes around the kind of work.</p></div>
+    <div className="behance-gallery">{designProjects.map((project, index) =>
+      <motion.button type="button" className={`behance-card behance-card-${project.tone}`} key={project.number} onClick={() => openProject(project)} whileHover={reduceMotion ? undefined : { y: -5 }} transition={{ duration: .2 }}>
+        <span className="behance-card-visual"><iframe src={project.embed} title={`${project.title} Behance preview`} loading="lazy" tabIndex={-1} aria-hidden="true"/><span className="behance-preview-wash" /><span className="behance-open"><ArrowUpRight size={19} /></span></span>
+        <span className="behance-card-meta"><span>{project.number} / {project.subtitle}</span><span>{project.year}</span></span>
+        <span className="behance-card-title">{project.title}</span>
+        <span className="behance-card-desc">{project.description}</span>
+      </motion.button>
+    )}</div>
+    <div className="behance-bottom"><span>FULL PROJECTS HOSTED ON BEHANCE</span><a href="https://www.behance.net/" target="_blank" rel="noreferrer">VISIT BEHANCE <ArrowUpRight size={14} /></a></div>
+  </section>
+  {selected && <div className="design-modal-backdrop" role="presentation" onMouseDown={(e) => { if (e.target === e.currentTarget) setSelected(null); }}>
+    <motion.section className="design-modal" role="dialog" aria-modal="true" aria-labelledby="design-modal-title" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .22 }}>
+      <div className="design-modal-top"><span>{selected.number} / PROJECT DETAILS</span><button className="design-modal-close" onClick={() => setSelected(null)} aria-label="Close project"><X size={19} /></button></div>
+      <div className="design-modal-embed"><iframe src={selected.embed} title={`${selected.title} project on Behance`} allowFullScreen loading="lazy" /></div>
+      <div className="design-modal-info">
+        <div className="design-modal-title-row"><div><span className="eyebrow">{selected.subtitle}</span><h2 id="design-modal-title">{selected.title}</h2></div><a href={selected.url} target="_blank" rel="noreferrer" className="behance-external">OPEN ON BEHANCE <ExternalLink size={14} /></a></div>
+        <p className="design-modal-description">{selected.description}</p>
+        <div className="design-info-grid"><div><span>ROLE</span><p>{selected.role}</p></div><div><span>TOOLS / FOCUS</span><p>{selected.tools}</p></div><div><span>YEAR</span><p>{selected.year}</p></div></div>
+        <div className="design-modal-footer"><button onClick={() => { const i = designProjects.findIndex((p) => p.number === selected.number); const next = (i - 1 + designProjects.length) % designProjects.length; setSelected(designProjects[next]); setSlide(0); }}>← PREVIOUS PROJECT</button><span>{designProjects.findIndex((p) => p.number === selected.number) + 1} / {designProjects.length}</span><button onClick={() => { const i = designProjects.findIndex((p) => p.number === selected.number); const next = (i + 1) % designProjects.length; setSelected(designProjects[next]); setSlide(0); }}>NEXT PROJECT →</button></div>
+      </div>
+    </motion.section>
+  </div>}
+  </>;
 }
 function BuildsPage() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
