@@ -1585,3 +1585,36 @@ main#top[data-theme="light"] .floating-nav .nav-separator {
 main#top[data-theme="light"] .floating-nav .theme-toggle {
   background: rgba(23, 23, 21, .07) !important;
 }
+
+
+/* Scroll-driven sleepy cat journey: jump art travels to the intro heading, then rests. */
+.scroll-cat-jump {
+  position: fixed;
+  z-index: 15;
+  width: clamp(130px, 20vw, 260px);
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  will-change: left, top, transform, opacity;
+  transition: opacity .12s linear;
+  filter: drop-shadow(0 5px 8px rgba(0,0,0,.18));
+}
+.scroll-cat-jump.is-traveling { opacity: 1; }
+.scroll-cat-resting {
+  position: absolute;
+  z-index: 3;
+  left: clamp(230px, 30vw, 440px);
+  top: clamp(220px, 25vw, 320px);
+  width: clamp(86px, 10vw, 140px);
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 3px 5px rgba(0,0,0,.15));
+}
+@media (max-width: 760px) {
+  .scroll-cat-jump { width: clamp(92px, 30vw, 150px); }
+  .scroll-cat-resting { left: 28%; top: 230px; width: 22vw; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cat-jump { transition: none !important; }
+}
