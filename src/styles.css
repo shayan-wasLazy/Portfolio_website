@@ -1198,3 +1198,75 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
    Character motion should be implemented using isolated transparent character layers,
    so the animal artwork itself moves rather than decorative effects around it. */
 .hero-animal-interactions { display: none !important; }
+
+
+/* Real animated WebP character overlays: the valley background remains fixed. */
+.hero-animal-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+.hero-animal {
+  position: absolute;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  pointer-events: auto;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(.97);
+  transition: opacity .18s ease, transform .22s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.hero-animal img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+.hero-animal:hover,
+.hero-animal:focus-visible,
+.hero-animal.is-active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+.hero-animal:focus-visible { outline: 1px dashed rgba(242,240,233,.85); outline-offset: 3px; }
+.animal-sleepy-cat { left: 30%; top: 37%; width: clamp(125px, 15vw, 235px); aspect-ratio: 1.7; }
+.animal-sunglasses-cat { left: 52.5%; top: 39%; width: clamp(105px, 12vw, 180px); aspect-ratio: 1.7; }
+.animal-headphone-blob { left: 70.5%; top: 40%; width: clamp(90px, 10vw, 150px); aspect-ratio: 1.15; }
+.animal-waving-monster { left: 19%; top: 71%; width: clamp(95px, 10vw, 150px); aspect-ratio: 1.25; }
+.animal-bottom-cats { left: 74%; top: 73%; width: clamp(125px, 15vw, 225px); aspect-ratio: 1.8; }
+.hero-animal-greeting {
+  position: absolute;
+  top: -9%;
+  right: -3%;
+  padding: 7px 11px;
+  border-radius: 999px 999px 999px 5px;
+  color: #171715;
+  background: #f2f0e9;
+  font: 800 12px/1 'Manrope', sans-serif;
+  opacity: 0;
+  transform: translateY(5px) scale(.9);
+  transition: opacity .18s ease, transform .18s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,.16);
+}
+.animal-waving-monster:hover .hero-animal-greeting,
+.animal-waving-monster:focus-visible .hero-animal-greeting,
+.animal-waving-monster.is-active .hero-animal-greeting { opacity: 1; transform: translateY(0) scale(1); }
+@media (hover: none) {
+  .hero-animal.is-active { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+@media (max-width: 760px) {
+  .animal-sleepy-cat { left: 31%; top: 37%; width: 25vw; }
+  .animal-sunglasses-cat { left: 52%; top: 39%; width: 21vw; }
+  .animal-headphone-blob { left: 72%; top: 40%; width: 19vw; }
+  .animal-waving-monster { left: 20%; top: 72%; width: 20vw; }
+  .animal-bottom-cats { left: 75%; top: 74%; width: 25vw; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-animal, .hero-animal-greeting { transition: none; }
+}
