@@ -35,7 +35,31 @@ function Navigation({ active, theme, onToggleTheme }: { active: PageId; theme: "
   return <nav className="floating-nav" aria-label="Main navigation"><div className="nav-links">{navItems.map((item) => <a key={item.id} className={`nav-item ${active === item.id ? "is-active" : ""}`} href={item.href} aria-current={active === item.id ? "page" : undefined}><span>{item.label}</span>{active === item.id && <motion.span className="active-mark" layoutId="active-mark" transition={{ type: "spring", stiffness: 380, damping: 30 }} />}</a>)}</div><span className="nav-separator" aria-hidden="true" /><button className="theme-toggle" onClick={onToggleTheme} aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`} title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}>{theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}</button></nav>;
 }
 function Hero() {
-  return <section className="hero home-hero" aria-label="Portfolio cover"><div className="hero-image" role="img" aria-label="Monochrome Japanese mountain valley illustration" /><div className="hero-vignette" /><div className="hero-grain" /><FloatingLeaves /></section>;
+  const [activeAnimal, setActiveAnimal] = useState<string | null>(null);
+  const animals = [
+    { id: "sleepy-cat", label: "Wake the sleeping cat", src: "sleepy_cat.webp", className: "animal-sleepy-cat" },
+    { id: "sunglasses-cat", label: "React to the cool cat", src: "sunglasses_cat.webp", className: "animal-sunglasses-cat" },
+    { id: "headphone-blob", label: "Dance with the headphone creature", src: "headphone_blob.webp", className: "animal-headphone-blob" },
+    { id: "waving-monster", label: "Say hi to the waving monster", src: "waving_monster.webp", className: "animal-waving-monster" },
+    { id: "bottom-cats", label: "Wake the resting cats", src: "bottom_cats.webp", className: "animal-bottom-cats" },
+  ];
+  return <section className="hero home-hero" aria-label="Portfolio cover">
+    <div className="hero-image" role="img" aria-label="Monochrome Japanese mountain valley illustration" />
+    <div className="hero-vignette" /><div className="hero-grain" /><FloatingLeaves />
+    <div className="hero-animal-layer" aria-label="Interactive valley characters">
+      {animals.map((animal) => <button key={animal.id} type="button"
+        className={`hero-animal ${animal.className} ${activeAnimal === animal.id ? "is-active" : ""}`}
+        aria-label={animal.label} aria-pressed={activeAnimal === animal.id}
+        onMouseEnter={() => setActiveAnimal(animal.id)}
+        onMouseLeave={() => setActiveAnimal(null)}
+        onFocus={() => setActiveAnimal(animal.id)}
+        onBlur={() => setActiveAnimal(null)}
+        onClick={() => setActiveAnimal((current) => current === animal.id ? null : animal.id)}>
+        <img src={`${import.meta.env.BASE_URL}assets/animals/${animal.src}`} alt="" draggable={false} />
+        {animal.id === "waving-monster" && <span className="hero-animal-greeting" aria-hidden="true">Hi!</span>}
+      </button>)}
+    </div>
+  </section>;
 }
 function LoadingScreen({ page }: { page: PageId }) {
   const firstLine = page === "home" ? "Shayan" : page === "design" ? "Design" : "Builds";
