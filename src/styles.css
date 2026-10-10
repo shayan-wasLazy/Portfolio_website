@@ -1431,3 +1431,16 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
 @media (prefers-reduced-motion: reduce) {
   .hero-animal img { animation: none !important; }
 }
+
+
+/* Strict hover pause: keep animation timelines mounted and paused at the exact frame. */
+.hero-animal img { animation-play-state: paused !important; }
+.hero-animal:hover img, .hero-animal:focus-visible img { animation-play-state: running !important; }
+.hero-animal.is-active img { animation-play-state: paused !important; }
+.animal-waving-monster, .animal-bottom-cats { display: none !important; }
+@media (hover: hover) and (pointer: fine) {
+  .lofi-cursor { width: 22px !important; height: 22px !important; border-radius: 50%; background: #f2f0e9; mix-blend-mode: difference; border: 1px solid rgba(242,240,233,.9); box-shadow: 0 0 0 5px rgba(242,240,233,.10); }
+  .lofi-cursor-core { width: 4px !important; height: 4px !important; background: #f2f0e9; }
+  .lofi-cursor-ring { inset: -4px !important; border-color: rgba(242,240,233,.65); }
+  .lofi-cursor-spark { display: none; }
+}
