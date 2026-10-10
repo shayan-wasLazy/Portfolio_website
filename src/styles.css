@@ -1323,3 +1323,96 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
     animation: none !important;
   }
 }
+
+
+/* Hover-triggered character animation: freeze on the exact frame when pointer leaves */
+.hero-animal img {
+  animation-play-state: paused;
+  backface-visibility: hidden;
+}
+.hero-animal:hover img,
+.hero-animal:focus-visible img,
+.hero-animal.is-active img {
+  animation-play-state: running;
+}
+.animal-waving-monster img,
+.animal-bottom-cats img {
+  transform-origin: 50% 85%;
+  will-change: transform;
+}
+.animal-waving-monster:hover img,
+.animal-waving-monster:focus-visible img,
+.animal-waving-monster.is-active img {
+  animation: waving-monster-hover-motion .9s ease-in-out infinite;
+}
+.animal-bottom-cats:hover img,
+.animal-bottom-cats:focus-visible img,
+.animal-bottom-cats.is-active img {
+  animation: bottom-cats-hover-motion 2.4s ease-in-out infinite;
+}
+@keyframes waving-monster-hover-motion {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  22% { transform: rotate(-5deg) translateY(-2px); }
+  48% { transform: rotate(7deg) translateY(-3px); }
+  74% { transform: rotate(-3deg) translateY(-1px); }
+}
+@keyframes bottom-cats-hover-motion {
+  0%, 100% { transform: translateY(0) scale(1,1); }
+  50% { transform: translateY(-2px) scale(1.008,.995); }
+}
+
+/* Lo-fi ink cursor — warm paper center, soft halo, tiny animated sparkle */
+@media (hover: hover) and (pointer: fine) {
+  body, a, button { cursor: none !important; }
+  .lofi-cursor {
+    position: fixed;
+    z-index: 9999;
+    width: 30px;
+    height: 30px;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(.8);
+    transition: opacity .16s ease, transform .18s ease;
+    mix-blend-mode: difference;
+  }
+  .lofi-cursor.is-visible { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  .lofi-cursor-core {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: #f2f0e9;
+    transform: translate(-50%, -50%);
+  }
+  .lofi-cursor-ring {
+    position: absolute;
+    inset: 3px;
+    border: 1px solid rgba(242,240,233,.9);
+    border-radius: 50%;
+    animation: lofi-cursor-breathe 2.2s ease-in-out infinite;
+  }
+  .lofi-cursor-spark {
+    position: absolute;
+    right: -5px; top: -7px;
+    color: #f2f0e9;
+    font-size: 12px;
+    line-height: 1;
+    animation: lofi-cursor-spark 3.2s linear infinite;
+  }
+  .lofi-cursor.is-pressed .lofi-cursor-ring { inset: 0; }
+  .lofi-cursor.is-pressed .lofi-cursor-spark { transform: scale(.65); }
+}
+@keyframes lofi-cursor-breathe {
+  0%, 100% { transform: scale(.88); opacity: .62; }
+  50% { transform: scale(1.12); opacity: 1; }
+}
+@keyframes lofi-cursor-spark { to { rotate: 360deg; } }
+@media (hover: none), (pointer: coarse) {
+  .lofi-cursor { display: none !important; }
+  body, a, button { cursor: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lofi-cursor-ring, .lofi-cursor-spark { animation: none !important; }
+  .animal-waving-monster:hover img,
+  .animal-bottom-cats:hover img { animation-duration: .01ms; }
+}
