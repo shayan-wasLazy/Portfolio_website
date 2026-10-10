@@ -1671,19 +1671,19 @@ main#top[data-theme="light"] .floating-nav .theme-toggle {
   object-fit: contain;
 }
 .inline-sleepy-cat {
-  top: -78px;
-  left: 8px;
+  top: -35px;
+  left: 35%;
   width: clamp(95px, 11vw, 150px);
 }
 .inline-headphone-blob {
-  top: -96px;
-  left: 49%;
+  top: 218.5%;
+  left: 85%;
   width: clamp(62px, 7vw, 96px);
 }
 .inline-critter .animal-frame-image { animation: none !important; }
 .inline-critter:hover .animal-frame-image,
 .inline-critter:focus-visible .animal-frame-image { filter: drop-shadow(0 4px 8px rgba(0,0,0,.22)); }
 @media (max-width: 760px) {
-  .inline-sleepy-cat { top: -52px; left: 0; width: 88px; }
-  .inline-headphone-blob { top: -72px; left: 48%; width: 58px; }
+  .inline-sleepy-cat { top: -52px; left: 35%; width: 88px; }
+  .inline-headphone-blob { top: 218.5%; left: 85%; width: 58px; }
 }
