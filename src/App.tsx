@@ -81,7 +81,7 @@ function AnimalFrameSequence({ folder, active }: { folder: string; active: boole
     let previous = 0;
     const tick = (time: number) => {
       if (!activeRef.current) return;
-      if (!previous || time - previous >= 95) {
+      if (!previous || time - previous >= 240) {
         frameRef.current = (frameRef.current + 1) % frames.length;
         setFrame(frameRef.current);
         previous = time;
@@ -101,13 +101,12 @@ function AnimalFrameSequence({ folder, active }: { folder: string; active: boole
 function Hero() {
   const [activeAnimal, setActiveAnimal] = useState<string | null>(null);
   const animals = [
-    { id: "sleepy-cat", label: "Sleeping cat", folder: "sleepy_cat_frames", className: "animal-sleepy-cat" },
-    { id: "sunglasses-cat", label: "Sunglasses cat", folder: "sunglasses_cat_frames", className: "animal-sunglasses-cat" },
+    { id: "sleepy-cat", label: "Sleeping cat", folder: "sleepy_cat", className: "animal-sleepy-cat" },
+    { id: "sunglasses-cat", label: "Sunglasses cat", folder: "sunglasses_cat", className: "animal-sunglasses-cat" },
     { id: "headphone-blob", label: "Headphone creature", folder: "headphone_blob_frames", className: "animal-headphone-blob" },
   ];
   return <section className="hero home-hero" aria-label="Portfolio cover">
     <div className="hero-image" role="img" aria-label="Monochrome Japanese mountain valley illustration" />
-    <div className="hero-glass-gradient" aria-hidden="true" />
     <div className="hero-vignette" /><div className="hero-grain" /><FloatingLeaves />
     <div className="hero-animal-layer" aria-label="Interactive valley characters">
       {animals.map((animal) => <button key={animal.id} type="button"
