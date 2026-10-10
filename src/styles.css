@@ -1270,3 +1270,56 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
 @media (prefers-reduced-motion: reduce) {
   .hero-animal, .hero-animal-greeting { transition: none; }
 }
+
+
+/* Top-row characters: keep their original still frames visible at rest.
+   Motion starts only while the character is hovered, focused, or activated. */
+.animal-sleepy-cat img,
+.animal-sunglasses-cat img,
+.animal-headphone-blob img {
+  transform-origin: 50% 85%;
+  will-change: transform;
+}
+
+.animal-sleepy-cat:hover img,
+.animal-sleepy-cat:focus-visible img,
+.animal-sleepy-cat.is-active img {
+  animation: sleepy-cat-hover-motion 2.8s ease-in-out infinite;
+}
+
+.animal-sunglasses-cat:hover img,
+.animal-sunglasses-cat:focus-visible img,
+.animal-sunglasses-cat.is-active img {
+  animation: sunglasses-cat-hover-motion 2.2s ease-in-out infinite;
+}
+
+.animal-headphone-blob:hover img,
+.animal-headphone-blob:focus-visible img,
+.animal-headphone-blob.is-active img {
+  animation: headphone-blob-hover-motion 1.8s ease-in-out infinite;
+}
+
+@keyframes sleepy-cat-hover-motion {
+  0%, 100% { transform: translateY(0) scale(1, 1); }
+  50% { transform: translateY(-2px) scale(1.012, .99); }
+}
+
+@keyframes sunglasses-cat-hover-motion {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  35% { transform: translateY(-3px) rotate(-1.5deg); }
+  70% { transform: translateY(0) rotate(1deg); }
+}
+
+@keyframes headphone-blob-hover-motion {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  30% { transform: translateY(-4px) rotate(-2deg); }
+  65% { transform: translateY(1px) rotate(2deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animal-sleepy-cat img,
+  .animal-sunglasses-cat img,
+  .animal-headphone-blob img {
+    animation: none !important;
+  }
+}
