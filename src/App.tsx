@@ -110,7 +110,7 @@ function Hero() {
     <div className="hero-vignette" /><div className="hero-grain" /><FloatingLeaves />
     <div className="hero-animal-layer" aria-label="Interactive valley characters">
       {animals.map((animal) => <button key={animal.id} type="button"
-        className={`hero-animal ${animal.className} ${animal.id === "sleepy-cat" && scrollY > 8 ? "is-hidden-on-scroll" : ""} ${activeAnimal === animal.id ? "is-active" : ""}`}
+        className={`hero-animal ${animal.className} ${activeAnimal === animal.id ? "is-active" : ""}`}
         aria-label={animal.label} aria-pressed={activeAnimal === animal.id}
         onMouseEnter={() => setActiveAnimal(animal.id)}
         onMouseLeave={() => setActiveAnimal(null)}
@@ -121,49 +121,6 @@ function Hero() {
       </button>)}
     </div>
   </section>;
-}
-
-function ScrollCatJourney() {
-  const [scrollY, setScrollY] = useState(0);
-  const [viewportHeight, setViewportHeight] = useState(() => window.innerHeight);
-  useEffect(() => {
-    const update = () => {
-      setScrollY(window.scrollY);
-      setViewportHeight(window.innerHeight);
-    };
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-    };
-  }, []);
-  const journeyDistance = Math.max(1, viewportHeight * 0.72);
-  const travel = Math.min(1, Math.max(0, scrollY / journeyDistance));
-  const traveling = scrollY > 8 && travel < 1;
-  const arrived = travel >= 1;
-  return <>
-    <img
-      className={`scroll-cat-jump ${traveling ? "is-traveling" : ""} ${arrived ? "is-arrived" : ""}`}
-      src={`${import.meta.env.BASE_URL}catsleepjump.png`}
-      alt=""
-      aria-hidden="true"
-      onError={(event) => { event.currentTarget.style.display = "none"; }}
-      style={{
-        left: `${31 - travel * 9}%`,
-        top: `${37 + travel * 42}vh`,
-        opacity: scrollY <= 8 || arrived ? 0 : 1,
-        transform: `translate(-50%, -50%) rotate(${-8 + travel * 12}deg) scale(${1 - travel * .12})`
-      }}
-    />
-    {arrived && <img
-      className="scroll-cat-resting"
-      src={`${import.meta.env.BASE_URL}assets/animals/sleepy_cat/frame_01.png`}
-      alt=""
-      aria-hidden="true"
-    />}
-  </>;
 }
 
 function LoadingScreen({ page }: { page: PageId }) {
@@ -205,8 +162,8 @@ function LoFiCursor() {
 
 function SectionLabel({ left, right }: { left: string; right: string }) { return <div className="section-label"><span>{left}</span><span>{right}</span></div>; }
 function HomePage() {
-  return <><Hero /><section id="content" className="intro section-shell"><SectionLabel left="HOME / 001" right="MUMBAI, INDIA" /><div className="intro-grid"><h1>Curious by<br /><em>default.</em></h1><div className="intro-copy"><p className="intro-lead">I’m Shayan — a data science student who likes building things that sit somewhere between logic and feeling.</p><p>From machine learning experiments to motion graphics, I enjoy pulling ideas apart, figuring out how they work, and making something of my own. Usually with music on and too many tabs open.</p><div className="interest-line"><span>CURRENT CURIOSITIES</span><b>AI / ML</b><i>✳</i><b>Visual storytelling</b><i>✳</i><b>Anime</b></div></div></div>
-  <div className="home-contact"><div><span className="eyebrow"><Mail size={14} /> CONTACT / SOCIALS</span><h2>Say <em>hello.</em></h2><p>Have an interesting idea, a project to build, or something good to recommend? Let’s connect.</p></div><div className="social-links">
+  return <><Hero /><section id="content" className="intro section-shell"><SectionLabel left="HOME / 001" right="MUMBAI, INDIA" /><div className="intro-grid"><h1 className="curious-heading"><button type="button" className="inline-critter inline-sleepy-cat" aria-label="Wake the sleeping cat" onMouseEnter={() => {}} onFocus={() => {}}><AnimalFrameSequence folder="sleepy_cat" active={false} /></button>Curious by<br /><em>default.</em></h1><div className="intro-copy"><p className="intro-lead">I’m Shayan — a data science student who likes building things that sit somewhere between logic and feeling.</p><p>From machine learning experiments to motion graphics, I enjoy pulling ideas apart, figuring out how they work, and making something of my own. Usually with music on and too many tabs open.</p><div className="interest-line"><span>CURRENT CURIOSITIES</span><b>AI / ML</b><i>✳</i><b>Visual storytelling</b><i>✳</i><b>Anime</b></div></div></div>
+  <div className="home-contact"><button type="button" className="inline-critter inline-headphone-blob" aria-label="Headphone creature" onMouseEnter={(e) => e.currentTarget.classList.add("is-hovered")} onMouseLeave={(e) => e.currentTarget.classList.remove("is-hovered")} onFocus={(e) => e.currentTarget.classList.add("is-hovered")} onBlur={(e) => e.currentTarget.classList.remove("is-hovered")}><AnimalFrameSequence folder="headphone_blob_frames" active={false} /></button><div><span className="eyebrow"><Mail size={14} /> CONTACT / SOCIALS</span><h2>Say <em>hello.</em></h2><p>Have an interesting idea, a project to build, or something good to recommend? Let’s connect.</p></div><div className="social-links">
   <a href="https://github.com/shayan-wasLazy" target="_blank" rel="noreferrer"><Github size={18} /><span>GitHub</span><small>CODE & EXPERIMENTS</small><ArrowUpRight size={17} /></a>
   <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer"><Linkedin size={18} /><span>LinkedIn</span><small>PROFESSIONAL</small><ArrowUpRight size={17} /></a>
   <a href="https://www.instagram.com/lazy_but_kind_/" target="_blank" rel="noreferrer"><Instagram size={18} /><span>Instagram</span><small>VISUALS & PERSONAL</small><ArrowUpRight size={17} /></a>
@@ -283,5 +240,5 @@ export default function App() {
     return () => window.removeEventListener("hashchange", update);
   }, []);
   const active = pageFromPath(path);
-  return <main id="top" data-theme={theme}><LoFiCursor /><ScrollCatJourney />{loadingPage && <LoadingScreen key={loadingPage} page={loadingPage} />}<Navigation active={active} theme={theme} onToggleTheme={() => setTheme((current) => current === "dark" ? "light" : "dark")} />{active === "design" ? <DesignPage /> : active === "builds" ? <BuildsPage /> : <HomePage />}<Footer /></main>;
+  return <main id="top" data-theme={theme}><LoFiCursor />{loadingPage && <LoadingScreen key={loadingPage} page={loadingPage} />}<Navigation active={active} theme={theme} onToggleTheme={() => setTheme((current) => current === "dark" ? "light" : "dark")} />{active === "design" ? <DesignPage /> : active === "builds" ? <BuildsPage /> : <HomePage />}<Footer /></main>;
 }
