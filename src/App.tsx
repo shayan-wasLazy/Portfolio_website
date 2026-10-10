@@ -40,8 +40,6 @@ function Hero() {
     { id: "sleepy-cat", label: "Sleeping cat", src: "sleepy_cat.webp", className: "animal-sleepy-cat" },
     { id: "sunglasses-cat", label: "Sunglasses cat", src: "sunglasses_cat.webp", className: "animal-sunglasses-cat" },
     { id: "headphone-blob", label: "Headphone creature", src: "headphone_blob.webp", className: "animal-headphone-blob" },
-    { id: "waving-monster", label: "Waving monster", src: "waving_monster.webp", className: "animal-waving-monster" },
-    { id: "bottom-cats", label: "Sleeping cats", src: "bottom_cats.webp", className: "animal-bottom-cats" },
   ];
   return <section className="hero home-hero" aria-label="Portfolio cover">
     <div className="hero-image" role="img" aria-label="Monochrome Japanese mountain valley illustration" />
@@ -54,9 +52,8 @@ function Hero() {
         onMouseLeave={() => setActiveAnimal(null)}
         onFocus={() => setActiveAnimal(animal.id)}
         onBlur={() => setActiveAnimal(null)}
-        onClick={() => setActiveAnimal((current) => current === animal.id ? null : animal.id)}>
+        >
         <img src={`${import.meta.env.BASE_URL}assets/animals/${animal.src}`} alt="" draggable={false} />
-        {animal.id === "waving-monster" && <span className="hero-animal-greeting" aria-hidden="true">hi ✳</span>}
       </button>)}
     </div>
   </section>;
