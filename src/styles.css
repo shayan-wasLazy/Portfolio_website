@@ -1444,3 +1444,5 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
   .lofi-cursor-ring { inset: -4px !important; border-color: rgba(242,240,233,.65); }
   .lofi-cursor-spark { display: none; }
 }
+
+.hero-animal.is-active img { animation-play-state: running !important; }
