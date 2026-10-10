@@ -37,14 +37,16 @@ function Navigation({ active, theme, onToggleTheme }: { active: PageId; theme: "
 function Hero() {
   return <section className="hero home-hero" aria-label="Portfolio cover"><div className="hero-image" role="img" aria-label="Monochrome Japanese mountain valley illustration" /><div className="hero-vignette" /><div className="hero-grain" /><FloatingLeaves /></section>;
 }
-function LoadingScreen() {
-  return <motion.div className="portfolio-intro-screen" role="status" aria-label="Loading Shayan Mandrekar portfolio"
+function LoadingScreen({ page }: { page: PageId }) {
+  const firstLine = page === "home" ? "Shayan" : page === "design" ? "Design" : "Builds";
+  const secondLine = page === "home" ? "Mandrekar" : "Page";
+  return <motion.div className="portfolio-intro-screen" role="status" aria-label={`Loading ${firstLine} ${secondLine}`}
     initial={{ opacity: 1 }} animate={{ opacity: [1, 1, 0] }}
-    transition={{ duration: 3, times: [0, .78, 1], ease: "easeInOut" }}>
-    <div className="portfolio-intro-content"><div className="portfolio-intro-wordmark" aria-label="Shayan Mandrekar">
-      <span className="portfolio-intro-first">{Array.from("Shayan").map((char, index) => <span aria-hidden="true" className="portfolio-intro-letter" key={index} style={{ "--letter-index": index } as React.CSSProperties}>{char}</span>)}</span>
-      <span className="portfolio-intro-last">{Array.from("Mandrekar").map((char, index) => <span aria-hidden="true" className="portfolio-intro-letter" key={index} style={{ "--letter-index": index + 6 } as React.CSSProperties}>{char}</span>)}</span>
-    </div></div>
+    transition={{ duration: page === "home" ? 3 : 1.35, times: [0, .78, 1], ease: "easeInOut" }}>
+    <div className="portfolio-intro-content"><div className="portfolio-intro-wordmark" aria-label={`${firstLine} ${secondLine}`}>
+      <span className="portfolio-intro-first">{Array.from(firstLine).map((char, index) => <span aria-hidden="true" className="portfolio-intro-letter" key={index} style={{ "--letter-index": index } as React.CSSProperties}>{char}</span>)}</span>
+      <span className="portfolio-intro-last">{Array.from(secondLine).map((char, index) => <span aria-hidden="true" className="portfolio-intro-letter" key={index} style={{ "--letter-index": index + firstLine.length } as React.CSSProperties}>{char}</span>)}</span>
+    </div>{page !== "home" && <p className="portfolio-intro-tagline">{page === "design" ? "A curated collection of visual work, shaped over the years." : "Experiments, tools, and ideas brought to life through code."}</p>}</div>
   </motion.div>;
 }
 function SectionLabel({ left, right }: { left: string; right: string }) { return <div className="section-label"><span>{left}</span><span>{right}</span></div>; }
@@ -107,27 +109,25 @@ function Footer() { const reduceMotion = useReducedMotion(); return <footer clas
 
 export default function App() {
   const initialPath = window.location.hash || "#/";
+  const pageFromPath = (value: string): PageId => value.startsWith("#/design") ? "design" : value.startsWith("#/builds") ? "builds" : "home";
   const [path, setPath] = useState(initialPath);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
-  // Show the intro on a fresh visit only when the visitor lands on Home.
-  const [isLoading, setIsLoading] = useState(!initialPath.startsWith("#/design") && !initialPath.startsWith("#/builds"));
+  const [loadingPage, setLoadingPage] = useState<PageId | null>(pageFromPath(initialPath));
   useEffect(() => {
-    if (!isLoading) return;
-    const timeout = window.setTimeout(() => setIsLoading(false), 3000);
+    if (!loadingPage) return;
+    const timeout = window.setTimeout(() => setLoadingPage(null), loadingPage === "home" ? 3000 : 1350);
     return () => window.clearTimeout(timeout);
-  }, [isLoading]);
+  }, [loadingPage]);
   useEffect(() => {
     const update = () => {
       const nextPath = window.location.hash || "#/";
       setPath(nextPath);
-      // Inner pages should open immediately, without the intro overlay.
-      if (nextPath.startsWith("#/design") || nextPath.startsWith("#/builds")) {
-        setIsLoading(false);
-      }
+      setLoadingPage(pageFromPath(nextPath));
+      window.scrollTo({ top: 0, behavior: "auto" });
     };
     window.addEventListener("hashchange", update);
     return () => window.removeEventListener("hashchange", update);
   }, []);
-  const active: PageId = path.startsWith("#/design") ? "design" : path.startsWith("#/builds") ? "builds" : "home";
-  return <main id="top" data-theme={theme}>{isLoading && active === "home" && <LoadingScreen />}<Navigation active={active} theme={theme} onToggleTheme={() => setTheme((current) => current === "dark" ? "light" : "dark")} />{active === "design" ? <DesignPage /> : active === "builds" ? <BuildsPage /> : <HomePage />}<Footer /></main>;
+  const active = pageFromPath(path);
+  return <main id="top" data-theme={theme}>{loadingPage && <LoadingScreen key={loadingPage} page={loadingPage} />}<Navigation active={active} theme={theme} onToggleTheme={() => setTheme((current) => current === "dark" ? "light" : "dark")} />{active === "design" ? <DesignPage /> : active === "builds" ? <BuildsPage /> : <HomePage />}<Footer /></main>;
 }

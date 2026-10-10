@@ -952,3 +952,249 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
     min-height: 42px !important;
   }
 }
+
+
+/* Page intro captions: same restrained palette and type system as the wordmark */
+.portfolio-intro-tagline {
+  max-width: 420px;
+  margin: 22px 0 0;
+  color: rgba(242, 240, 233, .58);
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.7;
+  letter-spacing: .025em;
+  text-align: left;
+  opacity: 0;
+  animation: portfolio-intro-tagline-in .48s cubic-bezier(.2,.75,.25,1) .48s forwards;
+}
+@keyframes portfolio-intro-tagline-in {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* Short page transitions should finish their character entrance before fading out. */
+.portfolio-intro-screen[aria-label="Loading Design Page"] .portfolio-intro-letter,
+.portfolio-intro-screen[aria-label="Loading Builds Page"] .portfolio-intro-letter {
+  animation-duration: .72s;
+}
+@media (max-width: 600px) {
+  .portfolio-intro-tagline {
+    max-width: min(320px, calc(100vw - 52px));
+    margin-top: 16px;
+    font-size: 11px;
+    line-height: 1.65;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-intro-tagline { animation: none; opacity: 1; }
+}
+
+
+/* Mobile: persistent bottom navigation, sized for thumb reach */
+@media (max-width: 760px) {
+  .floating-nav {
+    position: fixed;
+    top: auto !important;
+    right: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom)) !important;
+    left: 12px;
+    transform: none;
+    width: auto;
+    max-width: none;
+    justify-content: space-between;
+    gap: 4px;
+    padding: 7px;
+    border-radius: 22px;
+    background: rgba(23, 23, 21, .97);
+    border: 1px solid rgba(242, 240, 233, .18);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, .32);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .floating-nav .nav-links {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    justify-content: space-around;
+    gap: 3px;
+  }
+  .floating-nav .nav-item {
+    flex: 1;
+    min-width: 0;
+    min-height: 44px;
+    padding: 12px 8px;
+    font-size: 12px;
+    line-height: 1;
+    border-radius: 15px;
+  }
+  .floating-nav .active-mark { bottom: 4px; }
+  .floating-nav .nav-separator {
+    flex: 0 0 1px;
+    height: 23px;
+    margin: 0 3px;
+    background: rgba(242, 240, 233, .2);
+  }
+  .floating-nav .theme-toggle {
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 14px;
+    color: #f2f0e9;
+    background: rgba(242, 240, 233, .09);
+  }
+  .site-footer { padding-bottom: calc(110px + env(safe-area-inset-bottom)); }
+}
+@media (max-width: 390px) {
+  .floating-nav { right: 9px; left: 9px; padding: 6px; }
+  .floating-nav .nav-item { padding-right: 5px; padding-left: 5px; font-size: 11px; }
+}
+
+
+/* Tiny interactive moments for the valley characters */
+.hero-animal-interactions {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+.animal-hotspot {
+  position: absolute;
+  display: block;
+  width: clamp(70px, 11vw, 150px);
+  height: clamp(70px, 11vw, 150px);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+}
+.animal-hotspot:focus-visible {
+  outline: 1px dashed rgba(242,240,233,.8);
+  outline-offset: 2px;
+}
+.animal-hello { left: 5.5%; bottom: 6%; }
+.animal-sleepy { left: 5.5%; top: 7%; }
+.animal-speech {
+  position: absolute;
+  left: 62%;
+  top: 2%;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  border: 1px solid rgba(242,240,233,.22);
+  border-radius: 999px 999px 999px 5px;
+  color: #171715;
+  background: #f2f0e9;
+  font: 700 12px/1 'Manrope', sans-serif;
+  letter-spacing: .02em;
+  opacity: 0;
+  transform: translateY(7px) scale(.92);
+  transform-origin: bottom left;
+  transition: opacity .22s ease, transform .22s cubic-bezier(.2,.8,.2,1);
+  pointer-events: none;
+  box-shadow: 0 5px 20px rgba(0,0,0,.14);
+}
+.animal-wave { display: inline-block; font-size: 15px; transform-origin: 70% 70%; }
+.animal-hello:hover .animal-speech,
+.animal-hello:focus-visible .animal-speech,
+.animal-hello.is-active .animal-speech { opacity: 1; transform: translateY(0) scale(1); }
+.animal-hello:hover .animal-wave,
+.animal-hello:focus-visible .animal-wave,
+.animal-hello.is-active .animal-wave { animation: animal-wave 0.55s ease-in-out 3; }
+.animal-zs {
+  position: absolute;
+  top: 3%;
+  left: 72%;
+  display: flex;
+  align-items: flex-start;
+  gap: 2px;
+  color: #f2f0e9;
+  font: italic 700 17px/1 Georgia, serif;
+  text-shadow: 0 2px 8px rgba(0,0,0,.55);
+  opacity: .0;
+  transform: translateY(7px);
+  transition: opacity .2s ease, transform .2s ease;
+  pointer-events: none;
+}
+.animal-zs i { display: block; font-style: italic; animation: animal-z-float 1.4s ease-in-out infinite; }
+.animal-zs i:nth-child(2) { margin-top: 9px; animation-delay: .18s; }
+.animal-zs i:nth-child(3) { margin-top: 18px; animation-delay: .36s; }
+.animal-sleepy:hover .animal-zs,
+.animal-sleepy:focus-visible .animal-zs,
+.animal-sleepy.is-active .animal-zs { opacity: .95; transform: translateY(0); }
+.animal-tail {
+  position: absolute;
+  width: 23px;
+  height: 33px;
+  top: 48%;
+  left: 76%;
+  border: 2px solid rgba(242,240,233,.85);
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 50% 65% 20% 20%;
+  opacity: 0;
+  transform-origin: 10% 90%;
+  transform: rotate(-12deg);
+  transition: opacity .2s ease;
+  pointer-events: none;
+}
+.animal-sleepy:hover .animal-tail,
+.animal-sleepy:focus-visible .animal-tail,
+.animal-sleepy.is-active .animal-tail { opacity: .85; animation: animal-tail-wag .34s ease-in-out infinite alternate; }
+@keyframes animal-wave { 0%,100% { transform: rotate(0); } 25% { transform: rotate(18deg); } 75% { transform: rotate(-12deg); } }
+@keyframes animal-z-float { 0%,100% { transform: translateY(0) rotate(-5deg); opacity: .45; } 50% { transform: translateY(-9px) rotate(5deg); opacity: 1; } }
+@keyframes animal-tail-wag { from { transform: rotate(-20deg); } to { transform: rotate(24deg); } }
+@media (max-width: 600px) {
+  .animal-hello { left: 1%; bottom: 8%; }
+  .animal-sleepy { left: 1%; top: 8%; }
+  .animal-hotspot { width: 22vw; height: 22vw; }
+  .animal-speech { font-size: 11px; padding: 7px 10px; }
+  .animal-zs { font-size: 15px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .animal-wave, .animal-zs i, .animal-tail { animation: none !important; }
+}
+
+
+/* Align interactive hit areas to the actual characters in the full-bleed hero art.
+   Coordinates are percentages of the hero section, not viewport edges. */
+.hero-animal-interactions { inset: 0; }
+.animal-hotspot {
+  transform: translate(-50%, -50%);
+  width: clamp(88px, 10.5vw, 160px);
+  height: clamp(88px, 10.5vw, 160px);
+}
+.animal-hello {
+  left: 19%;
+  top: 75%;
+  bottom: auto;
+}
+.animal-sleepy {
+  left: 30%;
+  top: 40%;
+}
+.animal-speech { left: 58%; top: 0; }
+.animal-zs { left: 74%; top: -2%; }
+.animal-tail { left: 78%; top: 48%; }
+@media (max-width: 600px) {
+  .animal-hotspot {
+    width: 22vw;
+    height: 22vw;
+    min-width: 70px;
+    min-height: 70px;
+  }
+  .animal-hello { left: 19%; top: 75%; bottom: auto; }
+  .animal-sleepy { left: 30%; top: 40%; }
+}
+
+
+/* Disable the temporary CSS-only animal overlays.
+   Character motion should be implemented using isolated transparent character layers,
+   so the animal artwork itself moves rather than decorative effects around it. */
+.hero-animal-interactions { display: none !important; }
