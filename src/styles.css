@@ -1486,3 +1486,35 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
   .project-card,
   .behance-card { transition: none !important; }
 }
+
+
+/* Mobile: keep the wallpaper and characters completely still on touch devices. */
+@media (max-width: 760px), (hover: none) and (pointer: coarse) {
+  .hero-image,
+  .leaf,
+  .hero-animal,
+  .hero-animal img,
+  .hero-animal canvas,
+  .floating-nav,
+  .active-mark {
+    animation: none !important;
+    transition: none !important;
+  }
+  .leaf-layer { display: none !important; }
+  .hero-animal { pointer-events: none !important; }
+  .hero-animal img,
+  .hero-animal canvas { transform: none !important; }
+}
+
+/* Keep the headphone blob centered on its anchor instead of drifting with scale. */
+.animal-headphone-blob {
+  transform: translate(-50%, -50%) scale(.7) !important;
+}
+@media (max-width: 760px) {
+  .animal-headphone-blob {
+    left: 66%;
+    top: 31%;
+    width: 19vw;
+    transform: translate(-50%, -50%) scale(.7) !important;
+  }
+}
