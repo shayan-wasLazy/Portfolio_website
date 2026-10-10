@@ -1250,7 +1250,7 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
   background: #f2f0e9;
   font: 800 12px/1 'Manrope', sans-serif;
   opacity: 0;
-  transform: translateY(5px) scale(.9);
+  /* transform: translateY(5px) scale(.9); */
   transition: opacity .18s ease, transform .18s ease;
   box-shadow: 0 4px 12px rgba(0,0,0,.16);
 }
