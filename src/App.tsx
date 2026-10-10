@@ -35,21 +35,7 @@ function Navigation({ active, theme, onToggleTheme }: { active: PageId; theme: "
   return <nav className="floating-nav" aria-label="Main navigation"><div className="nav-links">{navItems.map((item) => <a key={item.id} className={`nav-item ${active === item.id ? "is-active" : ""}`} href={item.href} aria-current={active === item.id ? "page" : undefined}><span>{item.label}</span>{active === item.id && <motion.span className="active-mark" layoutId="active-mark" transition={{ type: "spring", stiffness: 380, damping: 30 }} />}</a>)}</div><span className="nav-separator" aria-hidden="true" /><button className="theme-toggle" onClick={onToggleTheme} aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`} title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}>{theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}</button></nav>;
 }
 function Hero() {
-  const [hello, setHello] = useState(false);
-  const [sleepy, setSleepy] = useState(false);
-  return <section className="hero home-hero" aria-label="Portfolio cover">
-    <div className="hero-image" role="img" aria-label="Monochrome Japanese mountain valley illustration" />
-    <div className="hero-vignette" /><div className="hero-grain" /><FloatingLeaves />
-    <div className="hero-animal-interactions" aria-label="Interactive valley characters">
-      <button type="button" className={`animal-hotspot animal-hello ${hello ? "is-active" : ""}`} aria-label="Say hi to the animal at the bottom left" aria-pressed={hello} onClick={() => setHello((v) => !v)}>
-        <span className="animal-speech" aria-hidden="true">hi! <span className="animal-wave">✳</span></span>
-      </button>
-      <button type="button" className={`animal-hotspot animal-sleepy ${sleepy ? "is-active" : ""}`} aria-label="Wake the sleepy animal at the top left" aria-pressed={sleepy} onClick={() => setSleepy((v) => !v)}>
-        <span className="animal-zs" aria-hidden="true"><i>Z</i><i>z</i><i>z</i></span>
-        <span className="animal-tail" aria-hidden="true" />
-      </button>
-    </div>
-  </section>;
+  return <section className="hero home-hero" aria-label="Portfolio cover"><div className="hero-image" role="img" aria-label="Monochrome Japanese mountain valley illustration" /><div className="hero-vignette" /><div className="hero-grain" /><FloatingLeaves /></section>;
 }
 function LoadingScreen({ page }: { page: PageId }) {
   const firstLine = page === "home" ? "Shayan" : page === "design" ? "Design" : "Builds";
