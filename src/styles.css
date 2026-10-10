@@ -1458,3 +1458,68 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
   pointer-events: none;
   user-select: none;
 }
+
+
+/* Glass surfaces: restrained, readable, and consistent with the ink palette. */
+.floating-nav {
+  background: rgba(23, 23, 21, .66) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(125%);
+  backdrop-filter: blur(22px) saturate(125%);
+  border: 1px solid rgba(242, 240, 233, .16) !important;
+  box-shadow:
+    0 12px 38px rgba(0, 0, 0, .22),
+    inset 0 1px 0 rgba(242, 240, 233, .10),
+    inset 0 -1px 0 rgba(174, 119, 42, .07);
+}
+.project-card,
+.behance-card,
+.project-modal,
+.design-modal {
+  background: rgba(28, 28, 25, .56) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(115%);
+  backdrop-filter: blur(18px) saturate(115%);
+  border-color: rgba(242, 240, 233, .15) !important;
+  box-shadow:
+    0 14px 38px rgba(0, 0, 0, .12),
+    inset 0 1px 0 rgba(242, 240, 233, .07);
+}
+.project-card,
+.behance-card {
+  transition: background-color .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+.project-card:hover,
+.behance-card:hover {
+  background: rgba(40, 38, 31, .68) !important;
+  border-color: rgba(174, 119, 42, .32) !important;
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, .18),
+    inset 0 1px 0 rgba(242, 240, 233, .10);
+}
+
+/* Fine film grain across the page; fixed overlay never captures pointer input. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  pointer-events: none;
+  opacity: .042;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.62'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  mix-blend-mode: soft-light;
+}
+@media (prefers-reduced-transparency: reduce) {
+  .floating-nav,
+  .project-card,
+  .behance-card,
+  .project-modal,
+  .design-modal {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: rgba(23, 23, 21, .94) !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-card,
+  .behance-card { transition: none !important; }
+}
