@@ -1416,3 +1416,18 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
   .animal-waving-monster:hover img,
   .animal-bottom-cats:hover img { animation-duration: .01ms; }
 }
+
+
+/* Keep each character's animation timeline mounted while paused, so hover resumes
+   at the exact frame where the pointer left instead of resetting to frame zero. */
+.animal-sleepy-cat img { animation: sleepy-cat-hover-motion 2.8s ease-in-out infinite; animation-play-state: paused; }
+.animal-sunglasses-cat img { animation: sunglasses-cat-hover-motion 2.2s ease-in-out infinite; animation-play-state: paused; }
+.animal-headphone-blob img { animation: headphone-blob-hover-motion 1.8s ease-in-out infinite; animation-play-state: paused; }
+.animal-waving-monster img { animation: waving-monster-hover-motion .9s ease-in-out infinite; animation-play-state: paused; }
+.animal-bottom-cats img { animation: bottom-cats-hover-motion 2.4s ease-in-out infinite; animation-play-state: paused; }
+.hero-animal:hover img,
+.hero-animal:focus-visible img,
+.hero-animal.is-active img { animation-play-state: running; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-animal img { animation: none !important; }
+}
