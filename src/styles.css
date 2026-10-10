@@ -1220,7 +1220,7 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
   transition: opacity .18s ease, transform .22s ease;
   -webkit-tap-highlight-color: transparent;
 }
-.hero-animal img {
+.hero-animal canvas {
   display: block;
   width: 100%;
   height: 100%;
@@ -1274,9 +1274,9 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
 
 /* Top-row characters: keep their original still frames visible at rest.
    Motion starts only while the character is hovered, focused, or activated. */
-.animal-sleepy-cat img,
-.animal-sunglasses-cat img,
-.animal-headphone-blob img {
+.animal-sleepy-cat canvas,
+.animal-sunglasses-cat canvas,
+.animal-headphone-blob canvas {
   transform-origin: 50% 85%;
   will-change: transform;
 }
@@ -1317,9 +1317,183 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animal-sleepy-cat img,
-  .animal-sunglasses-cat img,
-  .animal-headphone-blob img {
+  .animal-sleepy-cat canvas,
+  .animal-sunglasses-cat canvas,
+  .animal-headphone-blob canvas {
     animation: none !important;
   }
+}
+
+
+/* Hover-triggered character animation: freeze on the exact frame when pointer leaves */
+.hero-animal canvas {
+  animation-play-state: paused;
+  backface-visibility: hidden;
+}
+.hero-animal:hover img,
+.hero-animal:focus-visible img,
+.hero-animal.is-active img {
+  animation-play-state: running;
+}
+.animal-waving-monster canvas,
+.animal-bottom-cats canvas {
+  transform-origin: 50% 85%;
+  will-change: transform;
+}
+.animal-waving-monster:hover img,
+.animal-waving-monster:focus-visible img,
+.animal-waving-monster.is-active img {
+  animation: waving-monster-hover-motion .9s ease-in-out infinite;
+}
+.animal-bottom-cats:hover img,
+.animal-bottom-cats:focus-visible img,
+.animal-bottom-cats.is-active img {
+  animation: bottom-cats-hover-motion 2.4s ease-in-out infinite;
+}
+@keyframes waving-monster-hover-motion {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  22% { transform: rotate(-5deg) translateY(-2px); }
+  48% { transform: rotate(7deg) translateY(-3px); }
+  74% { transform: rotate(-3deg) translateY(-1px); }
+}
+@keyframes bottom-cats-hover-motion {
+  0%, 100% { transform: translateY(0) scale(1,1); }
+  50% { transform: translateY(-2px) scale(1.008,.995); }
+}
+
+/* Lo-fi ink cursor — warm paper center, soft halo, tiny animated sparkle */
+@media (hover: hover) and (pointer: fine) {
+  body, a, button { cursor: none !important; }
+  .lofi-cursor {
+    position: fixed;
+    z-index: 9999;
+    width: 30px;
+    height: 30px;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(.8);
+    transition: opacity .16s ease, transform .18s ease;
+    mix-blend-mode: difference;
+  }
+  .lofi-cursor.is-visible { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  .lofi-cursor-core {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: #f2f0e9;
+    transform: translate(-50%, -50%);
+  }
+  .lofi-cursor-ring {
+    position: absolute;
+    inset: 3px;
+    border: 1px solid rgba(242,240,233,.9);
+    border-radius: 50%;
+    animation: lofi-cursor-breathe 2.2s ease-in-out infinite;
+  }
+  .lofi-cursor-spark {
+    position: absolute;
+    right: -5px; top: -7px;
+    color: #f2f0e9;
+    font-size: 12px;
+    line-height: 1;
+    animation: lofi-cursor-spark 3.2s linear infinite;
+  }
+  .lofi-cursor.is-pressed .lofi-cursor-ring { inset: 0; }
+  .lofi-cursor.is-pressed .lofi-cursor-spark { transform: scale(.65); }
+}
+@keyframes lofi-cursor-breathe {
+  0%, 100% { transform: scale(.88); opacity: .62; }
+  50% { transform: scale(1.12); opacity: 1; }
+}
+@keyframes lofi-cursor-spark { to { rotate: 360deg; } }
+@media (hover: none), (pointer: coarse) {
+  .lofi-cursor { display: none !important; }
+  body, a, button { cursor: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lofi-cursor-ring, .lofi-cursor-spark { animation: none !important; }
+  .animal-waving-monster:hover img,
+  .animal-bottom-cats:hover img { animation-duration: .01ms; }
+}
+
+
+/* Keep each character's animation timeline mounted while paused, so hover resumes
+   at the exact frame where the pointer left instead of resetting to frame zero. */
+.animal-sleepy-cat canvas { animation: sleepy-cat-hover-motion 2.8s ease-in-out infinite; animation-play-state: paused; }
+.animal-sunglasses-cat canvas { animation: sunglasses-cat-hover-motion 2.2s ease-in-out infinite; animation-play-state: paused; }
+.animal-headphone-blob canvas { animation: headphone-blob-hover-motion 1.8s ease-in-out infinite; animation-play-state: paused; }
+.animal-waving-monster canvas { animation: waving-monster-hover-motion .9s ease-in-out infinite; animation-play-state: paused; }
+.animal-bottom-cats canvas { animation: bottom-cats-hover-motion 2.4s ease-in-out infinite; animation-play-state: paused; }
+.hero-animal:hover img,
+.hero-animal:focus-visible img,
+.hero-animal.is-active img { animation-play-state: running; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-animal canvas { animation: none !important; }
+}
+
+
+/* Strict hover pause: keep animation timelines mounted and paused at the exact frame. */
+.hero-animal canvas { animation-play-state: paused !important; }
+.hero-animal:hover img, .hero-animal:focus-visible img { animation-play-state: running !important; }
+.hero-animal.is-active img { animation-play-state: paused !important; }
+.animal-waving-monster, .animal-bottom-cats { display: none !important; }
+@media (hover: hover) and (pointer: fine) {
+  .lofi-cursor { width: 22px !important; height: 22px !important; border-radius: 50%; background: #f2f0e9; mix-blend-mode: difference; border: 1px solid rgba(242,240,233,.9); box-shadow: 0 0 0 5px rgba(242,240,233,.10); }
+  .lofi-cursor-core { width: 4px !important; height: 4px !important; background: #f2f0e9; }
+  .lofi-cursor-ring { inset: -4px !important; border-color: rgba(242,240,233,.65); }
+  .lofi-cursor-spark { display: none; }
+}
+
+.hero-animal.is-active img { animation-play-state: running !important; }
+
+
+/* Canvas snapshots freeze the first decoded frame of animated WebP assets.
+   CSS transforms now animate the snapshot itself, never the WebP timeline. */
+.hero-animal canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+
+/* Animated glass gradient — ink black, warm paper and antique ochre. */
+.hero-glass-gradient {
+  position: absolute;
+  z-index: -2;
+  inset: -22%;
+  pointer-events: none;
+  opacity: .78;
+  filter: blur(48px) saturate(.82);
+  background:
+    radial-gradient(ellipse at 24% 28%, rgba(174, 119, 42, .42) 0%, transparent 31%),
+    radial-gradient(ellipse at 72% 23%, rgba(242, 240, 233, .25) 0%, transparent 27%),
+    radial-gradient(ellipse at 70% 72%, rgba(112, 87, 47, .3) 0%, transparent 29%),
+    radial-gradient(ellipse at 35% 78%, rgba(242, 240, 233, .12) 0%, transparent 24%),
+    #171715;
+  background-size: 140% 140%;
+  animation: glass-gradient-drift 18s ease-in-out infinite alternate;
+}
+.hero-grain { z-index: -1; }
+@keyframes glass-gradient-drift {
+  0% { background-position: 0% 0%; transform: translate3d(-1.5%, -1%, 0) scale(1); }
+  50% { background-position: 55% 35%; transform: translate3d(1.5%, 1%, 0) scale(1.035); }
+  100% { background-position: 100% 70%; transform: translate3d(-.5%, 1.5%, 0) scale(1.015); }
+}
+.hero-animal { z-index: 3; }
+.hero-animal .animal-frame-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  animation: none !important;
+}
+.animal-frame-placeholder { display: block; width: 100%; height: 100%; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-glass-gradient { animation: none !important; }
 }

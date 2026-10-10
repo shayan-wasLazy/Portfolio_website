@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowDownRight, ArrowUpRight, Github, Instagram, Linkedin, Palette, Code2, X, ExternalLink, Mail, Sun, Moon } from "lucide-react";
 
@@ -34,15 +34,80 @@ function FloatingLeaves() {
 function Navigation({ active, theme, onToggleTheme }: { active: PageId; theme: "dark" | "light"; onToggleTheme: () => void }) {
   return <nav className="floating-nav" aria-label="Main navigation"><div className="nav-links">{navItems.map((item) => <a key={item.id} className={`nav-item ${active === item.id ? "is-active" : ""}`} href={item.href} aria-current={active === item.id ? "page" : undefined}><span>{item.label}</span>{active === item.id && <motion.span className="active-mark" layoutId="active-mark" transition={{ type: "spring", stiffness: 380, damping: 30 }} />}</a>)}</div><span className="nav-separator" aria-hidden="true" /><button className="theme-toggle" onClick={onToggleTheme} aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`} title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}>{theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}</button></nav>;
 }
+function AnimalFrameSequence({ folder, active }: { folder: string; active: boolean }) {
+  const [frame, setFrame] = useState(0);
+  const [frames, setFrames] = useState<HTMLImageElement[]>([]);
+  const frameRef = useRef(0);
+  const activeRef = useRef(active);
+  useEffect(() => { activeRef.current = active; }, [active]);
+
+  useEffect(() => {
+    let cancelled = false;
+    const loaded: HTMLImageElement[] = [];
+    const patterns = (n: number) => {
+      const two = String(n).padStart(2, "0");
+      const three = String(n).padStart(3, "0");
+      return [`frame_${two}.png`, `frame-${two}.png`, `${two}.png`,
+        `frame_${three}.png`, `frame-${three}.png`, `${three}.png`,
+        `frame${n}.png`, `${n}.png`];
+    };
+    const loadFrame = (n: number) => new Promise<HTMLImageElement | null>((resolve) => {
+      const candidates = patterns(n);
+      let candidate = 0;
+      const tryNext = () => {
+        if (cancelled || candidate >= candidates.length) { resolve(null); return; }
+        const image = new Image();
+        image.onload = () => resolve(image);
+        image.onerror = () => { candidate += 1; tryNext(); };
+        image.src = `${import.meta.env.BASE_URL}assets/animals/${folder}/${candidates[candidate]}`;
+      };
+      tryNext();
+    });
+    (async () => {
+      for (let n = 1; n <= 30; n += 1) {
+        const image = await loadFrame(n);
+        if (cancelled) return;
+        if (!image) break;
+        loaded.push(image);
+        setFrames([...loaded]);
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [folder]);
+
+  useEffect(() => {
+    if (!frames.length || !active) return;
+    let raf = 0;
+    let previous = 0;
+    const tick = (time: number) => {
+      if (!activeRef.current) return;
+      if (!previous || time - previous >= 95) {
+        frameRef.current = (frameRef.current + 1) % frames.length;
+        setFrame(frameRef.current);
+        previous = time;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    if (frames.length > 1) raf = requestAnimationFrame(tick);
+    return () => { if (raf) cancelAnimationFrame(raf); };
+  }, [active, frames]);
+
+  const current = frames[frame] ?? frames[0];
+  return current
+    ? <img className="animal-frame-image" src={current.src} alt="" draggable={false} />
+    : <span className="animal-frame-placeholder" aria-hidden="true" />;
+}
+
 function Hero() {
   const [activeAnimal, setActiveAnimal] = useState<string | null>(null);
   const animals = [
-    { id: "sleepy-cat", label: "Sleeping cat", src: "sleepy_cat.webp", className: "animal-sleepy-cat" },
-    { id: "sunglasses-cat", label: "Sunglasses cat", src: "sunglasses_cat.webp", className: "animal-sunglasses-cat" },
-    { id: "headphone-blob", label: "Headphone creature", src: "headphone_blob.webp", className: "animal-headphone-blob" },
+    { id: "sleepy-cat", label: "Sleeping cat", folder: "sleepy_cat_frames", className: "animal-sleepy-cat" },
+    { id: "sunglasses-cat", label: "Sunglasses cat", folder: "sunglasses_cat_frames", className: "animal-sunglasses-cat" },
+    { id: "headphone-blob", label: "Headphone creature", folder: "headphone_blob_frames", className: "animal-headphone-blob" },
   ];
   return <section className="hero home-hero" aria-label="Portfolio cover">
     <div className="hero-image" role="img" aria-label="Monochrome Japanese mountain valley illustration" />
+    <div className="hero-glass-gradient" aria-hidden="true" />
     <div className="hero-vignette" /><div className="hero-grain" /><FloatingLeaves />
     <div className="hero-animal-layer" aria-label="Interactive valley characters">
       {animals.map((animal) => <button key={animal.id} type="button"
@@ -52,8 +117,8 @@ function Hero() {
         onMouseLeave={() => setActiveAnimal(null)}
         onFocus={() => setActiveAnimal(animal.id)}
         onBlur={() => setActiveAnimal(null)}
-        onClick={() => setActiveAnimal((current) => current === animal.id ? null : animal.id)}>
-        <img src={`${import.meta.env.BASE_URL}assets/animals/${animal.src}`} alt="" draggable={false} />
+        >
+        <AnimalFrameSequence folder={animal.folder} active={activeAnimal === animal.id} />
       </button>)}
     </div>
   </section>;
@@ -70,6 +135,30 @@ function LoadingScreen({ page }: { page: PageId }) {
     </div>{page !== "home" && <p className="portfolio-intro-tagline">{page === "design" ? "A curated collection of visual work, shaped over the years." : "Experiments, tools, and ideas brought to life through code."}</p>}</div>
   </motion.div>;
 }
+
+function LoFiCursor() {
+  const [position, setPosition] = useState({ x: -100, y: -100 });
+  const [visible, setVisible] = useState(false);
+  const [pressed, setPressed] = useState(false);
+  useEffect(() => {
+    const move = (event: MouseEvent) => { setPosition({ x: event.clientX, y: event.clientY }); setVisible(true); };
+    const leave = () => setVisible(false);
+    const down = () => setPressed(true);
+    const up = () => setPressed(false);
+    window.addEventListener("mousemove", move);
+    document.addEventListener("mouseleave", leave);
+    window.addEventListener("mousedown", down);
+    window.addEventListener("mouseup", up);
+    return () => {
+      window.removeEventListener("mousemove", move);
+      document.removeEventListener("mouseleave", leave);
+      window.removeEventListener("mousedown", down);
+      window.removeEventListener("mouseup", up);
+    };
+  }, []);
+  return <div className={`lofi-cursor ${visible ? "is-visible" : ""} ${pressed ? "is-pressed" : ""}`} style={{ left: position.x, top: position.y }} aria-hidden="true"><span className="lofi-cursor-core" /><span className="lofi-cursor-ring" /><span className="lofi-cursor-spark">✳</span></div>;
+}
+
 function SectionLabel({ left, right }: { left: string; right: string }) { return <div className="section-label"><span>{left}</span><span>{right}</span></div>; }
 function HomePage() {
   return <><Hero /><section id="content" className="intro section-shell"><SectionLabel left="HOME / 001" right="MUMBAI, INDIA" /><div className="intro-grid"><h1>Curious by<br /><em>default.</em></h1><div className="intro-copy"><p className="intro-lead">I’m Shayan — a data science student who likes building things that sit somewhere between logic and feeling.</p><p>From machine learning experiments to motion graphics, I enjoy pulling ideas apart, figuring out how they work, and making something of my own. Usually with music on and too many tabs open.</p><div className="interest-line"><span>CURRENT CURIOSITIES</span><b>AI / ML</b><i>✳</i><b>Visual storytelling</b><i>✳</i><b>Anime</b></div></div></div>
@@ -150,5 +239,5 @@ export default function App() {
     return () => window.removeEventListener("hashchange", update);
   }, []);
   const active = pageFromPath(path);
-  return <main id="top" data-theme={theme}>{loadingPage && <LoadingScreen key={loadingPage} page={loadingPage} />}<Navigation active={active} theme={theme} onToggleTheme={() => setTheme((current) => current === "dark" ? "light" : "dark")} />{active === "design" ? <DesignPage /> : active === "builds" ? <BuildsPage /> : <HomePage />}<Footer /></main>;
+  return <main id="top" data-theme={theme}><LoFiCursor />{loadingPage && <LoadingScreen key={loadingPage} page={loadingPage} />}<Navigation active={active} theme={theme} onToggleTheme={() => setTheme((current) => current === "dark" ? "light" : "dark")} />{active === "design" ? <DesignPage /> : active === "builds" ? <BuildsPage /> : <HomePage />}<Footer /></main>;
 }
