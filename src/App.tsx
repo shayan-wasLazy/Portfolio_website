@@ -123,6 +123,15 @@ function Hero() {
   </section>;
 }
 
+function HoverAnimal({ folder, className, label }: { folder: string; className: string; label: string }) {
+  const [active, setActive] = useState(false);
+  return <button type="button" className={`inline-critter ${className}`} aria-label={label}
+    onMouseEnter={() => setActive(true)} onMouseLeave={() => setActive(false)}
+    onFocus={() => setActive(true)} onBlur={() => setActive(false)}>
+    <AnimalFrameSequence folder={folder} active={active} />
+  </button>;
+}
+
 function LoadingScreen({ page }: { page: PageId }) {
   const firstLine = page === "home" ? "Shayan" : page === "design" ? "Design" : "Builds";
   const secondLine = page === "home" ? "Mandrekar" : "Page";
@@ -162,8 +171,8 @@ function LoFiCursor() {
 
 function SectionLabel({ left, right }: { left: string; right: string }) { return <div className="section-label"><span>{left}</span><span>{right}</span></div>; }
 function HomePage() {
-  return <><Hero /><section id="content" className="intro section-shell"><SectionLabel left="HOME / 001" right="MUMBAI, INDIA" /><div className="intro-grid"><h1 className="curious-heading"><button type="button" className="inline-critter inline-sleepy-cat" aria-label="Wake the sleeping cat" onMouseEnter={() => {}} onFocus={() => {}}><AnimalFrameSequence folder="sleepy_cat" active={false} /></button>Curious by<br /><em>default.</em></h1><div className="intro-copy"><p className="intro-lead">I’m Shayan — a data science student who likes building things that sit somewhere between logic and feeling.</p><p>From machine learning experiments to motion graphics, I enjoy pulling ideas apart, figuring out how they work, and making something of my own. Usually with music on and too many tabs open.</p><div className="interest-line"><span>CURRENT CURIOSITIES</span><b>AI / ML</b><i>✳</i><b>Visual storytelling</b><i>✳</i><b>Anime</b></div></div></div>
-  <div className="home-contact"><button type="button" className="inline-critter inline-headphone-blob" aria-label="Headphone creature" onMouseEnter={(e) => e.currentTarget.classList.add("is-hovered")} onMouseLeave={(e) => e.currentTarget.classList.remove("is-hovered")} onFocus={(e) => e.currentTarget.classList.add("is-hovered")} onBlur={(e) => e.currentTarget.classList.remove("is-hovered")}><AnimalFrameSequence folder="headphone_blob_frames" active={false} /></button><div><span className="eyebrow"><Mail size={14} /> CONTACT / SOCIALS</span><h2>Say <em>hello.</em></h2><p>Have an interesting idea, a project to build, or something good to recommend? Let’s connect.</p></div><div className="social-links">
+  return <><Hero /><section id="content" className="intro section-shell"><SectionLabel left="HOME / 001" right="MUMBAI, INDIA" /><div className="intro-grid"><h1 className="curious-heading"><HoverAnimal folder="sleepy_cat" className="inline-sleepy-cat" label="Sleeping cat" />Curious by<br /><em>default.</em></h1><div className="intro-copy"><p className="intro-lead">I’m Shayan — a data science student who likes building things that sit somewhere between logic and feeling.</p><p>From machine learning experiments to motion graphics, I enjoy pulling ideas apart, figuring out how they work, and making something of my own. Usually with music on and too many tabs open.</p><div className="interest-line"><span>CURRENT CURIOSITIES</span><b>AI / ML</b><i>✳</i><b>Visual storytelling</b><i>✳</i><b>Anime</b></div></div></div>
+  <div className="home-contact"><HoverAnimal folder="headphone_blob_frames" className="inline-headphone-blob" label="Headphone creature" /><div><span className="eyebrow"><Mail size={14} /> CONTACT / SOCIALS</span><h2>Say <em>hello.</em></h2><p>Have an interesting idea, a project to build, or something good to recommend? Let’s connect.</p></div><div className="social-links">
   <a href="https://github.com/shayan-wasLazy" target="_blank" rel="noreferrer"><Github size={18} /><span>GitHub</span><small>CODE & EXPERIMENTS</small><ArrowUpRight size={17} /></a>
   <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer"><Linkedin size={18} /><span>LinkedIn</span><small>PROFESSIONAL</small><ArrowUpRight size={17} /></a>
   <a href="https://www.instagram.com/lazy_but_kind_/" target="_blank" rel="noreferrer"><Instagram size={18} /><span>Instagram</span><small>VISUALS & PERSONAL</small><ArrowUpRight size={17} /></a>
