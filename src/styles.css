@@ -1618,3 +1618,31 @@ main#top[data-theme="light"] .floating-nav .theme-toggle {
 @media (prefers-reduced-motion: reduce) {
   .scroll-cat-jump { transition: none !important; }
 }
+
+
+/* Hide the original sleeping cat during the scroll journey, restoring it at the top. */
+.hero-animal.is-hidden-on-scroll { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+.scroll-cat-jump {
+  position: fixed !important;
+  z-index: 16 !important;
+  width: clamp(130px, 20vw, 260px) !important;
+  height: auto !important;
+  object-fit: contain;
+  pointer-events: none !important;
+  will-change: left, top, transform, opacity;
+  transition: opacity .08s linear;
+  filter: drop-shadow(0 5px 8px rgba(0,0,0,.18));
+}
+.scroll-cat-resting {
+  position: absolute !important;
+  z-index: 4 !important;
+  left: 28% !important;
+  top: 360px !important;
+  width: clamp(90px, 10vw, 140px) !important;
+  height: auto !important;
+  pointer-events: none !important;
+}
+@media (max-width: 760px) {
+  .scroll-cat-jump { width: clamp(95px, 29vw, 155px) !important; }
+  .scroll-cat-resting { left: 22% !important; top: 300px !important; width: 23vw !important; }
+}
