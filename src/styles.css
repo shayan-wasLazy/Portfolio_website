@@ -1496,18 +1496,29 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
     inset 0 1px 0 rgba(242, 240, 233, .10);
 }
 
-/* Fine film grain across the page; fixed overlay never captures pointer input. */
+/* Animated monochrome film grain across the page; never captures pointer input. */
 body::after {
   content: "";
   position: fixed;
-  inset: 0;
+  inset: -50%;
   z-index: 9000;
   pointer-events: none;
-  opacity: .075;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E");
+  opacity: .085;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.95'/%3E%3C/svg%3E");
   background-size: 180px 180px;
   mix-blend-mode: normal;
   filter: grayscale(1) contrast(1.15);
+  animation: film-grain-drift .22s steps(2, end) infinite;
+}
+@keyframes film-grain-drift {
+  0% { transform: translate3d(0, 0, 0); }
+  25% { transform: translate3d(-2%, 1%, 0); }
+  50% { transform: translate3d(1%, -2%, 0); }
+  75% { transform: translate3d(2%, 2%, 0); }
+  100% { transform: translate3d(-1%, -1%, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  body::after { animation: none !important; }
 }
 @media (prefers-reduced-transparency: reduce) {
   .floating-nav,
