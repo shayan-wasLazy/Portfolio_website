@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowDownRight, ArrowUpRight, Github, Instagram, Linkedin, Palette, Code2, X, ExternalLink, Mail, Sun, Moon } from "lucide-react";
 
@@ -34,6 +34,24 @@ function FloatingLeaves() {
 function Navigation({ active, theme, onToggleTheme }: { active: PageId; theme: "dark" | "light"; onToggleTheme: () => void }) {
   return <nav className="floating-nav" aria-label="Main navigation"><div className="nav-links">{navItems.map((item) => <a key={item.id} className={`nav-item ${active === item.id ? "is-active" : ""}`} href={item.href} aria-current={active === item.id ? "page" : undefined}><span>{item.label}</span>{active === item.id && <motion.span className="active-mark" layoutId="active-mark" transition={{ type: "spring", stiffness: 380, damping: 30 }} />}</a>)}</div><span className="nav-separator" aria-hidden="true" /><button className="theme-toggle" onClick={onToggleTheme} aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`} title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}>{theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}</button></nav>;
 }
+function StaticAnimalFrame({ src }: { src: string }) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const image = new Image();
+    image.onload = () => {
+      canvas.width = image.naturalWidth;
+      canvas.height = image.naturalHeight;
+      const context = canvas.getContext("2d");
+      if (context) context.drawImage(image, 0, 0);
+    };
+    image.src = src;
+    return () => { image.onload = null; };
+  }, [src]);
+  return <canvas ref={canvasRef} aria-hidden="true" />;
+}
+
 function Hero() {
   const [activeAnimal, setActiveAnimal] = useState<string | null>(null);
   const animals = [
@@ -53,7 +71,7 @@ function Hero() {
         onFocus={() => setActiveAnimal(animal.id)}
         onBlur={() => setActiveAnimal(null)}
         >
-        <img src={`${import.meta.env.BASE_URL}assets/animals/${animal.src}`} alt="" draggable={false} />
+        <StaticAnimalFrame src={`${import.meta.env.BASE_URL}assets/animals/${animal.src}`} />
       </button>)}
     </div>
   </section>;
