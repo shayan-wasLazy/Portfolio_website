@@ -1270,3 +1270,85 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
 @media (prefers-reduced-motion: reduce) {
   .hero-animal, .hero-animal-greeting { transition: none; }
 }
+
+
+/* Hover animation pass: keep the original character pose visible at rest.
+   Adjust the existing animal-* position rules above to fine-tune placement. */
+.hero-animal {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform .28s ease, filter .28s ease;
+}
+
+/* Only animate while hovered, focused, or tapped/activated. Slow, restrained motion. */
+.hero-animal:hover,
+.hero-animal:focus-visible,
+.hero-animal.is-active {
+  opacity: 1;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,.18));
+}
+
+.hero-animal img {
+  transform-origin: 50% 85%;
+  will-change: transform;
+}
+
+.animal-waving-monster:hover img,
+.animal-waving-monster:focus-visible img,
+.animal-waving-monster.is-active img {
+  animation: monster-greeting-bob 1.8s ease-in-out infinite;
+}
+
+.animal-sleepy-cat:hover img,
+.animal-sleepy-cat:focus-visible img,
+.animal-sleepy-cat.is-active img {
+  animation: sleepy-cat-breathe 2.8s ease-in-out infinite;
+}
+
+.animal-sunglasses-cat:hover img,
+.animal-sunglasses-cat:focus-visible img,
+.animal-sunglasses-cat.is-active img {
+  animation: cool-cat-nod 2.2s ease-in-out infinite;
+}
+
+.animal-headphone-blob:hover img,
+.animal-headphone-blob:focus-visible img,
+.animal-headphone-blob.is-active img {
+  animation: headphone-groove 1.7s ease-in-out infinite;
+}
+
+.animal-bottom-cats:hover img,
+.animal-bottom-cats:focus-visible img,
+.animal-bottom-cats.is-active img {
+  animation: resting-cats-stretch 2.6s ease-in-out infinite;
+}
+
+@keyframes monster-greeting-bob {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  25% { transform: translateY(-2px) rotate(-2deg); }
+  55% { transform: translateY(-4px) rotate(1.5deg); }
+  78% { transform: translateY(-1px) rotate(-1deg); }
+}
+@keyframes sleepy-cat-breathe {
+  0%, 100% { transform: scale(1, 1); }
+  50% { transform: scale(1.012, .99); }
+}
+@keyframes cool-cat-nod {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  40% { transform: translateY(-3px) rotate(-1deg); }
+  70% { transform: translateY(0) rotate(1deg); }
+}
+@keyframes headphone-groove {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  30% { transform: translateY(-3px) rotate(-2deg); }
+  65% { transform: translateY(1px) rotate(2deg); }
+}
+@keyframes resting-cats-stretch {
+  0%, 100% { transform: scale(1, 1) translateY(0); }
+  45% { transform: scale(1.015, .985) translateY(-2px); }
+  70% { transform: scale(1, 1) translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-animal img { animation: none !important; }
+}
