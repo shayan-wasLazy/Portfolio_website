@@ -158,6 +158,21 @@ function LoFiCursor() {
   return <div className={`lofi-cursor ${visible ? "is-visible" : ""} ${pressed ? "is-pressed" : ""}`} style={{ left: position.x, top: position.y }} aria-hidden="true"><span className="lofi-cursor-core" /><span className="lofi-cursor-ring" /><span className="lofi-cursor-spark">✳</span></div>;
 }
 
+
+function AmbientCritters() {
+  const [spots] = useState(() => [
+    { folder: "sleepy_cat", left: 8 + Math.random() * 76, top: 18 + Math.random() * 58, rotate: -7 + Math.random() * 14 },
+    { folder: "sunglasses_cat", left: 8 + Math.random() * 76, top: 18 + Math.random() * 58, rotate: -7 + Math.random() * 14 },
+    { folder: "headphone_blob_frames", left: 8 + Math.random() * 76, top: 18 + Math.random() * 58, rotate: -7 + Math.random() * 14 },
+  ]);
+  return <div className="ambient-critters" aria-hidden="true">{spots.map((spot) =>
+    <img key={spot.folder} src={`${import.meta.env.BASE_URL}assets/animals/${spot.folder}/frame_01.png`}
+      className={`ambient-critter ambient-${spot.folder}`}
+      style={{ left: `${spot.left}%`, top: `${spot.top}vh`, transform: `translate(-50%, -50%) rotate(${spot.rotate}deg)` }}
+      alt="" draggable={false} loading="eager" />
+  )}</div>;
+}
+
 function SectionLabel({ left, right }: { left: string; right: string }) { return <div className="section-label"><span>{left}</span><span>{right}</span></div>; }
 function HomePage() {
   return <><Hero /><section id="content" className="intro section-shell"><SectionLabel left="HOME / 001" right="MUMBAI, INDIA" /><div className="intro-grid"><h1>Curious by<br /><em>default.</em></h1><div className="intro-copy"><p className="intro-lead">I’m Shayan — a data science student who likes building things that sit somewhere between logic and feeling.</p><p>From machine learning experiments to motion graphics, I enjoy pulling ideas apart, figuring out how they work, and making something of my own. Usually with music on and too many tabs open.</p><div className="interest-line"><span>CURRENT CURIOSITIES</span><b>AI / ML</b><i>✳</i><b>Visual storytelling</b><i>✳</i><b>Anime</b></div></div></div>
@@ -238,5 +253,5 @@ export default function App() {
     return () => window.removeEventListener("hashchange", update);
   }, []);
   const active = pageFromPath(path);
-  return <main id="top" data-theme={theme}><LoFiCursor />{loadingPage && <LoadingScreen key={loadingPage} page={loadingPage} />}<Navigation active={active} theme={theme} onToggleTheme={() => setTheme((current) => current === "dark" ? "light" : "dark")} />{active === "design" ? <DesignPage /> : active === "builds" ? <BuildsPage /> : <HomePage />}<Footer /></main>;
+  return <main id="top" data-theme={theme}><LoFiCursor /><AmbientCritters />{loadingPage && <LoadingScreen key={loadingPage} page={loadingPage} />}<Navigation active={active} theme={theme} onToggleTheme={() => setTheme((current) => current === "dark" ? "light" : "dark")} />{active === "design" ? <DesignPage /> : active === "builds" ? <BuildsPage /> : <HomePage />}<Footer /></main>;
 }
