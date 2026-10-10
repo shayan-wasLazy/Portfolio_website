@@ -1160,3 +1160,35 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
 @media (prefers-reduced-motion: reduce) {
   .animal-wave, .animal-zs i, .animal-tail { animation: none !important; }
 }
+
+
+/* Align interactive hit areas to the actual characters in the full-bleed hero art.
+   Coordinates are percentages of the hero section, not viewport edges. */
+.hero-animal-interactions { inset: 0; }
+.animal-hotspot {
+  transform: translate(-50%, -50%);
+  width: clamp(88px, 10.5vw, 160px);
+  height: clamp(88px, 10.5vw, 160px);
+}
+.animal-hello {
+  left: 19%;
+  top: 75%;
+  bottom: auto;
+}
+.animal-sleepy {
+  left: 30%;
+  top: 40%;
+}
+.animal-speech { left: 58%; top: 0; }
+.animal-zs { left: 74%; top: -2%; }
+.animal-tail { left: 78%; top: 48%; }
+@media (max-width: 600px) {
+  .animal-hotspot {
+    width: 22vw;
+    height: 22vw;
+    min-width: 70px;
+    min-height: 70px;
+  }
+  .animal-hello { left: 19%; top: 75%; bottom: auto; }
+  .animal-sleepy { left: 30%; top: 40%; }
+}
