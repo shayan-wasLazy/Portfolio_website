@@ -1235,9 +1235,9 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
   /* transform: translate(-50%, -50%) scale(1); */
 }
 .hero-animal:focus-visible { outline: 1px dashed rgba(242,240,233,.85); outline-offset: 3px; }
-.animal-sleepy-cat { left: 30%; top: 37%; width: clamp(125px, 15vw, 235px); aspect-ratio: 1.7; }
-.animal-sunglasses-cat { left: 45%; top: 41%; width: clamp(105px, 12vw, 180px); aspect-ratio: 1.7; }
-.animal-headphone-blob { left: 65.5%; top: 29%; width: clamp(90px, 10vw, 150px); aspect-ratio: 1.15; transform: translate(-50%, -50%) scale(0.7); }
+.animal-sleepy-cat { left: 29.7%; top: 37%; width: clamp(125px, 15vw, 235px); aspect-ratio: 1.7; transform: translate(-50%, -50%) scale(1.2);}
+.animal-sunglasses-cat { left: 43%; top: 35%; width: clamp(105px, 12vw, 180px); aspect-ratio: 1.7; transform: scale(1.4); }
+.animal-headphone-blob { left: 64.5%; top: 38.5%; width: clamp(90px, 10vw, 150px); aspect-ratio: 1.15; transform: scale(0.9); }
 .animal-waving-monster { left: 19%; top: 71%; width: clamp(95px, 10vw, 150px); aspect-ratio: 1.25; }
 .animal-bottom-cats { left: 74%; top: 73%; width: clamp(125px, 15vw, 225px); aspect-ratio: 1.8; }
 .hero-animal-greeting {
@@ -1508,13 +1508,7 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
 
 /* Keep the headphone blob centered on its anchor instead of drifting with scale. */
 .animal-headphone-blob {
-  transform: translate(-50%, -50%) scale(.7) !important;
+  left: 70.5% !important;
+  transform: translate(-50%, -50%) scale(.9) !important;
 }
-@media (max-width: 760px) {
-  .animal-headphone-blob {
-    left: 66%;
-    top: 31%;
-    width: 19vw;
-    transform: translate(-50%, -50%) scale(.7) !important;
-  }
-}
+
