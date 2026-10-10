@@ -34,33 +34,80 @@ function FloatingLeaves() {
 function Navigation({ active, theme, onToggleTheme }: { active: PageId; theme: "dark" | "light"; onToggleTheme: () => void }) {
   return <nav className="floating-nav" aria-label="Main navigation"><div className="nav-links">{navItems.map((item) => <a key={item.id} className={`nav-item ${active === item.id ? "is-active" : ""}`} href={item.href} aria-current={active === item.id ? "page" : undefined}><span>{item.label}</span>{active === item.id && <motion.span className="active-mark" layoutId="active-mark" transition={{ type: "spring", stiffness: 380, damping: 30 }} />}</a>)}</div><span className="nav-separator" aria-hidden="true" /><button className="theme-toggle" onClick={onToggleTheme} aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`} title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}>{theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}</button></nav>;
 }
-function StaticAnimalFrame({ src }: { src: string }) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+function AnimalFrameSequence({ folder, active }: { folder: string; active: boolean }) {
+  const [frame, setFrame] = useState(0);
+  const [frames, setFrames] = useState<HTMLImageElement[]>([]);
+  const frameRef = useRef(0);
+  const activeRef = useRef(active);
+  useEffect(() => { activeRef.current = active; }, [active]);
+
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const image = new Image();
-    image.onload = () => {
-      canvas.width = image.naturalWidth;
-      canvas.height = image.naturalHeight;
-      const context = canvas.getContext("2d");
-      if (context) context.drawImage(image, 0, 0);
+    let cancelled = false;
+    const loaded: HTMLImageElement[] = [];
+    const patterns = (n: number) => {
+      const two = String(n).padStart(2, "0");
+      const three = String(n).padStart(3, "0");
+      return [`frame_${two}.png`, `frame-${two}.png`, `${two}.png`,
+        `frame_${three}.png`, `frame-${three}.png`, `${three}.png`,
+        `frame${n}.png`, `${n}.png`];
     };
-    image.src = src;
-    return () => { image.onload = null; };
-  }, [src]);
-  return <canvas ref={canvasRef} aria-hidden="true" />;
+    const loadFrame = (n: number) => new Promise<HTMLImageElement | null>((resolve) => {
+      const candidates = patterns(n);
+      let candidate = 0;
+      const tryNext = () => {
+        if (cancelled || candidate >= candidates.length) { resolve(null); return; }
+        const image = new Image();
+        image.onload = () => resolve(image);
+        image.onerror = () => { candidate += 1; tryNext(); };
+        image.src = `${import.meta.env.BASE_URL}assets/animals/${folder}/${candidates[candidate]}`;
+      };
+      tryNext();
+    });
+    (async () => {
+      for (let n = 1; n <= 30; n += 1) {
+        const image = await loadFrame(n);
+        if (cancelled) return;
+        if (!image) break;
+        loaded.push(image);
+        setFrames([...loaded]);
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [folder]);
+
+  useEffect(() => {
+    if (!frames.length || !active) return;
+    let raf = 0;
+    let previous = 0;
+    const tick = (time: number) => {
+      if (!activeRef.current) return;
+      if (!previous || time - previous >= 95) {
+        frameRef.current = (frameRef.current + 1) % frames.length;
+        setFrame(frameRef.current);
+        previous = time;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    if (frames.length > 1) raf = requestAnimationFrame(tick);
+    return () => { if (raf) cancelAnimationFrame(raf); };
+  }, [active, frames]);
+
+  const current = frames[frame] ?? frames[0];
+  return current
+    ? <img className="animal-frame-image" src={current.src} alt="" draggable={false} />
+    : <span className="animal-frame-placeholder" aria-hidden="true" />;
 }
 
 function Hero() {
   const [activeAnimal, setActiveAnimal] = useState<string | null>(null);
   const animals = [
-    { id: "sleepy-cat", label: "Sleeping cat", src: "sleepy_cat.webp", className: "animal-sleepy-cat" },
-    { id: "sunglasses-cat", label: "Sunglasses cat", src: "sunglasses_cat.webp", className: "animal-sunglasses-cat" },
-    { id: "headphone-blob", label: "Headphone creature", src: "headphone_blob.webp", className: "animal-headphone-blob" },
+    { id: "sleepy-cat", label: "Sleeping cat", folder: "sleepy_cat_frames", className: "animal-sleepy-cat" },
+    { id: "sunglasses-cat", label: "Sunglasses cat", folder: "sunglasses_cat_frames", className: "animal-sunglasses-cat" },
+    { id: "headphone-blob", label: "Headphone creature", folder: "headphone_blob_frames", className: "animal-headphone-blob" },
   ];
   return <section className="hero home-hero" aria-label="Portfolio cover">
     <div className="hero-image" role="img" aria-label="Monochrome Japanese mountain valley illustration" />
+    <div className="hero-glass-gradient" aria-hidden="true" />
     <div className="hero-vignette" /><div className="hero-grain" /><FloatingLeaves />
     <div className="hero-animal-layer" aria-label="Interactive valley characters">
       {animals.map((animal) => <button key={animal.id} type="button"
@@ -71,7 +118,7 @@ function Hero() {
         onFocus={() => setActiveAnimal(animal.id)}
         onBlur={() => setActiveAnimal(null)}
         >
-        <StaticAnimalFrame src={`${import.meta.env.BASE_URL}assets/animals/${animal.src}`} />
+        <AnimalFrameSequence folder={animal.folder} active={activeAnimal === animal.id} />
       </button>)}
     </div>
   </section>;
