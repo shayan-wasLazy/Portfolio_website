@@ -110,7 +110,7 @@ function Hero() {
     <div className="hero-vignette" /><div className="hero-grain" /><FloatingLeaves />
     <div className="hero-animal-layer" aria-label="Interactive valley characters">
       {animals.map((animal) => <button key={animal.id} type="button"
-        className={`hero-animal ${animal.className} ${activeAnimal === animal.id ? "is-active" : ""}`}
+        className={`hero-animal ${animal.className} ${animal.id === "sleepy-cat" && scrollY > 8 ? "is-hidden-on-scroll" : ""} ${activeAnimal === animal.id ? "is-active" : ""}`}
         aria-label={animal.label} aria-pressed={activeAnimal === animal.id}
         onMouseEnter={() => setActiveAnimal(animal.id)}
         onMouseLeave={() => setActiveAnimal(null)}
@@ -125,29 +125,44 @@ function Hero() {
 
 function ScrollCatJourney() {
   const [scrollY, setScrollY] = useState(0);
+  const [viewportHeight, setViewportHeight] = useState(() => window.innerHeight);
   useEffect(() => {
-    const update = () => setScrollY(window.scrollY);
+    const update = () => {
+      setScrollY(window.scrollY);
+      setViewportHeight(window.innerHeight);
+    };
     update();
     window.addEventListener("scroll", update, { passive: true });
-    return () => window.removeEventListener("scroll", update);
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
   }, []);
-  const travel = Math.min(1, Math.max(0, scrollY / Math.max(1, window.innerHeight * 0.72)));
-  const isTraveling = scrollY > 8 && travel < 1;
-  const isArrived = travel >= 1;
+  const journeyDistance = Math.max(1, viewportHeight * 0.72);
+  const travel = Math.min(1, Math.max(0, scrollY / journeyDistance));
+  const traveling = scrollY > 8 && travel < 1;
+  const arrived = travel >= 1;
   return <>
     <img
-      className={`scroll-cat-jump ${isTraveling ? "is-traveling" : ""} ${isArrived ? "is-arrived" : ""}`}
+      className={`scroll-cat-jump ${traveling ? "is-traveling" : ""} ${arrived ? "is-arrived" : ""}`}
       src={`${import.meta.env.BASE_URL}catsleepjump.png`}
       alt=""
       aria-hidden="true"
+      onError={(event) => { event.currentTarget.style.display = "none"; }}
       style={{
         left: `${31 - travel * 9}%`,
         top: `${37 + travel * 42}vh`,
-        opacity: scrollY <= 8 || isArrived ? 0 : 1,
+        opacity: scrollY <= 8 || arrived ? 0 : 1,
         transform: `translate(-50%, -50%) rotate(${-8 + travel * 12}deg) scale(${1 - travel * .12})`
       }}
     />
-    {isArrived && <img className="scroll-cat-resting" src={`${import.meta.env.BASE_URL}assets/animals/sleepy_cat/frame_01.png`} alt="" aria-hidden="true" />}
+    {arrived && <img
+      className="scroll-cat-resting"
+      src={`${import.meta.env.BASE_URL}assets/animals/sleepy_cat/frame_01.png`}
+      alt=""
+      aria-hidden="true"
+    />}
   </>;
 }
 
