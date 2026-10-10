@@ -1220,7 +1220,7 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
   transition: opacity .18s ease, transform .22s ease;
   -webkit-tap-highlight-color: transparent;
 }
-.hero-animal img {
+.hero-animal canvas {
   display: block;
   width: 100%;
   height: 100%;
@@ -1274,9 +1274,9 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
 
 /* Top-row characters: keep their original still frames visible at rest.
    Motion starts only while the character is hovered, focused, or activated. */
-.animal-sleepy-cat img,
-.animal-sunglasses-cat img,
-.animal-headphone-blob img {
+.animal-sleepy-cat canvas,
+.animal-sunglasses-cat canvas,
+.animal-headphone-blob canvas {
   transform-origin: 50% 85%;
   will-change: transform;
 }
@@ -1317,16 +1317,16 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animal-sleepy-cat img,
-  .animal-sunglasses-cat img,
-  .animal-headphone-blob img {
+  .animal-sleepy-cat canvas,
+  .animal-sunglasses-cat canvas,
+  .animal-headphone-blob canvas {
     animation: none !important;
   }
 }
 
 
 /* Hover-triggered character animation: freeze on the exact frame when pointer leaves */
-.hero-animal img {
+.hero-animal canvas {
   animation-play-state: paused;
   backface-visibility: hidden;
 }
@@ -1335,8 +1335,8 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
 .hero-animal.is-active img {
   animation-play-state: running;
 }
-.animal-waving-monster img,
-.animal-bottom-cats img {
+.animal-waving-monster canvas,
+.animal-bottom-cats canvas {
   transform-origin: 50% 85%;
   will-change: transform;
 }
@@ -1420,21 +1420,21 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
 
 /* Keep each character's animation timeline mounted while paused, so hover resumes
    at the exact frame where the pointer left instead of resetting to frame zero. */
-.animal-sleepy-cat img { animation: sleepy-cat-hover-motion 2.8s ease-in-out infinite; animation-play-state: paused; }
-.animal-sunglasses-cat img { animation: sunglasses-cat-hover-motion 2.2s ease-in-out infinite; animation-play-state: paused; }
-.animal-headphone-blob img { animation: headphone-blob-hover-motion 1.8s ease-in-out infinite; animation-play-state: paused; }
-.animal-waving-monster img { animation: waving-monster-hover-motion .9s ease-in-out infinite; animation-play-state: paused; }
-.animal-bottom-cats img { animation: bottom-cats-hover-motion 2.4s ease-in-out infinite; animation-play-state: paused; }
+.animal-sleepy-cat canvas { animation: sleepy-cat-hover-motion 2.8s ease-in-out infinite; animation-play-state: paused; }
+.animal-sunglasses-cat canvas { animation: sunglasses-cat-hover-motion 2.2s ease-in-out infinite; animation-play-state: paused; }
+.animal-headphone-blob canvas { animation: headphone-blob-hover-motion 1.8s ease-in-out infinite; animation-play-state: paused; }
+.animal-waving-monster canvas { animation: waving-monster-hover-motion .9s ease-in-out infinite; animation-play-state: paused; }
+.animal-bottom-cats canvas { animation: bottom-cats-hover-motion 2.4s ease-in-out infinite; animation-play-state: paused; }
 .hero-animal:hover img,
 .hero-animal:focus-visible img,
 .hero-animal.is-active img { animation-play-state: running; }
 @media (prefers-reduced-motion: reduce) {
-  .hero-animal img { animation: none !important; }
+  .hero-animal canvas { animation: none !important; }
 }
 
 
 /* Strict hover pause: keep animation timelines mounted and paused at the exact frame. */
-.hero-animal img { animation-play-state: paused !important; }
+.hero-animal canvas { animation-play-state: paused !important; }
 .hero-animal:hover img, .hero-animal:focus-visible img { animation-play-state: running !important; }
 .hero-animal.is-active img { animation-play-state: paused !important; }
 .animal-waving-monster, .animal-bottom-cats { display: none !important; }
@@ -1446,3 +1446,15 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
 }
 
 .hero-animal.is-active img { animation-play-state: running !important; }
+
+
+/* Canvas snapshots freeze the first decoded frame of animated WebP assets.
+   CSS transforms now animate the snapshot itself, never the WebP timeline. */
+.hero-animal canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
