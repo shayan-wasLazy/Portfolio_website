@@ -1471,31 +1471,6 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
     inset 0 1px 0 rgba(242, 240, 233, .10),
     inset 0 -1px 0 rgba(174, 119, 42, .07);
 }
-.project-card,
-.behance-card,
-.project-modal,
-.design-modal {
-  background: rgba(28, 28, 25, .56) !important;
-  -webkit-backdrop-filter: blur(18px) saturate(115%);
-  backdrop-filter: blur(18px) saturate(115%);
-  border-color: rgba(242, 240, 233, .15) !important;
-  box-shadow:
-    0 14px 38px rgba(0, 0, 0, .12),
-    inset 0 1px 0 rgba(242, 240, 233, .07);
-}
-.project-card,
-.behance-card {
-  transition: background-color .3s ease, border-color .3s ease, box-shadow .3s ease;
-}
-.project-card:hover,
-.behance-card:hover {
-  background: rgba(40, 38, 31, .68) !important;
-  border-color: rgba(174, 119, 42, .32) !important;
-  box-shadow:
-    0 18px 44px rgba(0, 0, 0, .18),
-    inset 0 1px 0 rgba(242, 240, 233, .10);
-}
-
 @media (prefers-reduced-transparency: reduce) {
   .floating-nav,
   .project-card,
