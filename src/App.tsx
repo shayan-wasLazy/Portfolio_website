@@ -122,6 +122,35 @@ function Hero() {
     </div>
   </section>;
 }
+
+function ScrollCatJourney() {
+  const [scrollY, setScrollY] = useState(0);
+  useEffect(() => {
+    const update = () => setScrollY(window.scrollY);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, []);
+  const travel = Math.min(1, Math.max(0, scrollY / Math.max(1, window.innerHeight * 0.72)));
+  const isTraveling = scrollY > 8 && travel < 1;
+  const isArrived = travel >= 1;
+  return <>
+    <img
+      className={`scroll-cat-jump ${isTraveling ? "is-traveling" : ""} ${isArrived ? "is-arrived" : ""}`}
+      src={`${import.meta.env.BASE_URL}catsleepjump.png`}
+      alt=""
+      aria-hidden="true"
+      style={{
+        left: `${31 - travel * 9}%`,
+        top: `${37 + travel * 42}vh`,
+        opacity: scrollY <= 8 || isArrived ? 0 : 1,
+        transform: `translate(-50%, -50%) rotate(${-8 + travel * 12}deg) scale(${1 - travel * .12})`
+      }}
+    />
+    {isArrived && <img className="scroll-cat-resting" src={`${import.meta.env.BASE_URL}assets/animals/sleepy_cat/frame_01.png`} alt="" aria-hidden="true" />}
+  </>;
+}
+
 function LoadingScreen({ page }: { page: PageId }) {
   const firstLine = page === "home" ? "Shayan" : page === "design" ? "Design" : "Builds";
   const secondLine = page === "home" ? "Mandrekar" : "Page";
@@ -239,5 +268,5 @@ export default function App() {
     return () => window.removeEventListener("hashchange", update);
   }, []);
   const active = pageFromPath(path);
-  return <main id="top" data-theme={theme}><LoFiCursor />{loadingPage && <LoadingScreen key={loadingPage} page={loadingPage} />}<Navigation active={active} theme={theme} onToggleTheme={() => setTheme((current) => current === "dark" ? "light" : "dark")} />{active === "design" ? <DesignPage /> : active === "builds" ? <BuildsPage /> : <HomePage />}<Footer /></main>;
+  return <main id="top" data-theme={theme}><LoFiCursor /><ScrollCatJourney />{loadingPage && <LoadingScreen key={loadingPage} page={loadingPage} />}<Navigation active={active} theme={theme} onToggleTheme={() => setTheme((current) => current === "dark" ? "light" : "dark")} />{active === "design" ? <DesignPage /> : active === "builds" ? <BuildsPage /> : <HomePage />}<Footer /></main>;
 }
