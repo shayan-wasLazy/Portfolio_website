@@ -37,11 +37,9 @@ function Navigation({ active, theme, onToggleTheme }: { active: PageId; theme: "
 function Hero() {
   const [activeAnimal, setActiveAnimal] = useState<string | null>(null);
   const animals = [
-    { id: "sleepy-cat", label: "Wake the sleeping cat", src: "sleepy_cat.webp", className: "animal-sleepy-cat" },
-    { id: "sunglasses-cat", label: "React to the cool cat", src: "sunglasses_cat.webp", className: "animal-sunglasses-cat" },
-    { id: "headphone-blob", label: "Dance with the headphone creature", src: "headphone_blob.webp", className: "animal-headphone-blob" },
-    { id: "waving-monster", label: "Say hi to the waving monster", src: "waving_monster.webp", className: "animal-waving-monster" },
-    { id: "bottom-cats", label: "Wake the resting cats", src: "bottom_cats.webp", className: "animal-bottom-cats" },
+    { id: "sleepy-cat", label: "Sleeping cat", src: "sleepy_cat.webp", className: "animal-sleepy-cat" },
+    { id: "sunglasses-cat", label: "Sunglasses cat", src: "sunglasses_cat.webp", className: "animal-sunglasses-cat" },
+    { id: "headphone-blob", label: "Headphone creature", src: "headphone_blob.webp", className: "animal-headphone-blob" },
   ];
   return <section className="hero home-hero" aria-label="Portfolio cover">
     <div className="hero-image" role="img" aria-label="Monochrome Japanese mountain valley illustration" />
@@ -56,7 +54,6 @@ function Hero() {
         onBlur={() => setActiveAnimal(null)}
         onClick={() => setActiveAnimal((current) => current === animal.id ? null : animal.id)}>
         <img src={`${import.meta.env.BASE_URL}assets/animals/${animal.src}`} alt="" draggable={false} />
-        {animal.id === "waving-monster" && <span className="hero-animal-greeting" aria-hidden="true">Hi!</span>}
       </button>)}
     </div>
   </section>;
