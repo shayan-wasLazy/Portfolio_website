@@ -1192,3 +1192,9 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
   .animal-hello { left: 19%; top: 75%; bottom: auto; }
   .animal-sleepy { left: 30%; top: 40%; }
 }
+
+
+/* Disable the temporary CSS-only animal overlays.
+   Character motion should be implemented using isolated transparent character layers,
+   so the animal artwork itself moves rather than decorative effects around it. */
+.hero-animal-interactions { display: none !important; }
