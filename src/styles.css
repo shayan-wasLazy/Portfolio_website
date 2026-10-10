@@ -21,7 +21,7 @@ button, a { font: inherit; }
 a { color: inherit; }
 button:focus-visible, a:focus-visible { outline: 2px solid #f2f0e9; outline-offset: 4px; }
 .hero { min-height: 100svh; height: 100svh; position: relative; overflow: hidden; isolation: isolate; background: #a9a79f; color: var(--paper-light); }
-.hero-image { position: absolute; inset: 0; z-index: -4; background-image: url('/hero-valley.png'); background-size: cover; background-position: center 51%; transform: scale(1.012); animation: image-arrive 1.6s cubic-bezier(.2,.7,.2,1) both; }
+.hero-image { position: absolute; inset: 0; z-index: -4; background-image: url('/Portfolio_website/hero-valley.png'); background-size: cover; background-position: center 51%; transform: scale(1.012); animation: image-arrive 1.6s cubic-bezier(.2,.7,.2,1) both; }
 .hero-vignette { position: absolute; inset: 0; z-index: -3; background: linear-gradient(180deg, rgba(12,12,11,.23), transparent 25%, transparent 64%, rgba(12,12,11,.38)), linear-gradient(90deg, rgba(12,12,11,.09), transparent 28%, transparent 72%, rgba(12,12,11,.12)); pointer-events: none; }
 .hero-grain { position: absolute; inset: 0; z-index: -2; pointer-events: none; opacity: .12; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E"); }
 .hero-topline { position: absolute; top: clamp(18px, 3.2vw, 42px); left: clamp(18px, 4vw, 58px); right: clamp(18px, 4vw, 58px); display: flex; justify-content: space-between; align-items: center; gap: 20px; font: 10px var(--mono); letter-spacing: .08em; text-shadow: 0 1px 8px #222; }
@@ -1237,7 +1237,7 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
 .hero-animal:focus-visible { outline: 1px dashed rgba(242,240,233,.85); outline-offset: 3px; }
 .animal-sleepy-cat { left: 30%; top: 37%; width: clamp(125px, 15vw, 235px); aspect-ratio: 1.7; }
 .animal-sunglasses-cat { left: 45%; top: 41%; width: clamp(105px, 12vw, 180px); aspect-ratio: 1.7; }
-.animal-headphone-blob { left: 65.5%; top: 29%; width: clamp(90px, 10vw, 150px); aspect-ratio: 1.15; transform: scale(0.7); }
+.animal-headphone-blob { left: 65.5%; top: 29%; width: clamp(90px, 10vw, 150px); aspect-ratio: 1.15; transform: translate(-50%, -50%) scale(0.7); }
 .animal-waving-monster { left: 19%; top: 71%; width: clamp(95px, 10vw, 150px); aspect-ratio: 1.25; }
 .animal-bottom-cats { left: 74%; top: 73%; width: clamp(125px, 15vw, 225px); aspect-ratio: 1.8; }
 .hero-animal-greeting {
@@ -1263,7 +1263,7 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
 @media (max-width: 760px) {
   .animal-sleepy-cat { left: 31%; top: 37%; width: 25vw; }
   .animal-sunglasses-cat { left: 52%; top: 39%; width: 21vw; }
-  .animal-headphone-blob { left: 65.5%; top: 37%; width: 19vw; }
+  .animal-headphone-blob { left: 65.5%; top: 37%; width: 19vw; transform: translate(-50%, -50%) scale(0.7); }
   .animal-waving-monster { left: 20%; top: 72%; width: 20vw; }
   .animal-bottom-cats { left: 75%; top: 74%; width: 25vw; }
 }
