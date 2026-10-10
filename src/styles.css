@@ -1232,11 +1232,11 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
 .hero-animal:focus-visible,
 .hero-animal.is-active {
   opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
+  /* transform: translate(-50%, -50%) scale(1); */
 }
 .hero-animal:focus-visible { outline: 1px dashed rgba(242,240,233,.85); outline-offset: 3px; }
 .animal-sleepy-cat { left: 30%; top: 37%; width: clamp(125px, 15vw, 235px); aspect-ratio: 1.7; }
-.animal-sunglasses-cat { left: 52.5%; top: 39%; width: clamp(105px, 12vw, 180px); aspect-ratio: 1.7; }
+.animal-sunglasses-cat { left: 45%; top: 41%; width: clamp(105px, 12vw, 180px); aspect-ratio: 1.7; }
 .animal-headphone-blob { left: 70.5%; top: 40%; width: clamp(90px, 10vw, 150px); aspect-ratio: 1.15; }
 .animal-waving-monster { left: 19%; top: 71%; width: clamp(95px, 10vw, 150px); aspect-ratio: 1.25; }
 .animal-bottom-cats { left: 74%; top: 73%; width: clamp(125px, 15vw, 225px); aspect-ratio: 1.8; }
@@ -1299,7 +1299,7 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
   animation: headphone-blob-hover-motion 1.8s ease-in-out infinite;
 }
 
-@keyframes sleepy-cat-hover-motion {
+/* @keyframes sleepy-cat-hover-motion {
   0%, 100% { transform: translateY(0) scale(1, 1); }
   50% { transform: translateY(-2px) scale(1.012, .99); }
 }
@@ -1314,7 +1314,7 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
   0%, 100% { transform: translateY(0) rotate(0); }
   30% { transform: translateY(-4px) rotate(-2deg); }
   65% { transform: translateY(1px) rotate(2deg); }
-}
+} */
 
 @media (prefers-reduced-motion: reduce) {
   .animal-sleepy-cat canvas,
