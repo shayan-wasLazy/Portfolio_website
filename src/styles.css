@@ -1512,3 +1512,76 @@ main#top[data-theme="light"] .project-modal .modal-repo-link { background: #1919
   transform: translate(-50%, -50%) scale(.9) !important;
 }
 
+
+
+/* Cross-browser loader sizing: keep the complete wordmark inside the viewport on Safari/macOS. */
+.portfolio-intro-content,
+.portfolio-intro-wordmark {
+  width: min(max-content, calc(100vw - 48px)) !important;
+  max-width: calc(100vw - 48px) !important;
+}
+.portfolio-intro-first,
+.portfolio-intro-last {
+  font-size: clamp(42px, min(10vw, 15vh), 164px) !important;
+  max-width: 100%;
+  white-space: nowrap;
+}
+@media (max-width: 700px) {
+  .portfolio-intro-first { font-size: clamp(38px, 13vw, 84px) !important; }
+  .portfolio-intro-last { font-size: clamp(34px, 11.5vw, 76px) !important; }
+}
+@media (max-height: 500px) {
+  .portfolio-intro-first { font-size: min(13vh, 100px) !important; }
+  .portfolio-intro-last { font-size: min(11.5vh, 88px) !important; }
+}
+
+/* Ambient character stickers: randomized positions, subtle scale, above content but below nav. */
+.ambient-critters {
+  position: fixed;
+  inset: 0;
+  z-index: 12;
+  overflow: hidden;
+  pointer-events: none;
+}
+.ambient-critter {
+  position: absolute;
+  width: clamp(46px, 5.5vw, 88px);
+  height: auto;
+  object-fit: contain;
+  opacity: .94;
+  filter: drop-shadow(0 3px 5px rgba(0,0,0,.22));
+}
+.ambient-sunglasses_cat { width: clamp(54px, 6vw, 94px); }
+.ambient-headphone_blob_frames { width: clamp(42px, 4.8vw, 76px); }
+.floating-nav { z-index: 30 !important; }
+@media (max-width: 760px) {
+  .ambient-critters { display: none !important; }
+}
+
+/* High-specificity light theme navigation fixes for both desktop and mobile. */
+main#top[data-theme="light"] .floating-nav {
+  background: rgba(242, 240, 233, .97) !important;
+  color: #191917 !important;
+  border: 1px solid rgba(23, 23, 21, .2) !important;
+  box-shadow: 0 10px 30px rgba(23, 23, 21, .13), inset 0 1px 0 rgba(255,255,255,.8) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(115%) !important;
+  backdrop-filter: blur(18px) saturate(115%) !important;
+}
+main#top[data-theme="light"] .floating-nav .nav-item,
+main#top[data-theme="light"] .floating-nav .theme-toggle {
+  color: #191917 !important;
+}
+main#top[data-theme="light"] .floating-nav .nav-item:hover {
+  color: #191917 !important;
+  background: rgba(23, 23, 21, .07) !important;
+}
+main#top[data-theme="light"] .floating-nav .nav-item.is-active {
+  color: #191917 !important;
+}
+main#top[data-theme="light"] .floating-nav .active-mark,
+main#top[data-theme="light"] .floating-nav .nav-separator {
+  background: rgba(23, 23, 21, .48) !important;
+}
+main#top[data-theme="light"] .floating-nav .theme-toggle {
+  background: rgba(23, 23, 21, .07) !important;
+}
