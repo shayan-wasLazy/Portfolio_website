@@ -105,8 +105,6 @@ footer a { text-decoration: none; }
   .hero-caption p { font-size: 8px; letter-spacing: .12em; }
   .caption-note { font-size: 10px; }
   .scroll-cue { right: 20px; bottom: 26px; font-size: 8px; }
-  .floating-nav { bottom: calc(15px + env(safe-area-inset-bottom)); width: max-content; max-width: calc(100% - 24px); padding: 5px; gap: 0; }
-  .nav-item { min-width: 0; padding: 13px clamp(14px, 5vw, 25px); gap: 7px; font-size: 11px; }
   .nav-index { display: none; }
   .intro-grid { grid-template-columns: 1fr; gap: 34px; padding-top: 32px; }
   .intro h1 { font-size: clamp(65px, 17vw, 100px); }
@@ -130,7 +128,6 @@ footer a { text-decoration: none; }
   .hero-topline { left: 14px; right: 14px; }
   .availability { gap: 6px; letter-spacing: .03em; }
   .edition { max-width: 100px; line-height: 1.6; }
-  .nav-item { padding: 12px 15px; }
   .section-label { font-size: 8px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1686,4 +1683,16 @@ main#top[data-theme="light"] .floating-nav .theme-toggle {
 @media (max-width: 760px) {
   .inline-sleepy-cat { top: -52px; left: 35%; width: 88px; }
   .inline-headphone-blob { top: 218.5%; left: 85%; width: 58px; }
+}
+
+
+/* Mobile: keep the wallpaper and page content free of decorative animals */
+@media (max-width: 760px) {
+  .hero-animal-layer,
+  .hero-animal,
+  .inline-critter,
+  .inline-sleepy-cat,
+  .inline-headphone-blob {
+    display: none !important;
+  }
 }
