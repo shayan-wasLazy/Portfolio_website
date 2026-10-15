@@ -19,7 +19,9 @@ const reelProjects = [
   { id: "EE3UOdOqkMs", label: "VIDEO / 06" },
   { id: "KCRJzkxxC8M", label: "VIDEO / 07" },
   { id: "RGX4G9L45Ko", label: "VIDEO / 08" },
-];
+
+  { id: "e4AjccMiT-s", label: "VIDEO / 09" },
+  { id: "bC7Bat_pDAs", label: "VIDEO / 10" },];
 
 const designProjects: DesignProject[] = [
   { number: "01", title: "Hyperloop", subtitle: "BRAND IDENTITY", description: "A visual identity concept exploring the future-facing character of high-speed transportation.", year: "2024", role: "Brand identity / visual design", tools: "Branding · Typography · Visual systems", url: "https://www.behance.net/gallery/201498491/HyperLoop-brand-identity", embed: "https://www.behance.net/embed/project/201498491?url=https%3A%2F%2Fwww.behance.net%2Fgallery%2F201498491%2FHyperLoop-brand-identity", tone: "hyperloop", thumbnail: `${import.meta.env.BASE_URL}assets/hyperloop.gif`, media: "image" },
@@ -232,6 +234,38 @@ function DesignPage() {
         <button className="reel-nav reel-nav-next" type="button" onClick={() => setActiveReel((activeReel + 1) % reelProjects.length)} aria-label="Next video">→</button>
       </div>
       <div className="reel-progress" aria-hidden="true"><span style={{ width: `${((activeReel + 1) / reelProjects.length) * 100}%` }} /></div>
+    </section>
+    <section className="asset-gallery-section" aria-labelledby="apparel-heading">
+      <div className="reels-heading-row asset-gallery-heading">
+        <div><span className="eyebrow"><Palette size={14} /> APPAREL DESIGN</span><h2 id="apparel-heading">Made to <em>wear.</em></h2></div>
+        <p>Apparel concepts and wearable visual experiments.</p>
+      </div>
+      <div className="asset-gallery-grid">
+        {[
+          ["Tee%201.png", "APPAREL / 01"], ["jjjj4w.png", "APPAREL / 02"],
+          ["tee%202.png", "APPAREL / 03"], ["tee%203.png", "APPAREL / 04"],
+          ["tsjtj.png", "APPAREL / 05"]
+        ].map(([file, label], index) => <a className="asset-gallery-card" key={file} href={`${import.meta.env.BASE_URL}assets/design/tshirt%20design/${file}`} target="_blank" rel="noreferrer">
+          <span className="asset-gallery-image"><img src={`${import.meta.env.BASE_URL}assets/design/tshirt%20design/${file}`} alt={`Apparel design ${index + 1}`} loading="lazy" /></span>
+          <span className="asset-gallery-meta"><span>{label}</span><ArrowUpRight size={16} /></span>
+        </a>)}
+      </div>
+    </section>
+    <section className="asset-gallery-section" aria-labelledby="gfx-heading">
+      <div className="reels-heading-row asset-gallery-heading">
+        <div><span className="eyebrow"><Palette size={14} /> GRAPHIC DESIGN</span><h2 id="gfx-heading">Visual <em>experiments.</em></h2></div>
+        <p>Standalone graphics, compositions, and visual studies.</p>
+      </div>
+      <div className="asset-gallery-grid">
+        {[
+          ["dgafgagg.png", "GRAPHIC / 01"], ["eghge.png", "GRAPHIC / 02"],
+          ["fhshg.png", "GRAPHIC / 03"], ["rhrehreh.png", "GRAPHIC / 04"],
+          ["rhrhg.png", "GRAPHIC / 05"], ["rurujrj.png", "GRAPHIC / 06"]
+        ].map(([file, label], index) => <a className="asset-gallery-card" key={file} href={`${import.meta.env.BASE_URL}assets/design/gfx/${file}`} target="_blank" rel="noreferrer">
+          <span className="asset-gallery-image"><img src={`${import.meta.env.BASE_URL}assets/design/gfx/${file}`} alt={`Graphic design ${index + 1}`} loading="lazy" /></span>
+          <span className="asset-gallery-meta"><span>{label}</span><ArrowUpRight size={16} /></span>
+        </a>)}
+      </div>
     </section>
   </section>
   {selected && <div className="design-modal-backdrop" role="presentation" onMouseDown={(e) => { if (e.target === e.currentTarget) setSelected(null); }}>
