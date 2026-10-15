@@ -2703,3 +2703,22 @@ html, body { overflow-x:hidden; }
 .about-poster-facts{display:grid;gap:10px}.about-poster-facts span{padding-top:10px;border-top:1px solid rgba(242,240,233,.15);color:#c7c3ba;font:9px var(--mono);letter-spacing:.08em}
 .about-poster-bottom{padding-top:17px;border-top:1px solid rgba(242,240,233,.15)}
 @media(max-width:680px){.about-poster{padding:17px;margin-top:42px}.about-poster-body{grid-template-columns:minmax(0,1fr);gap:36px;padding:30px 4px}.about-poster-photo{width:min(82%,340px)}.about-poster-copy h2{font-size:clamp(86px,24vw,132px)}.about-poster-copy p{font-size:12px}.about-poster-bottom{flex-wrap:wrap;font-size:8px}}
+
+/* Harmonize the profile poster with the portfolio's warm monochrome palette. */
+.about-poster {
+  background:
+    radial-gradient(ellipse at 17% 46%, rgba(190, 170, 115, .07), transparent 35%),
+    radial-gradient(ellipse at 90% 20%, rgba(242,240,233,.035), transparent 35%),
+    #171715;
+  border-color: rgba(242,240,233,.2);
+  box-shadow: none;
+}
+.about-poster-photo:before,
+.about-poster-copy h2 span,
+.about-poster-mark { color: #c5b88f; }
+.about-poster-kicker { color: #c5b88f; }
+.about-photo-stamp { color: #171715; background: #c5b88f; }
+.about-poster-photo img {
+  filter: grayscale(1) contrast(1.06);
+  object-position: center 34%;
+}
