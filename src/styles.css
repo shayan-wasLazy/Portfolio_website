@@ -2731,7 +2731,7 @@ html, body { overflow-x:hidden; }
 .about-poster {
   width: 100%;
   max-width: none;
-  margin: clamp(24px, 4vw, 52px) 0 clamp(48px, 7vw, 88px);
+  margin: clamp(24px, 4vw, 52px) 0 16px;
   padding: clamp(8px, 1.5vw, 20px) 0;
   background: transparent;
   box-shadow: none;
@@ -2751,7 +2751,7 @@ html, body { overflow-x:hidden; }
   .about-poster-photo { max-width: 440px; }
 }
 @media (max-width: 680px) {
-  .about-poster { margin: 28px 0 56px; padding: 0; }
+  .about-poster { margin: 28px 0 18px; padding: 0; }
   .about-poster-body { gap: 34px; padding: 30px 0; }
   .about-poster-photo { width: min(82%, 340px); }
 }
