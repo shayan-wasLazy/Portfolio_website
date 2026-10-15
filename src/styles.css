@@ -2435,3 +2435,29 @@ main#top[data-theme="light"] .floating-nav .theme-toggle {
     padding: 22px 0 38px;
   }
 }
+
+/* Reel carousel: remove the decorative card frames and labels; show media only. */
+.reel-slide {
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 16px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+.reel-slide.is-current {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.reel-player, .reel-still {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 18px 48px rgba(0,0,0,.28);
+}
+.reel-slide-label { display: none !important; }
+.reel-stage {
+  min-height: calc(var(--reel-width) * 1.78 + 20px);
+}
+@media (max-width:760px) {
+  .reel-stage { min-height: calc(var(--reel-width) * 1.85 + 18px); }
+}
