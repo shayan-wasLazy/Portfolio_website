@@ -2722,3 +2722,7 @@ html, body { overflow-x:hidden; }
   filter: grayscale(1) contrast(1.06);
   object-position: center 34%;
 }
+
+/* Remove the two outer frames around the About Me poster. */
+.about-poster { border: 0 !important; }
+.about-poster::before { display: none !important; }
