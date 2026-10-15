@@ -11,16 +11,14 @@ const navItems: { id: PageId; label: string; href: string }[] = [
 ];
 type DesignProject = { number: string; title: string; subtitle: string; description: string; year: string; role: string; tools: string; url: string; embed: string; tone: string; thumbnail: string; media: "image" | "video" };
 const reelProjects = [
-  { id: "DPYdl3XiH1m", label: "REEL / 01" },
-  { id: "DKzJQhtzsMq", label: "REEL / 02" },
-  { id: "DKfWhMJoWfY", label: "REEL / 03" },
-  { id: "DFW9G94TMvV", label: "REEL / 04" },
-  { id: "DFIZQwsz3ZZ", label: "REEL / 05" },
-  { id: "DEullskTdUM", label: "REEL / 06" },
-  { id: "DEiCxUOTsEi", label: "REEL / 07" },
-  { id: "C9NVGpYofSK", label: "REEL / 08" },
-  { id: "C-VDBI1yQ8G", label: "REEL / 09" },
-  { id: "DCod2xgtxdM", label: "REEL / 10" },
+  { id: "NfMGeI5htS0", label: "VIDEO / 01" },
+  { id: "N3gH7SXzGcI", label: "VIDEO / 02" },
+  { id: "n1H5aUNC6Q4", label: "VIDEO / 03" },
+  { id: "DIBXYPhjCWY", label: "VIDEO / 04" },
+  { id: "VQn_lkjb-2c", label: "VIDEO / 05" },
+  { id: "EE3UOdOqkMs", label: "VIDEO / 06" },
+  { id: "KCRJzkxxC8M", label: "VIDEO / 07" },
+  { id: "RGX4G9L45Ko", label: "VIDEO / 08" },
 ];
 
 const designProjects: DesignProject[] = [
@@ -217,13 +215,13 @@ function DesignPage() {
     <section className="reels-section" aria-labelledby="reels-heading">
       <div className="reels-heading-row">
         <div><span className="eyebrow"><Instagram size={14} /> MOTION / SHORT FORM</span><h2 id="reels-heading">Made to <em>move.</em></h2></div>
-        <p>A few edits and visual experiments from Instagram. Tap any reel to watch it on Instagram.</p>
+        <p>A selection of short-form edits and visual experiments.</p>
       </div>
       <div className="reels-track">
         {reelProjects.map((reel, index) => <motion.a
           className="reel-card"
           key={reel.id}
-          href={`https://www.instagram.com/reel/${reel.id}/`}
+          href={`https://www.youtube.com/watch?v=${reel.id}`}
           target="_blank"
           rel="noreferrer"
           initial={{ opacity: 0, y: 22 }}
@@ -233,13 +231,13 @@ function DesignPage() {
         >
           <span className="reel-card-top"><span>{reel.label}</span><ArrowUpRight size={17} /></span>
           <span className="reel-preview"><iframe
-            src={`https://www.instagram.com/reel/${reel.id}/embed/`}
-            title={`Instagram reel ${index + 1}`}
+            src={`https://www.youtube-nocookie.com/embed/${reel.id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${reel.id}&playsinline=1&rel=0`}
+            title={`YouTube video ${index + 1}`}
             loading="lazy"
             allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
             allowFullScreen
           /></span>
-          <span className="reel-card-bottom"><Instagram size={14} /><span>WATCH ON INSTAGRAM</span><ArrowUpRight size={14} /></span>
+          <span className="reel-card-bottom"><span>WATCH ON YOUTUBE</span><ArrowUpRight size={14} /></span>
         </motion.a>)}
       </div>
     </section>
