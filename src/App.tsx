@@ -184,7 +184,25 @@ function LoFiCursor() {
 
 function SectionLabel({ left, right }: { left: string; right: string }) { return <div className="section-label"><span>{left}</span><span>{right}</span></div>; }
 function HomePage() {
-  return <><Hero /><section id="content" className="intro section-shell"><SectionLabel left="HOME / 001" right="MUMBAI, INDIA" /><div className="intro-grid"><h1 className="curious-heading"><HoverAnimal folder="sleepy_cat" className="inline-sleepy-cat" label="Sleeping cat" />Curious by<br /><em>default.</em></h1><div className="intro-copy"><p className="intro-lead">I’m Shayan — a data science student who likes building things that sit somewhere between logic and feeling.</p><p>From machine learning experiments to motion graphics, I enjoy pulling ideas apart, figuring out how they work, and making something of my own. Usually with music on and too many tabs open.</p><div className="interest-line"><span>CURRENT CURIOSITIES</span><b>AI / ML</b><i>✳</i><b>Visual storytelling</b><i>✳</i><b>Anime</b></div></div></div><figure className="intro-portrait"><img src={`${import.meta.env.BASE_URL}assets/shayan-portrait.jpg`} alt="Shayan Mandrekar, portrait in black and white" loading="lazy" /><figcaption><span>SHAYAN MANDREKAR</span><span>CREATIVE / TECHNICAL</span></figcaption></figure>
+  return <><Hero /><section id="content" className="intro section-shell"><SectionLabel left="HOME / 001" right="MUMBAI, INDIA" /><div className="intro-grid"><h1 className="curious-heading"><HoverAnimal folder="sleepy_cat" className="inline-sleepy-cat" label="Sleeping cat" />Curious by<br /><em>default.</em></h1><div className="intro-copy"><p className="intro-lead">I’m Shayan — a data science student who likes building things that sit somewhere between logic and feeling.</p><p>From machine learning experiments to motion graphics, I enjoy pulling ideas apart, figuring out how they work, and making something of my own. Usually with music on and too many tabs open.</p><div className="interest-line"><span>CURRENT CURIOSITIES</span><b>AI / ML</b><i>✳</i><b>Visual storytelling</b><i>✳</i><b>Anime</b></div></div></div><section className="about-poster" aria-label="About Shayan Mandrekar">
+    <div className="about-poster-top"><span>✳ ABOUT ME</span><span>PROFILE / 001</span></div>
+    <div className="about-poster-body">
+      <div className="about-poster-photo">
+        <span className="about-photo-stamp">MUMBAI<br />INDIA</span>
+        <img src={`${import.meta.env.BASE_URL}assets/shayan-portrait.jpg`} alt="Shayan Mandrekar in a dramatic black and white portrait" loading="lazy" />
+        <span className="about-photo-caption">SHAYAN MANDREKAR · 2026</span>
+      </div>
+      <div className="about-poster-copy">
+        <span className="about-poster-kicker">DESIGNER × DEVELOPER</span>
+        <h2>HI<span>!!</span></h2>
+        <p className="about-poster-lead">I’m Shayan — a data science student with one foot in logic and the other in visual storytelling.</p>
+        <p>I build machine learning experiments, code useful things, and create motion graphics and visual identities. I like work that feels considered, a little unexpected, and unmistakably human.</p>
+        <div className="about-poster-mark" aria-hidden="true">✳</div>
+        <div className="about-poster-facts"><span>01 / AI & MACHINE LEARNING</span><span>02 / MOTION & GRAPHIC DESIGN</span><span>03 / ALWAYS EXPERIMENTING</span></div>
+      </div>
+    </div>
+    <div className="about-poster-bottom"><span>CURIOUS BY DEFAULT.</span><span>CREATIVE / TECHNICAL</span><span>MMXXVI</span></div>
+  </section>
   <div className="home-contact"><HoverAnimal folder="headphone_blob_frames" className="inline-headphone-blob" label="Headphone creature" /><div><span className="eyebrow"><Mail size={14} /> CONTACT / SOCIALS</span><h2>Say <em>hello.</em></h2><p>Have an interesting idea, a project to build, or something good to recommend? Let’s connect.</p></div><div className="social-links">
   <a href="https://github.com/shayan-wasLazy" target="_blank" rel="noreferrer"><Github size={18} /><span>GitHub</span><small>CODE & EXPERIMENTS</small><ArrowUpRight size={17} /></a>
   <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer"><Linkedin size={18} /><span>LinkedIn</span><small>PROFESSIONAL</small><ArrowUpRight size={17} /></a>
