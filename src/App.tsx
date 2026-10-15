@@ -189,7 +189,7 @@ function HomePage() {
     <div className="about-poster-body">
       <div className="about-poster-photo">
         <span className="about-photo-stamp">MUMBAI<br />INDIA</span>
-        <img src={`${import.meta.env.BASE_URL}assets/shayan-portrait.jpg`} alt="Shayan Mandrekar in a dramatic black and white portrait" loading="lazy" />
+        <img src={`${import.meta.env.BASE_URL}assets/shayan-portrait.png`} alt="Shayan Mandrekar in a dramatic black and white portrait" loading="lazy" />
         <span className="about-photo-caption">SHAYAN MANDREKAR · 2026</span>
       </div>
       <div className="about-poster-copy">
@@ -203,7 +203,7 @@ function HomePage() {
     </div>
     <div className="about-poster-bottom"><span>CURIOUS BY DEFAULT.</span><span>CREATIVE / TECHNICAL</span><span>MMXXVI</span></div>
   </section>
-  <div className="home-contact"><HoverAnimal folder="headphone_blob_frames" className="inline-headphone-blob" label="Headphone creature" /><div><span className="eyebrow"><Mail size={14} /> CONTACT / SOCIALS</span><h2>Say <em>hello.</em></h2><p>Have an interesting idea, a project to build, or something good to recommend? Let’s connect.</p></div><div className="social-links">
+  <div className="home-contact"><div><span className="eyebrow"><Mail size={14} /> CONTACT / SOCIALS</span><h2>Say <em>hello.</em></h2><p>Have an interesting idea, a project to build, or something good to recommend? Let’s connect.</p></div><div className="social-links">
   <a href="https://github.com/shayan-wasLazy" target="_blank" rel="noreferrer"><Github size={18} /><span>GitHub</span><small>CODE & EXPERIMENTS</small><ArrowUpRight size={17} /></a>
   <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer"><Linkedin size={18} /><span>LinkedIn</span><small>PROFESSIONAL</small><ArrowUpRight size={17} /></a>
   <a href="https://www.instagram.com/lazy_but_kind_/" target="_blank" rel="noreferrer"><Instagram size={18} /><span>Instagram</span><small>VISUALS & PERSONAL</small><ArrowUpRight size={17} /></a>
