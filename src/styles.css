@@ -2531,3 +2531,43 @@ main#top[data-theme="light"] .floating-nav .theme-toggle {
   .asset-gallery-card, .asset-gallery-image img { transition: none !important; }
   .asset-gallery-card:hover { transform: none; }
 }
+
+/* Masonry-style asset layouts: let each artwork keep its natural proportions. */
+.asset-gallery-section { min-width: 0; }
+.asset-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: 12px;
+  grid-auto-flow: dense;
+  align-items: stretch;
+  gap: 16px;
+}
+.asset-gallery-card { min-width: 0; height: 100%; }
+.asset-gallery-image {
+  height: 100%;
+  min-height: 0;
+  aspect-ratio: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.asset-gallery-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.asset-gallery-apparel .asset-gallery-card:nth-child(1) { grid-row: span 28; }
+.asset-gallery-apparel .asset-gallery-card:nth-child(2) { grid-row: span 34; }
+.asset-gallery-apparel .asset-gallery-card:nth-child(3) { grid-row: span 34; }
+.asset-gallery-apparel .asset-gallery-card:nth-child(4) { grid-row: span 34; }
+.asset-gallery-apparel .asset-gallery-card:nth-child(5) { grid-row: span 28; }
+.asset-gallery-gfx .asset-gallery-card { grid-row: span 28; }
+.asset-gallery-gfx .asset-gallery-card:nth-child(3n + 1) { grid-row: span 22; }
+.asset-gallery-gfx .asset-gallery-card:nth-child(3n + 2) { grid-row: span 20; }
+.asset-gallery-gfx .asset-gallery-card:nth-child(3n) { grid-row: span 24; }
+.asset-gallery-meta { flex: 0 0 auto; }
+@media (max-width: 760px) {
+  .asset-gallery-grid { grid-template-columns: repeat(2, minmax(0,1fr)); grid-auto-rows: 10px; gap: 11px; }
+  .asset-gallery-apparel .asset-gallery-card:nth-child(n) { grid-row: span 26; }
+  .asset-gallery-gfx .asset-gallery-card:nth-child(n) { grid-row: span 23; }
+}
