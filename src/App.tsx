@@ -201,7 +201,6 @@ function HomePage() {
         <div className="about-poster-facts"><span>01 / AI & MACHINE LEARNING</span><span>02 / MOTION & GRAPHIC DESIGN</span><span>03 / ALWAYS EXPERIMENTING</span></div>
       </div>
     </div>
-    <div className="about-poster-bottom"><span>CURIOUS BY DEFAULT.</span><span>CREATIVE / TECHNICAL</span><span>MMXXVI</span></div>
   </section>
   <div className="home-contact"><div><span className="eyebrow"><Mail size={14} /> CONTACT / SOCIALS</span><h2>Say <em>hello.</em></h2><p>Have an interesting idea, a project to build, or something good to recommend? Let’s connect.</p></div><div className="social-links">
   <a href="https://github.com/shayan-wasLazy" target="_blank" rel="noreferrer"><Github size={18} /><span>GitHub</span><small>CODE & EXPERIMENTS</small><ArrowUpRight size={17} /></a>
