@@ -215,7 +215,7 @@ function DesignPage() {
     <section className="reels-section" aria-labelledby="reels-heading">
       <div className="reels-heading-row">
         <div><span className="eyebrow"><Instagram size={14} /> MOTION / SHORT FORM</span><h2 id="reels-heading">Made to <em>move.</em></h2></div>
-        <p>A selection of short-form edits and visual experiments.</p>
+        <p>A moving wall of short-form edits and visual experiments.</p>
       </div>
       <div className="reels-track">
         {reelProjects.map((reel, index) => <motion.a
@@ -229,15 +229,11 @@ function DesignPage() {
           viewport={{ once: true, amount: 0.18 }}
           transition={{ duration: reduceMotion ? 0 : 0.45, delay: reduceMotion ? 0 : (index % 5) * 0.055 }}
         >
-          <span className="reel-card-top"><span>{reel.label}</span><ArrowUpRight size={17} /></span>
-          <span className="reel-preview"><iframe
-            src={`https://www.youtube-nocookie.com/embed/${reel.id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${reel.id}&playsinline=1&rel=0`}
-            title={`YouTube video ${index + 1}`}
-            loading="lazy"
-            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-            allowFullScreen
-          /></span>
-          <span className="reel-card-bottom"><span>WATCH ON YOUTUBE</span><ArrowUpRight size={14} /></span>
+          <span className="reel-card-top"><span>{reel.label}</span><span className="reel-index">{String(index + 1).padStart(2, "0")}</span></span>
+          <span className="reel-preview">
+            <img src={`https://i.ytimg.com/vi/${reel.id}/hqdefault.jpg`} alt={`Video preview ${index + 1}`} loading="lazy" />
+            <span className="reel-play-mark" aria-hidden="true">↗</span>
+          </span>
         </motion.a>)}
       </div>
     </section>
