@@ -2648,3 +2648,37 @@ html, body { overflow-x:hidden; }
 .asset-gallery-image img { max-width:100%; }
 .reel-stage { max-width:100%; min-width:0; }
 @media(max-width:900px) { .asset-gallery-grid { columns:2; } }
+
+/* Monochrome portrait placed directly below the home introduction copy. */
+.intro-portrait {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 12px 20px;
+  width: min(100%, 620px);
+  margin: clamp(42px, 6vw, 76px) auto 0;
+}
+.intro-portrait img {
+  grid-column: 1 / -1;
+  display: block;
+  width: 100%;
+  max-height: 760px;
+  object-fit: cover;
+  object-position: center 38%;
+  filter: grayscale(1) contrast(1.04);
+  border-radius: 2px;
+}
+.intro-portrait figcaption {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: #77756e;
+  font: 9px var(--mono);
+  letter-spacing: .09em;
+}
+@media (max-width: 760px) {
+  .intro-portrait { width: 100%; margin-top: 36px; }
+  .intro-portrait img { max-height: 620px; }
+  .intro-portrait figcaption { font-size: 8px; }
+}
