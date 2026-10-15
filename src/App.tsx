@@ -10,6 +10,19 @@ const navItems: { id: PageId; label: string; href: string }[] = [
   { id: "builds", label: "Builds", href: `${import.meta.env.BASE_URL}#/builds` },
 ];
 type DesignProject = { number: string; title: string; subtitle: string; description: string; year: string; role: string; tools: string; url: string; embed: string; tone: string; thumbnail: string; media: "image" | "video" };
+const reelProjects = [
+  { id: "DPYdl3XiH1m", label: "REEL / 01" },
+  { id: "DKzJQhtzsMq", label: "REEL / 02" },
+  { id: "DKfWhMJoWfY", label: "REEL / 03" },
+  { id: "DFW9G94TMvV", label: "REEL / 04" },
+  { id: "DFIZQwsz3ZZ", label: "REEL / 05" },
+  { id: "DEullskTdUM", label: "REEL / 06" },
+  { id: "DEiCxUOTsEi", label: "REEL / 07" },
+  { id: "C9NVGpYofSK", label: "REEL / 08" },
+  { id: "C-VDBI1yQ8G", label: "REEL / 09" },
+  { id: "DCod2xgtxdM", label: "REEL / 10" },
+];
+
 const designProjects: DesignProject[] = [
   { number: "01", title: "Hyperloop", subtitle: "BRAND IDENTITY", description: "A visual identity concept exploring the future-facing character of high-speed transportation.", year: "2024", role: "Brand identity / visual design", tools: "Branding · Typography · Visual systems", url: "https://www.behance.net/gallery/201498491/HyperLoop-brand-identity", embed: "https://www.behance.net/embed/project/201498491?url=https%3A%2F%2Fwww.behance.net%2Fgallery%2F201498491%2FHyperLoop-brand-identity", tone: "hyperloop", thumbnail: `${import.meta.env.BASE_URL}assets/hyperloop.gif`, media: "image" },
   { number: "02", title: "Green Oasis", subtitle: "BRAND IDENTITY", description: "A brand identity built around a greener, calmer visual language.", year: "2024", role: "Brand identity / visual design", tools: "Branding · Logo · Visual system", url: "https://www.behance.net/gallery/201579531/Green-Oasis-Brand-identity", embed: "https://www.behance.net/embed/project/201579531?url=https%3A%2F%2Fwww.behance.net%2Fgallery%2F201579531%2FGreen-Oasis-Brand-identity", tone: "oasis", thumbnail: `${import.meta.env.BASE_URL}assets/green-oasis.gif`, media: "image" },
@@ -201,6 +214,35 @@ function DesignPage() {
       </motion.button>
     )}</div>
     <div className="behance-bottom"><span>FULL PROJECTS HOSTED ON BEHANCE</span><a href="https://www.behance.net/" target="_blank" rel="noreferrer">VISIT BEHANCE <ArrowUpRight size={14} /></a></div>
+    <section className="reels-section" aria-labelledby="reels-heading">
+      <div className="reels-heading-row">
+        <div><span className="eyebrow"><Instagram size={14} /> MOTION / SHORT FORM</span><h2 id="reels-heading">Made to <em>move.</em></h2></div>
+        <p>A few edits and visual experiments from Instagram. Tap any reel to watch it on Instagram.</p>
+      </div>
+      <div className="reels-track">
+        {reelProjects.map((reel, index) => <motion.a
+          className="reel-card"
+          key={reel.id}
+          href={`https://www.instagram.com/reel/${reel.id}/`}
+          target="_blank"
+          rel="noreferrer"
+          initial={{ opacity: 0, y: 22 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.18 }}
+          transition={{ duration: reduceMotion ? 0 : 0.45, delay: reduceMotion ? 0 : (index % 5) * 0.055 }}
+        >
+          <span className="reel-card-top"><span>{reel.label}</span><ArrowUpRight size={17} /></span>
+          <span className="reel-preview"><iframe
+            src={`https://www.instagram.com/reel/${reel.id}/embed/`}
+            title={`Instagram reel ${index + 1}`}
+            loading="lazy"
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+            allowFullScreen
+          /></span>
+          <span className="reel-card-bottom"><Instagram size={14} /><span>WATCH ON INSTAGRAM</span><ArrowUpRight size={14} /></span>
+        </motion.a>)}
+      </div>
+    </section>
   </section>
   {selected && <div className="design-modal-backdrop" role="presentation" onMouseDown={(e) => { if (e.target === e.currentTarget) setSelected(null); }}>
     <motion.section className="design-modal" role="dialog" aria-modal="true" aria-labelledby="design-modal-title" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .22 }}>
