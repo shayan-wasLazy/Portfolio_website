@@ -2461,3 +2461,73 @@ main#top[data-theme="light"] .floating-nav .theme-toggle {
 @media (max-width:760px) {
   .reel-stage { min-height: calc(var(--reel-width) * 1.85 + 18px); }
 }
+
+/* Additional visual-design galleries use the same editorial rhythm as Behance cards. */
+.asset-gallery-section {
+  margin-top: clamp(64px, 9vw, 112px);
+  padding-top: clamp(34px, 5vw, 58px);
+  border-top: 1px solid rgba(242,240,233,.2);
+}
+.asset-gallery-heading { margin-bottom: 30px; }
+.asset-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+.asset-gallery-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: 9px;
+  overflow: hidden;
+  border: 1px solid rgba(242,240,233,.2);
+  border-radius: 18px;
+  background: rgba(242,240,233,.035);
+  color: var(--paper-light);
+  text-decoration: none;
+  transition: transform .28s ease, border-color .28s ease, background .28s ease;
+}
+.asset-gallery-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(242,240,233,.45);
+  background: rgba(242,240,233,.065);
+}
+.asset-gallery-image {
+  display: block;
+  overflow: hidden;
+  border-radius: 11px;
+  background: rgba(242,240,233,.04);
+  aspect-ratio: 4 / 5;
+}
+.asset-gallery-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform .55s cubic-bezier(.2,.7,.2,1);
+}
+.asset-gallery-card:hover .asset-gallery-image img { transform: scale(1.025); }
+.asset-gallery-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 3px 3px;
+  color: #b6b3aa;
+  font: 9px var(--mono);
+  letter-spacing: .07em;
+}
+@media (min-width: 1100px) {
+  .asset-gallery-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .asset-gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
+  .asset-gallery-card { padding: 7px; border-radius: 15px; }
+  .asset-gallery-image { border-radius: 9px; }
+  .asset-gallery-meta { font-size: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .asset-gallery-card, .asset-gallery-image img { transition: none !important; }
+  .asset-gallery-card:hover { transform: none; }
+}
