@@ -2419,3 +2419,19 @@ main#top[data-theme="light"] .floating-nav .theme-toggle {
 .reel-progress span { display:block; height:100%; background:#f2f0e9; transition:width .4s ease; }
 @media(max-width:760px) { .reels-heading-row { align-items:start; flex-direction:column; gap:16px; } .reels-heading-row h2 { font-size:clamp(44px,12vw,68px); } .reel-stage { --reel-width:min(61vw,250px); min-height:calc(var(--reel-width) * 1.7); padding:10px 0 22px; } .reel-slide { transform:translate(calc(-50% + var(--reel-position) * 55%),-50%) scale(calc(1 - min(abs(var(--reel-position)),4) * .13)); } .reel-nav { width:36px; height:36px; } .reel-nav-prev { left:0; } .reel-nav-next { right:0; } }
 @media(prefers-reduced-motion:reduce) { .reel-slide,.reel-still img,.reel-nav,.reel-progress span { transition:none!important; } }
+
+/* Prevent the layered reel carousel from being clipped vertically. */
+.reels-section { overflow: visible; }
+.reel-stage {
+  min-height: calc(var(--reel-width) * 1.78 + 42px);
+  padding: 30px 0 46px;
+  overflow: visible;
+}
+.reel-slide { transform-origin: center center; }
+.reel-slide.is-current { transform: translate(-50%, -50%) scale(1); }
+@media (max-width: 760px) {
+  .reel-stage {
+    min-height: calc(var(--reel-width) * 1.85 + 36px);
+    padding: 22px 0 38px;
+  }
+}
