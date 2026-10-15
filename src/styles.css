@@ -2682,3 +2682,24 @@ html, body { overflow-x:hidden; }
   .intro-portrait img { max-height: 620px; }
   .intro-portrait figcaption { font-size: 8px; }
 }
+
+/* Editorial about-me poster inspired by the supplied graphic-design reference. */
+.about-poster{position:relative;isolation:isolate;width:min(100%,1050px);margin:clamp(48px,7vw,88px) auto clamp(72px,10vw,128px);padding:clamp(18px,3vw,34px);overflow:hidden;color:#f2f0e9;background:radial-gradient(ellipse at 17% 46%,rgba(255,35,91,.10),transparent 35%),radial-gradient(ellipse at 90% 20%,rgba(242,240,233,.06),transparent 35%),#111110;border:1px solid rgba(242,240,233,.18);box-shadow:0 28px 90px rgba(0,0,0,.2)}
+.about-poster:before{content:"";position:absolute;z-index:-1;inset:12px;border:1px solid rgba(242,240,233,.07);pointer-events:none}
+.about-poster-top,.about-poster-bottom{display:flex;justify-content:space-between;align-items:center;gap:14px;color:#a7a49b;font:9px var(--mono);letter-spacing:.13em}
+.about-poster-top{padding-bottom:18px;border-bottom:1px solid rgba(242,240,233,.15)}.about-poster-top span:first-child{color:#f2f0e9}
+.about-poster-body{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1fr);gap:clamp(28px,5vw,66px);align-items:center;padding:clamp(24px,5vw,54px) clamp(0px,2vw,20px)}
+.about-poster-photo{position:relative;width:100%;max-width:390px;justify-self:center;padding:10px 10px 34px;background:#e8e5dc;transform:rotate(-2deg);box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.about-poster-photo:before{content:"✳";position:absolute;z-index:2;top:-26px;right:-22px;color:#ff315f;font-size:clamp(48px,7vw,84px);line-height:1;transform:rotate(15deg)}
+.about-poster-photo img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 35%;filter:grayscale(1) contrast(1.12) brightness(.92)}
+.about-photo-stamp{position:absolute;z-index:3;top:22px;left:-17px;padding:8px 10px;color:#f2f0e9;background:#ff315f;font:9px/1.4 var(--mono);letter-spacing:.1em;transform:rotate(-7deg)}
+.about-photo-caption{position:absolute;right:10px;bottom:10px;left:10px;color:#171715;font:9px var(--mono);letter-spacing:.06em}
+.about-poster-copy{position:relative;min-width:0}.about-poster-kicker{color:#ff5577;font:10px var(--mono);letter-spacing:.14em}
+.about-poster-copy h2{margin:8px 0 20px;font-size:clamp(76px,13vw,156px);line-height:.78;letter-spacing:-.095em;font-weight:850}
+.about-poster-copy h2 span{color:#ff315f;letter-spacing:-.12em}
+.about-poster-copy p{max-width:420px;color:#a9a69e;font-size:13px;line-height:1.8}
+.about-poster-copy p.about-poster-lead{color:#f2f0e9;font-size:clamp(15px,1.7vw,19px);line-height:1.55}
+.about-poster-mark{margin:18px 0 20px;color:#ff315f;font-size:42px;line-height:1}
+.about-poster-facts{display:grid;gap:10px}.about-poster-facts span{padding-top:10px;border-top:1px solid rgba(242,240,233,.15);color:#c7c3ba;font:9px var(--mono);letter-spacing:.08em}
+.about-poster-bottom{padding-top:17px;border-top:1px solid rgba(242,240,233,.15)}
+@media(max-width:680px){.about-poster{padding:17px;margin-top:42px}.about-poster-body{grid-template-columns:minmax(0,1fr);gap:36px;padding:30px 4px}.about-poster-photo{width:min(82%,340px)}.about-poster-copy h2{font-size:clamp(86px,24vw,132px)}.about-poster-copy p{font-size:12px}.about-poster-bottom{flex-wrap:wrap;font-size:8px}}
