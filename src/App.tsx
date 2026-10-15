@@ -190,6 +190,7 @@ function HomePage() {
   <a href="https://www.behance.net/" target="_blank" rel="noreferrer"><Palette size={18} /><span>Behance</span><small>CREATIVE WORK</small><ArrowUpRight size={17} /></a></div></div></section></>;
 }
 function DesignPage() {
+  const [activeReel, setActiveReel] = useState(0);
   const [selected, setSelected] = useState<DesignProject | null>(null);
   const reduceMotion = useReducedMotion();
   useEffect(() => {
@@ -215,27 +216,22 @@ function DesignPage() {
     <section className="reels-section" aria-labelledby="reels-heading">
       <div className="reels-heading-row">
         <div><span className="eyebrow"><Instagram size={14} /> MOTION / SHORT FORM</span><h2 id="reels-heading">Made to <em>move.</em></h2></div>
-        <p>A moving wall of short-form edits and visual experiments.</p>
+        <p>Short-form edits, playing in a little cinematic carousel.</p>
       </div>
-      <div className="reels-track">
-        {reelProjects.map((reel, index) => <motion.a
-          className="reel-card"
-          key={reel.id}
-          href={`https://www.youtube.com/watch?v=${reel.id}`}
-          target="_blank"
-          rel="noreferrer"
-          initial={{ opacity: 0, y: 22 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.18 }}
-          transition={{ duration: reduceMotion ? 0 : 0.45, delay: reduceMotion ? 0 : (index % 5) * 0.055 }}
-        >
-          <span className="reel-card-top"><span>{reel.label}</span><span className="reel-index">{String(index + 1).padStart(2, "0")}</span></span>
-          <span className="reel-preview">
-            <img src={`https://i.ytimg.com/vi/${reel.id}/hqdefault.jpg`} alt={`Video preview ${index + 1}`} loading="lazy" />
-            <span className="reel-play-mark" aria-hidden="true">↗</span>
-          </span>
-        </motion.a>)}
+      <div className="reel-stage" aria-label="Short-form video carousel">
+        {reelProjects.map((reel, index) => {
+          const offset = (index - activeReel + reelProjects.length) % reelProjects.length;
+          const position = offset > reelProjects.length / 2 ? offset - reelProjects.length : offset;
+          const visible = Math.abs(position) <= 2;
+          return <button type="button" key={reel.id} className={`reel-slide ${position === 0 ? "is-current" : ""} ${visible ? "" : "is-hidden"}`} style={{ "--reel-position": position } as React.CSSProperties} onClick={() => setActiveReel(index)} aria-label={`Play video ${index + 1}`} aria-current={position === 0 ? "true" : undefined} tabIndex={visible ? 0 : -1}>
+            {position === 0 ? <span className="reel-player"><iframe key={reel.id} src={`https://www.youtube-nocookie.com/embed/${reel.id}?autoplay=1&mute=1&controls=0&loop=1&playlist=${reel.id}&playsinline=1&rel=0&modestbranding=1`} title={`Short-form edit ${index + 1}`} allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen /></span> : <span className="reel-still"><img src={`https://i.ytimg.com/vi/${reel.id}/hqdefault.jpg`} alt="" loading="lazy" /></span>}
+            <span className="reel-slide-label"><span>{reel.label}</span><span>{String(index + 1).padStart(2, "0")} / {String(reelProjects.length).padStart(2, "0")}</span></span>
+          </button>;
+        })}
+        <button className="reel-nav reel-nav-prev" type="button" onClick={() => setActiveReel((activeReel - 1 + reelProjects.length) % reelProjects.length)} aria-label="Previous video">←</button>
+        <button className="reel-nav reel-nav-next" type="button" onClick={() => setActiveReel((activeReel + 1) % reelProjects.length)} aria-label="Next video">→</button>
       </div>
+      <div className="reel-progress" aria-hidden="true"><span style={{ width: `${((activeReel + 1) / reelProjects.length) * 100}%` }} /></div>
     </section>
   </section>
   {selected && <div className="design-modal-backdrop" role="presentation" onMouseDown={(e) => { if (e.target === e.currentTarget) setSelected(null); }}>
