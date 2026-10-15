@@ -2755,3 +2755,6 @@ html, body { overflow-x:hidden; }
   .about-poster-body { gap: 34px; padding: 30px 0; }
   .about-poster-photo { width: min(82%, 340px); }
 }
+
+/* Remove the horizontal rule separating the About section from Contact. */
+.home-contact { border-top: 0 !important; }
