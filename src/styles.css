@@ -2637,3 +2637,14 @@ main#top[data-theme="light"] .floating-nav .theme-toggle {
   .asset-gallery-image { border-radius: 8px; }
   .asset-gallery-meta { font-size: 8px; }
 }
+
+/* Final overflow guard: keep the document viewport-width while preserving vertical scroll. */
+html, body, #root { width:100%; max-width:100%; min-width:0; }
+html, body { overflow-x:hidden; }
+#root, main, .app, .page, .design-page, .design-content, .design-layout,
+.asset-gallery-section, .asset-gallery-grid { min-width:0; max-width:100%; }
+.asset-gallery-grid { width:100%; columns:3; overflow-x:clip; }
+.asset-gallery-card { min-width:0; max-width:100%; }
+.asset-gallery-image img { max-width:100%; }
+.reel-stage { max-width:100%; min-width:0; }
+@media(max-width:900px) { .asset-gallery-grid { columns:2; } }
