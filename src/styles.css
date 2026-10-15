@@ -2396,14 +2396,14 @@ main#top[data-theme="light"] .floating-nav .theme-toggle {
 
 
 /* Cinematic short-form carousel */
-.reels-section { margin-top:clamp(64px,9vw,112px); padding-top:clamp(34px,5vw,58px); border-top:1px solid rgba(242,240,233,.2); overflow:hidden; }
+.reels-section { margin-top:clamp(30px,1vw,112px); padding-top:clamp(34px,5vw,58px); overflow:hidden; }
 .reels-heading-row { display:flex; align-items:end; justify-content:space-between; gap:32px; margin-bottom:30px; }
 .reels-heading-row .eyebrow { margin-bottom:18px; }
 .reels-heading-row h2 { font-size:clamp(42px,6.6vw,82px); }
 .reels-heading-row h2 em { color:#b9b5aa; }
 .reels-heading-row > p { max-width:290px; margin:0 0 5px; color:#aaa79e; font-size:12px; line-height:1.8; }
 .reel-stage { --reel-width:clamp(190px,23vw,300px); position:relative; display:flex; justify-content:center; align-items:center; min-height:calc(var(--reel-width) * 1.58); padding:18px 0 32px; perspective:1200px; isolation:isolate; }
-.reel-slide { position:absolute; top:50%; left:50%; display:block; width:var(--reel-width); padding:8px; border:1px solid rgba(242,240,233,.24); border-radius:23px; overflow:hidden; color:#f2f0e9; background:rgba(34,34,31,.96); box-shadow:0 18px 55px rgba(0,0,0,.24); transform:translate(calc(-50% + var(--reel-position) * 67%),-50%) scale(calc(1 - min(abs(var(--reel-position)),4) * .105)) rotateY(calc(var(--reel-position) * -8deg)); opacity:calc(1 - min(abs(var(--reel-position)),4) * .2); z-index:calc(10 - min(abs(var(--reel-position)),4)); transition:transform .65s cubic-bezier(.2,.75,.2,1),opacity .5s ease,border-color .35s ease,box-shadow .35s ease; cursor:pointer; text-align:left; }
+.reel-slide { position:absolute; top:50%; left:50%; display:block; width:var(--reel-width); padding:8px; border:1px solid rgba(242,240,233,.24); border-radius:23px; overflow:hidden; color:#f2f0e9; background:rgba(34,34,31,.96); box-shadow:0 18px 55px rgba(0,0,0,.24); transform:translate(calc(-50% + var(--reel-position) * 67%),-50%) scale(calc(1 - min(abs(var(--reel-position)),4) * .105)) rotateY(calc(var(--reel-position) * -8deg)); z-index:calc(10 - min(abs(var(--reel-position)),4)); transition:transform .65s cubic-bezier(.2,.75,.2,1),opacity .5s ease,border-color .35s ease,box-shadow .35s ease; cursor:pointer; text-align:left; }
 .reel-slide.is-current { z-index:20; cursor:default; border-color:rgba(242,240,233,.48); box-shadow:0 28px 80px rgba(0,0,0,.42); }
 .reel-slide.is-hidden { opacity:0; pointer-events:none; }
 .reel-player,.reel-still { position:relative; display:block; width:100%; aspect-ratio:9/16; overflow:hidden; border-radius:16px; background:#080808; }
