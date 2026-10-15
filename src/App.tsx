@@ -240,7 +240,7 @@ function DesignPage() {
         <div><span className="eyebrow"><Palette size={14} /> APPAREL DESIGN</span><h2 id="apparel-heading">Made to <em>wear.</em></h2></div>
         <p>Apparel concepts and wearable visual experiments.</p>
       </div>
-      <div className="asset-gallery-grid">
+      <div className="asset-gallery-grid asset-gallery-apparel">
         {[
           ["Tee%201.png", "APPAREL / 01"], ["jjjj4w.png", "APPAREL / 02"],
           ["tee%202.png", "APPAREL / 03"], ["tee%203.png", "APPAREL / 04"],
@@ -256,7 +256,7 @@ function DesignPage() {
         <div><span className="eyebrow"><Palette size={14} /> GRAPHIC DESIGN</span><h2 id="gfx-heading">Visual <em>experiments.</em></h2></div>
         <p>Standalone graphics, compositions, and visual studies.</p>
       </div>
-      <div className="asset-gallery-grid">
+      <div className="asset-gallery-grid asset-gallery-gfx">
         {[
           ["dgafgagg.png", "GRAPHIC / 01"], ["eghge.png", "GRAPHIC / 02"],
           ["fhshg.png", "GRAPHIC / 03"], ["rhrehreh.png", "GRAPHIC / 04"],
