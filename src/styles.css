@@ -2758,3 +2758,19 @@ html, body { overflow-x:hidden; }
 
 /* Remove the horizontal rule separating the About section from Contact. */
 .home-contact { border-top: 0 !important; }
+
+/* Tighten the transition from the About section into Contact. */
+.intro {
+  padding-bottom: 24px !important;
+}
+.about-poster {
+  margin-bottom: 16px !important;
+}
+.home-contact {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+@media (max-width: 680px) {
+  .intro { padding-bottom: 18px !important; }
+  .about-poster { margin-bottom: 12px !important; }
+}
