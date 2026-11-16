@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowDownRight, ArrowUpRight, Github, Instagram, Linkedin, Palette, Code2, X, ExternalLink, Mail, Sun, Moon, Activity, Target, Trophy, BookOpen, Database, BrainCircuit, Film } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, Github, Instagram, Linkedin, Palette, Code2, X, ExternalLink, Mail, Sun, Moon, Activity, Target, Trophy } from "lucide-react";
 
 type PageId = "home" | "design" | "builds" | "analysis" | "reed" | "cog" | "anime" | "chess";
 type Project = { number: string; title: string; type: string; description: string; stack: string; focus: string; url?: string; analysisUrl?: string };
