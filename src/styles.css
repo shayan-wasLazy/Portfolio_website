@@ -3017,3 +3017,80 @@ main#top[data-theme="light"] .cricket-ranking-table tbody tr:first-child td:firs
 main#top[data-theme="light"] .cricket-bar-track i {
   background: var(--cricket-accent);
 }
+
+
+/* SupeRR Selector spacing + light-theme contrast refinements. */
+/* Give adjacent content panels enough separation to read as distinct surfaces. */
+main#top .cricket-facts-grid,
+main#top .cricket-note-grid {
+  gap: 18px;
+}
+main#top .cricket-model-layout {
+  gap: 20px;
+}
+main#top .cricket-facts-grid article,
+main#top .cricket-note-grid article,
+main#top .cricket-formula-card,
+main#top .cricket-chart-panel {
+  min-width: 0;
+}
+
+/* Light mode: every label, data value and divider uses a dark-theme-safe contrast. */
+main#top[data-theme="light"] .cricket-chart-heading {
+  color: #191917;
+  border-bottom-color: rgba(23,23,21,.18);
+}
+main#top[data-theme="light"] .cricket-chart-heading small {
+  color: #77756e;
+}
+main#top[data-theme="light"] .cricket-ranking-table .is-positive {
+  color: #4f4a43;
+}
+main#top[data-theme="light"] .cricket-ranking-table .is-negative {
+  color: #8a5149;
+}
+main#top[data-theme="light"] .cricket-stat strong,
+main#top[data-theme="light"] .cricket-facts-grid h3,
+main#top[data-theme="light"] .cricket-pipeline-step h3,
+main#top[data-theme="light"] .cricket-eligibility strong {
+  color: #191917;
+}
+main#top[data-theme="light"] .cricket-table td,
+main#top[data-theme="light"] .cricket-table td:first-child {
+  color: #3f3e39;
+}
+main#top[data-theme="light"] .cricket-formula-card p,
+main#top[data-theme="light"] .cricket-highlight-row strong {
+  color: #191917;
+}
+main#top[data-theme="light"] .cricket-chart-panel,
+main#top[data-theme="light"] .cricket-facts-grid article,
+main#top[data-theme="light"] .cricket-note-grid article,
+main#top[data-theme="light"] .cricket-formula-card {
+  background: #e8e5dd;
+  border-color: rgba(23,23,21,.2);
+}
+main#top[data-theme="light"] .cricket-case-hero,
+main#top[data-theme="light"] .cricket-stat-grid,
+main#top[data-theme="light"] .cricket-pipeline,
+main#top[data-theme="light"] .cricket-pipeline-step,
+main#top[data-theme="light"] .cricket-highlight-row,
+main#top[data-theme="light"] .cricket-limitations,
+main#top[data-theme="light"] .cricket-analysis-footer {
+  border-color: rgba(23,23,21,.2);
+}
+main#top[data-theme="light"] .cricket-eligibility div + div,
+main#top[data-theme="light"] .cricket-stat + .cricket-stat,
+main#top[data-theme="light"] .cricket-highlight-row > div + div {
+  border-color: rgba(23,23,21,.18);
+}
+main#top[data-theme="light"] .cricket-ranking-table tbody tr:first-child td:first-child {
+  color: #EE0497;
+}
+@media (max-width: 760px) {
+  main#top .cricket-facts-grid,
+  main#top .cricket-note-grid,
+  main#top .cricket-model-layout {
+    gap: 16px;
+  }
+}
