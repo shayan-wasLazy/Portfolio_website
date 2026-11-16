@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowDownRight, ArrowUpRight, Github, Instagram, Linkedin, Palette, Code2, X, ExternalLink, Mail, Sun, Moon } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, Github, Instagram, Linkedin, Palette, Code2, X, ExternalLink, Mail, Sun, Moon, Activity, Target, Trophy } from "lucide-react";
 
-type PageId = "home" | "design" | "builds";
-type Project = { number: string; title: string; type: string; description: string; stack: string; focus: string; url?: string };
+type PageId = "home" | "design" | "builds" | "analysis";
+type Project = { number: string; title: string; type: string; description: string; stack: string; focus: string; url?: string; analysisUrl?: string };
 const navItems: { id: PageId; label: string; href: string }[] = [
   { id: "home", label: "Home", href: import.meta.env.BASE_URL },
   { id: "design", label: "Design", href: `${import.meta.env.BASE_URL}#/design` },
@@ -31,10 +31,11 @@ const designProjects: DesignProject[] = [
   { number: "05", title: "The Myth", subtitle: "DISCORD BANNER", description: "A themed digital banner exploring a darker, myth-inspired visual direction.", year: "2022", role: "Banner design", tools: "Graphic design · Digital composition", url: "https://www.behance.net/gallery/174810451/The-myth", embed: "https://www.behance.net/embed/project/174810451?url=https%3A%2F%2Fwww.behance.net%2Fgallery%2F174810451%2FThe-myth", tone: "myth", thumbnail: `${import.meta.env.BASE_URL}assets/the-myth.mp4`, media: "video" },
 ];
 const projects: Project[] = [
-  { number: "01", title: "Reed AI", type: "AI STUDY ASSISTANT", description: "A study companion that turns personal notes into a searchable, conversational learning space.", stack: "FastAPI · Qdrant · Ollama · Sentence Transformers", focus: "Document ingestion, chunking, embeddings, retrieval, and local LLM-powered study workflows.", url: "https://github.com/shayan-wasLazy/Reed" },
-  { number: "02", title: "Cinematic Color Grading", type: "COMPUTER VISION / DEEP LEARNING", description: "An exploration of learning cinematic looks and transferring color characteristics between video frames.", stack: "PyTorch · ResNet · 3D LUTs", focus: "Frame extraction, training-pair construction, feature learning, and differentiable color lookup tables." },
-  { number: "03", title: "Anime Discovery", type: "DATA / RECOMMENDATION SYSTEMS", description: "An anime database and recommendation project designed to make discovery feel more personal.", stack: "Python · SQL · FastAPI · Recommendation systems", focus: "Building a structured anime catalogue and exploring recommendation logic." },
-  { number: "04", title: "Chess Bot", type: "ALGORITHMS / GAME AI", description: "A chess-playing project exploring how search and evaluation can guide decisions across a game tree.", stack: "Python · Search · Evaluation", focus: "Move generation, position evaluation, and adversarial search.", url: "https://github.com/shayan-wasLazy/Chess-Bot" },
+  { number: "01", title: "SupeRR Selector", type: "CRICKET ANALYTICS / PRESSURE MODELLING", description: "A pressure-first T20 player evaluation system that ranks batters and bowlers using ball-by-ball match context, role-specific performance, and model consensus.", stack: "Python · Pandas · XGBoost · Streamlit · Matplotlib", focus: "Pressure Index engineering, alternative pressure scenarios, player baselines and uplift, eligibility controls, and weighted Reciprocal Rank Fusion across five scoring methods.", url: "https://github.com/shayan-wasLazy/Cricket-Aanalysis", analysisUrl: "#/cricket-analysis" },
+  { number: "02", title: "Reed AI", type: "AI STUDY ASSISTANT", description: "A study companion that turns personal notes into a searchable, conversational learning space.", stack: "FastAPI · Qdrant · Ollama · Sentence Transformers", focus: "Document ingestion, chunking, embeddings, retrieval, and local LLM-powered study workflows.", url: "https://github.com/shayan-wasLazy/Reed" },
+  { number: "03", title: "Cinematic Color Grading", type: "COMPUTER VISION / DEEP LEARNING", description: "An exploration of learning cinematic looks and transferring color characteristics between video frames.", stack: "PyTorch · ResNet · 3D LUTs", focus: "Frame extraction, training-pair construction, feature learning, and differentiable color lookup tables." },
+  { number: "04", title: "Anime Discovery", type: "DATA / RECOMMENDATION SYSTEMS", description: "An anime database and recommendation project designed to make discovery feel more personal.", stack: "Python · SQL · FastAPI · Recommendation systems", focus: "Building a structured anime catalogue and exploring recommendation logic." },
+  { number: "05", title: "Chess Bot", type: "ALGORITHMS / GAME AI", description: "A chess-playing project exploring how search and evaluation can guide decisions across a game tree.", stack: "Python · Search · Evaluation", focus: "Move generation, position evaluation, and adversarial search.", url: "https://github.com/shayan-wasLazy/Chess-Bot" },
 ];
 const leaves = Array.from({ length: 13 }, (_, i) => ({ id: i, left: `${(i * 37 + 7) % 100}%`, delay: `${(i % 7) * -1.9}s`, duration: `${13 + (i % 6) * 2.5}s`, size: `${5 + (i % 4) * 2}px`, rotate: `${i * 43}deg` }));
 
@@ -146,15 +147,15 @@ function HoverAnimal({ folder, className, label }: { folder: string; className: 
 }
 
 function LoadingScreen({ page }: { page: PageId }) {
-  const firstLine = page === "home" ? "Shayan" : page === "design" ? "Design" : "Builds";
-  const secondLine = page === "home" ? "Mandrekar" : "Page";
+  const firstLine = page === "home" ? "Shayan" : page === "design" ? "Design" : page === "analysis" ? "Cricket" : "Builds";
+  const secondLine = page === "home" ? "Mandrekar" : page === "analysis" ? "Analysis" : "Page";
   return <motion.div className="portfolio-intro-screen" role="status" aria-label={`Loading ${firstLine} ${secondLine}`}
     initial={{ opacity: 1 }} animate={{ opacity: [1, 1, 0] }}
     transition={{ duration: page === "home" ? 3 : 1.35, times: [0, .78, 1], ease: "easeInOut" }}>
     <div className="portfolio-intro-content"><div className="portfolio-intro-wordmark" aria-label={`${firstLine} ${secondLine}`}>
       <span className="portfolio-intro-first">{Array.from(firstLine).map((char, index) => <span aria-hidden="true" className="portfolio-intro-letter" key={index} style={{ "--letter-index": index } as React.CSSProperties}>{char}</span>)}</span>
       <span className="portfolio-intro-last">{Array.from(secondLine).map((char, index) => <span aria-hidden="true" className="portfolio-intro-letter" key={index} style={{ "--letter-index": index + firstLine.length } as React.CSSProperties}>{char}</span>)}</span>
-    </div>{page !== "home" && <p className="portfolio-intro-tagline">{page === "design" ? "A curated collection of visual work, shaped over the years." : "Experiments, tools, and ideas brought to life through code."}</p>}</div>
+    </div>{page !== "home" && <p className="portfolio-intro-tagline">{page === "design" ? "A curated collection of visual work, shaped over the years." : page === "analysis" ? "A pressure-first cricket analytics case study." : "Experiments, tools, and ideas brought to life through code."}</p>}</div>
   </motion.div>;
 }
 
@@ -307,13 +308,203 @@ function BuildsPage() {
   return <><section id="content" className="projects-section section-shell"><SectionLabel left="02 / THE BUILDING SIDE" right="CODE & EXPERIMENTS" /><div className="section-heading"><div><span className="eyebrow"><Code2 size={14} /> SELECTED PROJECTS</span><h2>Ideas into <em>systems.</em></h2></div><p>I learn by building. Open a project to see what I’m exploring, how it works, and its code when available.</p></div>
   <div className="project-grid">{projects.map((project) => <motion.button type="button" className="project-card project-card-button" key={project.number} onClick={() => setSelectedProject(project)} whileHover={reduceMotion ? undefined : { y: -4 }} transition={{ duration: .22 }}><span className="project-card-top"><span>{project.number} / PROJECT NOTE</span><ArrowUpRight size={18} strokeWidth={1.5} /></span><span className="project-type">{project.type}</span><span className="project-card-title">{project.title}</span><span className="project-description">{project.description}</span><span className="project-stack">{project.stack}</span><span className="card-hint">OPEN PROJECT <ArrowUpRight size={13} /></span></motion.button>)}</div>
   <p className="honest-note">A curated selection of ongoing work. Repository links are included only where confirmed.</p></section>
-  {selectedProject && <div className="project-modal-backdrop" role="presentation" onMouseDown={(e) => { if (e.target === e.currentTarget) setSelectedProject(null); }}><motion.section className="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" initial={{ opacity: 0, y: 16, scale: .985 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: .2 }}><div className="modal-topline"><span>{selectedProject.number} / {selectedProject.type}</span><button className="modal-close" onClick={() => setSelectedProject(null)} aria-label="Close project details"><X size={19} /></button></div><h2 id="modal-title">{selectedProject.title}</h2><p className="modal-description">{selectedProject.description}</p><div className="modal-detail"><span>THE FOCUS</span><p>{selectedProject.focus}</p></div><div className="modal-detail"><span>TECH STACK</span><p>{selectedProject.stack}</p></div>{selectedProject.url ? <a className="modal-repo-link" href={selectedProject.url} target="_blank" rel="noreferrer"><Github size={17} /> View source on GitHub <ExternalLink size={15} /></a> : <p className="modal-unavailable">Repository link not added yet.</p>}<button className="modal-done" onClick={() => setSelectedProject(null)}>BACK TO BUILDS <ArrowDownRight size={15} /></button></motion.section></div>}</>;
+  {selectedProject && <div className="project-modal-backdrop" role="presentation" onMouseDown={(e) => { if (e.target === e.currentTarget) setSelectedProject(null); }}><motion.section className="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" initial={{ opacity: 0, y: 16, scale: .985 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: .2 }}><div className="modal-topline"><span>{selectedProject.number} / {selectedProject.type}</span><button className="modal-close" onClick={() => setSelectedProject(null)} aria-label="Close project details"><X size={19} /></button></div><h2 id="modal-title">{selectedProject.title}</h2><p className="modal-description">{selectedProject.description}</p><div className="modal-detail"><span>THE FOCUS</span><p>{selectedProject.focus}</p></div><div className="modal-detail"><span>TECH STACK</span><p>{selectedProject.stack}</p></div><div className="modal-actions">{selectedProject.url ? <a className="modal-repo-link" href={selectedProject.url} target="_blank" rel="noreferrer"><Github size={17} /> View GitHub repository <ExternalLink size={15} /></a> : <p className="modal-unavailable">Repository link not added yet.</p>}{selectedProject.analysisUrl && <a className="modal-repo-link modal-analysis-link" href={selectedProject.analysisUrl}><Activity size={17} /> Project analysis <ArrowUpRight size={15} /></a>}</div><button className="modal-done" onClick={() => setSelectedProject(null)}>BACK TO BUILDS <ArrowDownRight size={15} /></button></motion.section></div>}</>;
 }
+
+const cricketBatters = [
+  { rank: 1, name: "David Miller", rrf: "0.0158", model: 99.10, uplift: 20.94, balls: 56, matches: 11, methods: 5 },
+  { rank: 2, name: "Namboori Tilak Varma", rrf: "0.0156", model: 98.59, uplift: 31.90, balls: 82, matches: 11, methods: 5 },
+  { rank: 3, name: "Naman Dhir", rrf: "0.0155", model: 99.43, uplift: 18.93, balls: 56, matches: 5, methods: 4 },
+  { rank: 4, name: "Ashutosh Sharma", rrf: "0.0153", model: 97.33, uplift: 8.34, balls: 41, matches: 7, methods: 5 },
+  { rank: 5, name: "Jason Holder", rrf: "0.0151", model: 97.77, uplift: 15.31, balls: 101, matches: 16, methods: 5 },
+  { rank: 6, name: "Sherfane Rutherford", rrf: "0.0148", model: 95.49, uplift: 9.29, balls: 58, matches: 7, methods: 5 },
+  { rank: 7, name: "Mitchell Santner", rrf: "0.0145", model: 96.73, uplift: 13.08, balls: 82, matches: 11, methods: 5 },
+  { rank: 8, name: "Rovman Powell", rrf: "0.0141", model: 96.68, uplift: 15.85, balls: 123, matches: 16, methods: 5 },
+  { rank: 9, name: "Tristan Stubbs", rrf: "0.0138", model: 96.99, uplift: 17.65, balls: 60, matches: 8, methods: 4 },
+  { rank: 10, name: "Shashank Singh", rrf: "0.0137", model: 93.55, uplift: 11.19, balls: 81, matches: 9, methods: 5 },
+];
+
+const cricketBowlers = [
+  { rank: 1, name: "Corbin Bosch", rrf: "0.0159", model: 88.08, uplift: -2.76, balls: 95, matches: 7, methods: 5 },
+  { rank: 2, name: "Nathan Ellis", rrf: "0.0159", model: 87.92, uplift: -3.25, balls: 85, matches: 9, methods: 5 },
+  { rank: 3, name: "Jofra Archer", rrf: "0.0158", model: 87.84, uplift: -3.76, balls: 263, matches: 20, methods: 5 },
+  { rank: 4, name: "Bhuvneshwar Kumar", rrf: "0.0156", model: 87.26, uplift: -2.86, balls: 459, matches: 43, methods: 5 },
+  { rank: 5, name: "Axar Patel", rrf: "0.0146", model: 81.29, uplift: -3.37, balls: 272, matches: 28, methods: 5 },
+  { rank: 6, name: "Rashid Khan", rrf: "0.0144", model: 82.46, uplift: -3.94, balls: 479, matches: 36, methods: 5 },
+  { rank: 7, name: "Lungi Ngidi", rrf: "0.0137", model: 80.21, uplift: -4.61, balls: 108, matches: 11, methods: 5 },
+  { rank: 8, name: "Josh Hazlewood", rrf: "0.0136", model: 78.59, uplift: -2.50, balls: 333, matches: 27, methods: 5 },
+  { rank: 9, name: "Dunith Wellalage", rrf: "0.0135", model: 79.32, uplift: -3.93, balls: 61, matches: 6, methods: 5 },
+  { rank: 10, name: "Kagiso Rabada", rrf: "0.0135", model: 79.74, uplift: -4.37, balls: 267, matches: 24, methods: 5 },
+];
+
+function CricketAnalysisPage() {
+  const pressureWeights = [
+    ["Required run-rate pressure", "25.0%", "How quickly the batting side must score"],
+    ["Wicket pressure", "20.0%", "Cost and risk of losing a wicket"],
+    ["Time urgency", "15.0%", "Balls remaining to reach the target"],
+    ["Momentum pressure", "15.0%", "Gap between required and recent scoring rate"],
+    ["Death-over pressure", "10.0%", "Additional urgency in the final overs"],
+    ["Target difficulty", "7.5%", "Relative target difficulty within format and season"],
+    ["Match stakes", "7.5%", "Stage / knockout importance proxy"],
+  ];
+  const rrfWeights = [
+    ["PI baseline", "35%", "Primary, transparent pressure definition"],
+    ["PI RRR-heavy", "25%", "Emphasises chase urgency"],
+    ["PI momentum-heavy", "20%", "Tests sensitivity to recent scoring momentum"],
+    ["PI stakes-heavy", "15%", "Tests sensitivity to match importance"],
+    ["Synthetic XGBoost", "5%", "Supporting signal trained on generated pressure labels"],
+  ];
+  return <section id="content" className="cricket-analysis-section section-shell">
+    <SectionLabel left="03 / PROJECT ANALYSIS" right="SUPERR SELECTOR · SEASON 02" />
+    <header className="cricket-case-hero">
+      <div className="cricket-case-kicker"><Activity size={14} /> PRESSURE PERFORMANCE / IPL + T20I</div>
+      <div className="cricket-case-main">
+        <div className="cricket-case-title">
+          <h1>Read the game.<br /><em>Measure the pressure.</em></h1>
+          <p>A pressure-first player evaluation framework built for the SupeRR Selector Season 02 challenge. Instead of ranking players only by career totals, the system evaluates how they perform when match context becomes difficult.</p>
+        </div>
+        <aside className="cricket-case-aside">
+          <span>THE QUESTION</span>
+          <p>Who has produced the strongest performance profile in high-pressure T20 situations—not simply the strongest overall record?</p>
+          <a href="#/builds">← BACK TO BUILDS</a>
+        </aside>
+      </div>
+      <div className="cricket-case-actions">
+        <a className="cricket-action-primary" href="https://github.com/shayan-wasLazy/Cricket-Aanalysis" target="_blank" rel="noreferrer"><Github size={17} /> VIEW SOURCE REPOSITORY <ExternalLink size={14} /></a>
+        <a className="cricket-action-secondary" href="https://github.com/shayan-wasLazy/Cricket-Aanalysis/blob/main/README.md" target="_blank" rel="noreferrer">METHODOLOGY & RUN GUIDE <ArrowUpRight size={14} /></a>
+      </div>
+    </header>
+
+    <div className="cricket-stat-grid">
+      <div className="cricket-stat"><strong>10 + 10</strong><span>BATTER & BOWLER SHORTLISTS</span></div>
+      <div className="cricket-stat"><strong>05</strong><span>RANKING METHODS</span></div>
+      <div className="cricket-stat"><strong>0—100</strong><span>PRESSURE INDEX SCALE</span></div>
+      <div className="cricket-stat"><strong>2022—26</strong><span>IPL + T20I DATA WINDOW</span></div>
+    </div>
+
+    <section className="cricket-report-section">
+      <div className="cricket-section-heading"><div><span className="eyebrow">01 / THE CHALLENGE</span><h2>Measure performance <em>in context.</em></h2></div><p>The brief asks for two ordered top-10 lists and a reproducible explanation of pressure, player metrics, fair comparisons, supporting evidence, and model limitations.</p></div>
+      <div className="cricket-facts-grid">
+        <article><span>DATA INPUT</span><h3>Ball-by-ball</h3><p>IPL and T20 International deliveries from 2022 onward, joined with match, competition, team, player, playing-XI, and competition-player metadata.</p></article>
+        <article><span>ROLE-SPECIFIC VIEW</span><h3>Batters ≠ bowlers</h3><p>Batters are evaluated when the batting side is under pressure; bowlers are evaluated while the defending side is under pressure.</p></article>
+        <article><span>OUTPUT</span><h3>Coach-ready shortlist</h3><p>Rankings narrow the candidate pool. Role fit, matchups, and cricket context still require human review.</p></article>
+      </div>
+    </section>
+
+    <section className="cricket-report-section">
+      <div className="cricket-section-heading"><div><span className="eyebrow">02 / SELECTION PIPELINE</span><h2>From deliveries to <em>decisions.</em></h2></div><p>Each stage adds context and evidence controls before the model combines independent ranking positions.</p></div>
+      <div className="cricket-pipeline">
+        {[
+          ["01", "Join data", "Connect delivery-level records to match, competition, team, and player metadata."],
+          ["02", "Rebuild match state", "Reconstruct score, target, wickets, balls remaining, innings context, and chase state."],
+          ["03", "Score pressure", "Calculate a 0–100 baseline Pressure Index and alternative PI weight scenarios."],
+          ["04", "Measure response", "Build batter and bowler metrics using role-correct high-pressure opportunities and lower-pressure baselines."],
+          ["05", "Apply eligibility", "Filter by pressure deliveries, matches, recency, and the number of supporting methods."],
+          ["06", "Fuse rankings", "Rank every method independently, then combine candidate positions with weighted Reciprocal Rank Fusion."],
+        ].map((stage) => <article className="cricket-pipeline-step" key={stage[0]}><span>{stage[0]}</span><div><h3>{stage[1]}</h3><p>{stage[2]}</p></div></article>)}
+      </div>
+    </section>
+
+    <section className="cricket-report-section">
+      <div className="cricket-section-heading"><div><span className="eyebrow">03 / PRESSURE MODEL</span><h2>A transparent <em>Pressure Index.</em></h2></div><p>The baseline PI is a weighted sum of normalized match-state components. The transformations are implemented in code; the weights alone are not the whole definition.</p></div>
+      <div className="cricket-model-layout">
+        <div className="cricket-table-wrap">
+          <table className="cricket-table">
+            <thead><tr><th>COMPONENT</th><th>WEIGHT</th><th>CAPTURES</th></tr></thead>
+            <tbody>{pressureWeights.map((item) => <tr key={item[0]}><td>{item[0]}</td><td>{item[1]}</td><td>{item[2]}</td></tr>)}</tbody>
+          </table>
+        </div>
+        <aside className="cricket-formula-card"><span>BASELINE FORMULA</span><p>PI = 0.25·RRR + 0.20·Wicket + 0.15·Time + 0.15·Momentum + 0.10·Death + 0.075·Target + 0.075·Stakes</p><small>Each component is normalized before weighting. The resulting pressure score is scaled to 0–100.</small></aside>
+      </div>
+      <div className="cricket-note-grid">
+        <article><span>ALTERNATIVE PI VARIANTS</span><p>RRR-heavy, momentum-heavy, and stakes-heavy variants test whether the shortlist remains competitive when the pressure definition changes.</p></article>
+        <article><span>SYNTHETIC XGBOOST</span><p>XGBoost is trained on generated scenarios with teacher-rule labels. It learns that synthetic rule; it is not independently validated against real-world pressure labels.</p></article>
+      </div>
+    </section>
+
+    <section className="cricket-report-section">
+      <div className="cricket-section-heading"><div><span className="eyebrow">04 / PLAYER METRICS & RANKING</span><h2>Reward performance and <em>agreement.</em></h2></div><p>Role-specific rates are compared with lower-pressure baselines, while rank fusion avoids treating differently scaled model scores as directly comparable.</p></div>
+      <div className="cricket-facts-grid">
+        <article><span>BATTERS</span><h3>Runs per 100 balls</h3><p>Pressure scoring rate and uplift versus the player's lower-pressure baseline. Wides are not balls faced; no-balls count as balls faced.</p></article>
+        <article><span>BOWLERS</span><h3>Wickets per 100 legal balls</h3><p>Credited wickets, economy, and dot-ball rate. Only legal balls enter the wicket-rate denominator; non-bowler-credited dismissals are excluded.</p></article>
+        <article><span>RECENCY & SHRINKAGE</span><h3>Stabilise small samples</h3><p>Recency weights follow w = 2^(−age / half-life). A 100-delivery prior pulls small-sample rates toward the population rate.</p></article>
+      </div>
+      <div className="cricket-model-layout cricket-rank-layout">
+        <div className="cricket-table-wrap">
+          <table className="cricket-table">
+            <thead><tr><th>RANKING METHOD</th><th>WEIGHT</th><th>ROLE</th></tr></thead>
+            <tbody>{rrfWeights.map((item) => <tr key={item[0]}><td>{item[0]}</td><td>{item[1]}</td><td>{item[2]}</td></tr>)}</tbody>
+          </table>
+        </div>
+        <aside className="cricket-formula-card"><span>WEIGHTED RECIPROCAL RANK FUSION</span><p>RRF(p) = Σ [ method weight / (60 + method rank) ]</p><small>Missing method ranks contribute zero. A player must appear in at least three eligible method lists to enter the captured ensemble.</small></aside>
+      </div>
+      <div className="cricket-eligibility">
+        <div><span>FORMATS / SEASONS</span><strong>T20 + T20I · 2022–2026</strong></div>
+        <div><span>MINIMUM PRESSURE BALLS</span><strong>40</strong></div>
+        <div><span>MINIMUM PRESSURE MATCHES</span><strong>5</strong></div>
+        <div><span>MINIMUM MODEL SUPPORT</span><strong>3 of 5</strong></div>
+        <div><span>LAST PRESSURE MATCH</span><strong>Within 365 days</strong></div>
+      </div>
+      <p className="cricket-footnote">These are the dashboard settings captured in the final report. The repository's stricter code defaults are 100 deliveries and 10 matches; the dashboard overrides them for this submission. The 365-day value is an activity cutoff, not the recency half-life.</p>
+    </section>
+
+    <section className="cricket-report-section cricket-results-section">
+      <div className="cricket-section-heading"><div><span className="eyebrow">05 / BATTER SHORTLIST</span><h2>David Miller leads the <em>ensemble.</em></h2></div><p>Tilak Varma has the strongest displayed pressure uplift (+31.90 runs per 100 pressure balls); Naman Dhir has the highest displayed model score (99.43).</p></div>
+      <div className="cricket-highlight-row">
+        <div><span>TOP RRF RANK</span><strong>David Miller</strong><small>0.0158 · 5 methods · 11 matches</small></div>
+        <div><span>HIGHEST UPLIFT</span><strong>Tilak Varma</strong><small>+31.90 runs / 100 pressure balls</small></div>
+        <div><span>HIGHEST MODEL SCORE</span><strong>Naman Dhir</strong><small>99.43 · 56 balls · 5 matches</small></div>
+      </div>
+      <div className="cricket-chart-panel">
+        <div className="cricket-chart-heading"><span>BATTER PRESSURE UPLIFT</span><small>RUNS PER 100 PRESSURE BALLS</small></div>
+        <div className="cricket-bars">{cricketBatters.map((player) => <div className="cricket-bar-row" key={player.name}><span>{player.name}</span><div className="cricket-bar-track"><i style={{ width: (player.uplift / 31.9 * 100) + "%" }} /></div><strong>+{player.uplift.toFixed(2)}</strong></div>)}</div>
+      </div>
+      <div className="cricket-table-wrap">
+        <table className="cricket-table cricket-ranking-table">
+          <thead><tr><th>#</th><th>PLAYER</th><th>RRF</th><th>MODEL</th><th>UPLIFT / 100</th><th>MIN BALLS</th><th>MIN MATCHES</th><th>METHODS</th></tr></thead>
+          <tbody>{cricketBatters.map((player) => <tr key={player.name}><td>{player.rank}</td><td>{player.name}</td><td>{player.rrf}</td><td>{player.model.toFixed(2)}</td><td className="is-positive">+{player.uplift.toFixed(2)}</td><td>{player.balls}</td><td>{player.matches}</td><td>{player.methods}/5</td></tr>)}</tbody>
+        </table>
+      </div>
+      <p className="cricket-footnote">Miller combines +20.94 uplift with 56 minimum pressure balls across 11 matches and support from all five methods. Holder and Powell have comparatively larger samples (101/16 and 123/16). Ashutosh Sharma ranks fourth despite a lower uplift, showing that the ensemble is not sorted by uplift alone.</p>
+    </section>
+
+    <section className="cricket-report-section cricket-results-section">
+      <div className="cricket-section-heading"><div><span className="eyebrow">06 / BOWLER SHORTLIST</span><h2>Bosch & Ellis lead the <em>ensemble.</em></h2></div><p>The important qualification: all ten listed bowlers have negative wicket-rate uplift against their own lower-pressure baseline.</p></div>
+      <div className="cricket-highlight-row">
+        <div><span>TOP RRF RANK</span><strong>Corbin Bosch</strong><small>0.0159 · 5 methods · 7 matches</small></div>
+        <div><span>JOINT RRF SCORE</span><strong>Nathan Ellis</strong><small>0.0159 · 5 methods · 9 matches</small></div>
+        <div><span>LEAST-NEGATIVE UPLIFT</span><strong>Josh Hazlewood</strong><small>−2.50 wickets / 100 legal balls · rank 8</small></div>
+      </div>
+      <div className="cricket-table-wrap">
+        <table className="cricket-table cricket-ranking-table">
+          <thead><tr><th>#</th><th>PLAYER</th><th>RRF</th><th>MODEL</th><th>WKT UPLIFT / 100</th><th>MIN BALLS</th><th>MIN MATCHES</th><th>METHODS</th></tr></thead>
+          <tbody>{cricketBowlers.map((player) => <tr key={player.name}><td>{player.rank}</td><td>{player.name}</td><td>{player.rrf}</td><td>{player.model.toFixed(2)}</td><td className="is-negative">{player.uplift.toFixed(2)}</td><td>{player.balls}</td><td>{player.matches}</td><td>{player.methods}/5</td></tr>)}</tbody>
+        </table>
+      </div>
+      <div className="cricket-callout"><Trophy size={18} /><p>These are the ten highest-ranked eligible bowlers under the composite framework—not ten bowlers who improve under pressure. Negative uplift means credited wicket rate per 100 legal pressure balls is lower than the lower-pressure baseline. The composite also includes pressure wicket rate, economy, dot-ball rate, and model consensus.</p></div>
+    </section>
+
+    <section className="cricket-report-section">
+      <div className="cricket-section-heading"><div><span className="eyebrow">07 / LIMITATIONS & AUDIT</span><h2>Keep the result <em>in perspective.</em></h2></div><p>The model is designed to support selection review, not to claim certainty about a player's psychological response or predict future performance.</p></div>
+      <div className="cricket-limitations">
+        <article><span>01 / PRESSURE IS ENGINEERED</span><p>PI is an operational definition built from match-state features, not an externally labelled ground truth. Alternative weights test sensitivity but do not remove the modelling choice.</p></article>
+        <article><span>02 / SYNTHETIC XGBOOST</span><p>The classifier learns a generated teacher rule. Its 5% ensemble weight limits its influence; synthetic holdout performance is not independent real-match validation.</p></article>
+        <article><span>03 / OBSERVATIONAL UPLIFT</span><p>Pressure and baseline deliveries differ in phase, opposition, venue, role, and match state. The difference is descriptive, not a causal estimate.</p></article>
+        <article><span>04 / SAMPLE THRESHOLDS</span><p>40 balls and 5 matches expand coverage but increase uncertainty near the cutoff. Sample sizes should be reviewed beside every score.</p></article>
+        <article><span>05 / SCORE RECONSTRUCTION</span><p>The repository flags unresolved bye / leg-bye values and an extras field that may be categorical. Reconstructed innings totals and chase states remain provisional until checked against official scorecards.</p></article>
+        <article><span>06 / ELIGIBILITY & DISPLAY</span><p>Pakistan- and Bangladesh-mapped national-team player IDs are excluded from final candidates as a competition rule. The report also flags the dashboard's “None” shrinkage display and requests a full candidate-row audit for Brian Bennett.</p></article>
+      </div>
+      <div className="cricket-final-note"><Target size={19} /><p>A high rank means a player scores well under this pressure definition and eligibility configuration. It is not a probability of success, proof of causation, or a universal ranking of player quality.</p></div>
+    </section>
+    <footer className="cricket-analysis-footer"><span>SUPERR SELECTOR / SEASON 02</span><a href="https://github.com/shayan-wasLazy/Cricket-Aanalysis" target="_blank" rel="noreferrer">EXPLORE THE CODE <ExternalLink size={13} /></a><a href="#/builds">BACK TO BUILDS ↑</a></footer>
+  </section>;
+}
+
 function Footer() { const reduceMotion = useReducedMotion(); return <footer className="site-footer section-shell"><span>© 2026 SHAYAN MANDREKAR</span><span>BUILT WITH CURIOSITY, NOT A TEMPLATE.</span><a href="/" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" }); window.history.pushState({}, "", "/"); window.dispatchEvent(new PopStateEvent("popstate")); }}>BACK TO HOME ↑</a></footer>; }
 
 export default function App() {
   const initialPath = window.location.hash || "#/";
-  const pageFromPath = (value: string): PageId => value.startsWith("#/design") ? "design" : value.startsWith("#/builds") ? "builds" : "home";
+  const pageFromPath = (value: string): PageId => value.startsWith("#/design") ? "design" : value.startsWith("#/builds") ? "builds" : value.startsWith("#/cricket-analysis") ? "analysis" : "home";
   const [path, setPath] = useState(initialPath);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [loadingPage, setLoadingPage] = useState<PageId | null>(pageFromPath(initialPath));
@@ -333,5 +524,5 @@ export default function App() {
     return () => window.removeEventListener("hashchange", update);
   }, []);
   const active = pageFromPath(path);
-  return <main id="top" data-theme={theme}><LoFiCursor />{loadingPage && <LoadingScreen key={loadingPage} page={loadingPage} />}<Navigation active={active} theme={theme} onToggleTheme={() => setTheme((current) => current === "dark" ? "light" : "dark")} />{active === "design" ? <DesignPage /> : active === "builds" ? <BuildsPage /> : <HomePage />}<Footer /></main>;
+  return <main id="top" data-theme={theme}><LoFiCursor />{loadingPage && <LoadingScreen key={loadingPage} page={loadingPage} />}<Navigation active={active} theme={theme} onToggleTheme={() => setTheme((current) => current === "dark" ? "light" : "dark")} />{active === "design" ? <DesignPage /> : active === "builds" ? <BuildsPage /> : active === "analysis" ? <CricketAnalysisPage /> : <HomePage />}<Footer /></main>;
 }
