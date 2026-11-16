@@ -2978,3 +2978,42 @@ main#top[data-theme="light"] .modal-actions .modal-analysis-link { background: t
   .cricket-bar-row { grid-template-columns: minmax(0,108px) minmax(35px,1fr) 48px; }
   .cricket-action-primary, .cricket-action-secondary { width: 100%; }
 }
+
+
+/* SupeRR Selector — restrained magenta accent from the supplied RR reference. */
+main#top .cricket-analysis-section {
+  --cricket-accent: #EE0497;
+}
+main#top .cricket-case-kicker,
+main#top .cricket-section-heading .eyebrow {
+  color: var(--cricket-accent);
+}
+main#top .cricket-case-kicker svg {
+  color: var(--cricket-accent);
+}
+main#top .cricket-case-title h1 em,
+main#top .cricket-section-heading h2 em {
+  color: var(--cricket-accent);
+}
+main#top .cricket-bar-track i {
+  background: var(--cricket-accent);
+}
+main#top .cricket-ranking-table tbody tr:first-child td:first-child {
+  color: var(--cricket-accent);
+  font-weight: 800;
+}
+main#top .cricket-action-secondary:hover {
+  border-color: var(--cricket-accent);
+  color: var(--cricket-accent);
+}
+main#top[data-theme="light"] .cricket-case-kicker,
+main#top[data-theme="light"] .cricket-section-heading .eyebrow,
+main#top[data-theme="light"] .cricket-case-kicker svg,
+main#top[data-theme="light"] .cricket-case-title h1 em,
+main#top[data-theme="light"] .cricket-section-heading h2 em,
+main#top[data-theme="light"] .cricket-ranking-table tbody tr:first-child td:first-child {
+  color: var(--cricket-accent);
+}
+main#top[data-theme="light"] .cricket-bar-track i {
+  background: var(--cricket-accent);
+}
