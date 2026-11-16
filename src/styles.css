@@ -3637,7 +3637,7 @@ main#top[data-theme="light"] .study-code-grid span.dark { background: #aaa79d; }
   .study-image-grid.cog-image-grid .study-figure:last-child { grid-column: auto; }
   .study-flow { grid-template-columns: minmax(0,1fr); }
   .reed-preview-top { padding: 0 12px; gap: 9px; }
-  .reed-preview-local-pill { font-size: 7px; }
+  .reed-local-pill { font-size: 7px; }
   .reed-preview-body { grid-template-columns: 1fr; }
   .reed-preview-sidebar { display: none; }
   .reed-preview-main { padding: 16px 13px; }
@@ -3645,4 +3645,29 @@ main#top[data-theme="light"] .study-code-grid span.dark { background: #aaa79d; }
   .study-code-visual { padding: 12px; }
   .study-code-caption { flex-direction: column; }
   .study-footer { flex-direction: column; }
+}
+
+
+/* Final light-theme contrast polish for the project visuals. */
+main#top .reed-local-pill {
+  padding: 6px 9px;
+}
+main#top[data-theme="light"] .study-kicker-mark {
+  color: #191917;
+}
+main#top[data-theme="light"] .study-metric-grid small,
+main#top[data-theme="light"] .study-data-link,
+main#top[data-theme="light"] .reed-preview-welcome > span,
+main#top[data-theme="light"] .reed-preview-question > span,
+main#top[data-theme="light"] .reed-preview-answer > span,
+main#top[data-theme="light"] .reed-preview-answer > span i,
+main#top[data-theme="light"] .reed-local-pill {
+  color: #77756e;
+}
+main#top[data-theme="light"] .reed-local-pill {
+  border-color: rgba(23,23,21,.2);
+}
+main#top[data-theme="light"] .reed-preview-avatar {
+  color: #4e4d47;
+  border-color: rgba(23,23,21,.24);
 }
