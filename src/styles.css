@@ -3094,3 +3094,14 @@ main#top[data-theme="light"] .cricket-ranking-table tbody tr:first-child td:firs
     gap: 16px;
   }
 }
+
+
+/* Separate the player-metrics cards from the ranking / RRF row below. */
+main#top .cricket-facts-grid + .cricket-model-layout {
+  margin-top: 22px;
+}
+@media (max-width: 760px) {
+  main#top .cricket-facts-grid + .cricket-model-layout {
+    margin-top: 18px;
+  }
+}
