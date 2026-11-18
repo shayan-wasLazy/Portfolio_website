@@ -122,13 +122,23 @@ function Hero() {
   return <section className="hero home-hero" aria-label="Portfolio cover">
     <div className="hero-image" role="img" aria-label="Monochrome Japanese mountain valley illustration" />
     <div className="hero-vignette" /><div className="hero-grain" /><FloatingLeaves />
-    <a className="hero-resume-cta" href={`${import.meta.env.BASE_URL}shayan_mandrekar_resume.pdf`} download="shayan_mandrekar_resume.pdf" aria-label="Download Shayan Mandrekar's resume">
-      <span>VIEW MY RESUME</span><ArrowDownRight size={17} strokeWidth={1.8} />
+    <a className="hero-speech-bubble" href={`${import.meta.env.BASE_URL}shayan_mandrekar_resume.pdf`} download="shayan_mandrekar_resume.pdf" aria-label="Pet me to download Shayan Mandrekar's resume">
+      <span>psst... pet me to</span>
+      <strong>DOWNLOAD RESUME</strong>
     </a>
     <div className="hero-animal-layer" aria-label="Interactive valley characters">
       {animals.map((animal) => <button key={animal.id} type="button"
         className={`hero-animal ${animal.className} ${activeAnimal === animal.id ? "is-active" : ""}`}
-        aria-label={animal.label} aria-pressed={activeAnimal === animal.id}
+        aria-label={animal.id === "sunglasses-cat" ? "Pet this cat to download the resume" : animal.label}
+        aria-pressed={activeAnimal === animal.id}
+        onClick={() => {
+          if (animal.id === "sunglasses-cat") {
+            const link = document.createElement("a");
+            link.href = `${import.meta.env.BASE_URL}shayan_mandrekar_resume.pdf`;
+            link.download = "shayan_mandrekar_resume.pdf";
+            link.click();
+          }
+        }}
         onMouseEnter={() => setActiveAnimal(animal.id)}
         onMouseLeave={() => setActiveAnimal(null)}
         onFocus={() => setActiveAnimal(animal.id)}
