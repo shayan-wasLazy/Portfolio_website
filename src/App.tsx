@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowDownRight, ArrowUpRight, Github, Instagram, Linkedin, Palette, Code2, X, ExternalLink, Mail, Sun, Moon, Activity, Target, Trophy, Download } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, Github, Instagram, Linkedin, Palette, Code2, X, ExternalLink, Mail, Sun, Moon, Activity, Target, Trophy } from "lucide-react";
 
 type PageId = "home" | "design" | "builds" | "analysis" | "reed" | "cog" | "anime" | "chess";
 type Project = { number: string; title: string; type: string; description: string; stack: string; focus: string; url?: string; analysisUrl?: string };
@@ -122,6 +122,9 @@ function Hero() {
   return <section className="hero home-hero" aria-label="Portfolio cover">
     <div className="hero-image" role="img" aria-label="Monochrome Japanese mountain valley illustration" />
     <div className="hero-vignette" /><div className="hero-grain" /><FloatingLeaves />
+    <a className="hero-resume-cta" href={`${import.meta.env.BASE_URL}shayan_mandrekar_resume.pdf`} download="shayan_mandrekar_resume.pdf" aria-label="Download Shayan Mandrekar's resume">
+      <span>VIEW MY RESUME</span><ArrowDownRight size={17} strokeWidth={1.8} />
+    </a>
     <div className="hero-animal-layer" aria-label="Interactive valley characters">
       {animals.map((animal) => <button key={animal.id} type="button"
         className={`hero-animal ${animal.className} ${activeAnimal === animal.id ? "is-active" : ""}`}
@@ -785,13 +788,6 @@ function ChessCaseStudy() {
       <p className="study-footnote">The repository does not publish a benchmark rating, win-rate evaluation or held-out move accuracy, so none is claimed here.</p>
     </StudySection>
   </ProjectStudyFrame>;
-}
-
-function ResumeDownload() {
-  return <a className="resume-float-button" href={`${import.meta.env.BASE_URL}shayan_mandrekar_resume.pdf`} download="shayan_mandrekar_resume.pdf" aria-label="Download Shayan Mandrekar's resume">
-    <Download size={16} strokeWidth={1.8} />
-    <span>DOWNLOAD RESUME</span>
-  </a>;
 }
 
 function Footer() { const reduceMotion = useReducedMotion(); return <footer className="site-footer section-shell"><span>© 2026 SHAYAN MANDREKAR</span><span>BUILT WITH CURIOSITY, NOT A TEMPLATE.</span><a href="/" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" }); window.history.pushState({}, "", "/"); window.dispatchEvent(new PopStateEvent("popstate")); }}>BACK TO HOME ↑</a></footer>; }
