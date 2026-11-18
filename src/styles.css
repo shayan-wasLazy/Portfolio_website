@@ -3746,7 +3746,7 @@ main#top[data-theme="light"] .hero-speech-bubble::after {
 @media (max-width: 760px) {
   .hero-speech-bubble {
     left: 52%;
-    top: 30%;
+    top: 53%;
     max-width: 190px;
     padding: 10px 13px 11px;
     gap: 3px;
@@ -3764,7 +3764,7 @@ main#top[data-theme="light"] .hero-speech-bubble::after {
 @media (max-width: 380px) {
   .hero-speech-bubble {
     left: 52%;
-    top: 29%;
+    top: 52%;
     padding: 9px 11px 10px;
   }
 }
