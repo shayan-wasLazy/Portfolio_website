@@ -3673,56 +3673,69 @@ main#top[data-theme="light"] .reed-preview-avatar {
 }
 
 
-/* Floating resume download action */
-.resume-float-button {
-  position: fixed;
-  z-index: 80;
-  right: clamp(18px, 3vw, 38px);
-  bottom: clamp(18px, 3vw, 34px);
+/* Resume CTA: anchored to the hero artwork, not fixed to the viewport. */
+.hero-resume-cta {
+  position: absolute;
+  z-index: 7;
+  top: 55.5%;
+  left: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  min-height: 48px;
-  padding: 0 18px;
+  gap: 12px;
+  min-height: 46px;
+  padding: 0 19px 0 21px;
   color: #f2f0e9;
-  background: rgba(31, 30, 27, .88);
-  border: 1px solid rgba(242, 240, 233, .28);
+  background: rgba(24, 24, 22, .78);
+  border: 1px solid rgba(242, 240, 233, .48);
   border-radius: 999px;
-  box-shadow: 0 10px 32px rgba(0, 0, 0, .22);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .24);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   font: 9px var(--mono);
-  letter-spacing: .1em;
+  letter-spacing: .13em;
   text-decoration: none;
-  transition: transform .22s ease, background .22s ease, border-color .22s ease, box-shadow .22s ease;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+  transition: background .22s ease, border-color .22s ease, box-shadow .22s ease, transform .22s ease;
 }
-.resume-float-button:hover {
-  transform: translateY(-3px);
-  background: rgba(242, 240, 233, .12);
-  border-color: rgba(242, 240, 233, .55);
-  box-shadow: 0 14px 38px rgba(0, 0, 0, .28);
+.hero-resume-cta:hover {
+  transform: translate(-50%, calc(-50% - 3px));
+  background: rgba(242, 240, 233, .94);
+  color: #191917;
+  border-color: rgba(242, 240, 233, .9);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, .3);
 }
-.resume-float-button:focus-visible {
-  outline: 2px solid currentColor;
+.hero-resume-cta:focus-visible {
+  outline: 2px solid #f2f0e9;
   outline-offset: 4px;
 }
-main#top[data-theme="light"] .resume-float-button {
+main#top[data-theme="light"] .hero-resume-cta {
   color: #191917;
-  background: rgba(247, 245, 239, .9);
-  border-color: rgba(23, 23, 21, .22);
-  box-shadow: 0 10px 32px rgba(23, 23, 21, .12);
+  background: rgba(247, 245, 239, .86);
+  border-color: rgba(23, 23, 21, .35);
 }
-main#top[data-theme="light"] .resume-float-button:hover {
-  background: rgba(232, 229, 221, .96);
-  border-color: rgba(23, 23, 21, .42);
+main#top[data-theme="light"] .hero-resume-cta:hover {
+  color: #f2f0e9;
+  background: #191917;
+  border-color: #191917;
 }
-@media (max-width: 520px) {
-  .resume-float-button {
-    right: 16px;
-    bottom: 16px;
-    min-height: 44px;
-    padding: 0 15px;
+@media (max-width: 760px) {
+  .hero-resume-cta {
+    top: 55%;
+    min-height: 43px;
+    gap: 9px;
+    padding: 0 16px 0 18px;
     font-size: 8px;
+    letter-spacing: .11em;
   }
+}
+@media (max-width: 380px) {
+  .hero-resume-cta {
+    top: 54.5%;
+    min-height: 41px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-resume-cta { transition: none; }
 }
