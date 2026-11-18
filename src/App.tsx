@@ -814,5 +814,5 @@ export default function App() {
     return () => window.removeEventListener("hashchange", update);
   }, []);
   const active = pageFromPath(path);
-  return <main id="top" data-theme={theme}><LoFiCursor />{loadingPage && <LoadingScreen key={loadingPage} page={loadingPage} />}<Navigation active={active} theme={theme} onToggleTheme={() => setTheme((current) => current === "dark" ? "light" : "dark")} /><ResumeDownload />{active === "design" ? <DesignPage /> : active === "builds" ? <BuildsPage /> : active === "analysis" ? <CricketAnalysisPage /> : active === "reed" ? <ReedCaseStudy /> : active === "cog" ? <CogCaseStudy /> : active === "anime" ? <AnimeCaseStudy /> : active === "chess" ? <ChessCaseStudy /> : <HomePage />}<Footer /></main>;
+  return <main id="top" data-theme={theme}><LoFiCursor />{loadingPage && <LoadingScreen key={loadingPage} page={loadingPage} />}<Navigation active={active} theme={theme} onToggleTheme={() => setTheme((current) => current === "dark" ? "light" : "dark")} />{active === "design" ? <DesignPage /> : active === "builds" ? <BuildsPage /> : active === "analysis" ? <CricketAnalysisPage /> : active === "reed" ? <ReedCaseStudy /> : active === "cog" ? <CogCaseStudy /> : active === "anime" ? <AnimeCaseStudy /> : active === "chess" ? <ChessCaseStudy /> : <HomePage />}<Footer /></main>;
 }
