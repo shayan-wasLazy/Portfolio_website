@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowDownRight, ArrowUpRight, Github, Instagram, Linkedin, Palette, Code2, X, ExternalLink, Mail, Sun, Moon, Activity, Target, Trophy } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, Github, Instagram, Linkedin, Palette, Code2, X, ExternalLink, Mail, Sun, Moon, Activity, Target, Trophy, Download } from "lucide-react";
 
 type PageId = "home" | "design" | "builds" | "analysis" | "reed" | "cog" | "anime" | "chess";
 type Project = { number: string; title: string; type: string; description: string; stack: string; focus: string; url?: string; analysisUrl?: string };
@@ -787,6 +787,13 @@ function ChessCaseStudy() {
   </ProjectStudyFrame>;
 }
 
+function ResumeDownload() {
+  return <a className="resume-float-button" href={`${import.meta.env.BASE_URL}shayan_mandrekar_resume.pdf`} download="shayan_mandrekar_resume.pdf" aria-label="Download Shayan Mandrekar's resume">
+    <Download size={16} strokeWidth={1.8} />
+    <span>DOWNLOAD RESUME</span>
+  </a>;
+}
+
 function Footer() { const reduceMotion = useReducedMotion(); return <footer className="site-footer section-shell"><span>© 2026 SHAYAN MANDREKAR</span><span>BUILT WITH CURIOSITY, NOT A TEMPLATE.</span><a href="/" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" }); window.history.pushState({}, "", "/"); window.dispatchEvent(new PopStateEvent("popstate")); }}>BACK TO HOME ↑</a></footer>; }
 
 export default function App() {
@@ -811,5 +818,5 @@ export default function App() {
     return () => window.removeEventListener("hashchange", update);
   }, []);
   const active = pageFromPath(path);
-  return <main id="top" data-theme={theme}><LoFiCursor />{loadingPage && <LoadingScreen key={loadingPage} page={loadingPage} />}<Navigation active={active} theme={theme} onToggleTheme={() => setTheme((current) => current === "dark" ? "light" : "dark")} />{active === "design" ? <DesignPage /> : active === "builds" ? <BuildsPage /> : active === "analysis" ? <CricketAnalysisPage /> : active === "reed" ? <ReedCaseStudy /> : active === "cog" ? <CogCaseStudy /> : active === "anime" ? <AnimeCaseStudy /> : active === "chess" ? <ChessCaseStudy /> : <HomePage />}<Footer /></main>;
+  return <main id="top" data-theme={theme}><LoFiCursor />{loadingPage && <LoadingScreen key={loadingPage} page={loadingPage} />}<Navigation active={active} theme={theme} onToggleTheme={() => setTheme((current) => current === "dark" ? "light" : "dark")} /><ResumeDownload />{active === "design" ? <DesignPage /> : active === "builds" ? <BuildsPage /> : active === "analysis" ? <CricketAnalysisPage /> : active === "reed" ? <ReedCaseStudy /> : active === "cog" ? <CogCaseStudy /> : active === "anime" ? <AnimeCaseStudy /> : active === "chess" ? <ChessCaseStudy /> : <HomePage />}<Footer /></main>;
 }
