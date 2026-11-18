@@ -3671,3 +3671,58 @@ main#top[data-theme="light"] .reed-preview-avatar {
   color: #4e4d47;
   border-color: rgba(23,23,21,.24);
 }
+
+
+/* Floating resume download action */
+.resume-float-button {
+  position: fixed;
+  z-index: 80;
+  right: clamp(18px, 3vw, 38px);
+  bottom: clamp(18px, 3vw, 34px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 18px;
+  color: #f2f0e9;
+  background: rgba(31, 30, 27, .88);
+  border: 1px solid rgba(242, 240, 233, .28);
+  border-radius: 999px;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, .22);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  font: 9px var(--mono);
+  letter-spacing: .1em;
+  text-decoration: none;
+  transition: transform .22s ease, background .22s ease, border-color .22s ease, box-shadow .22s ease;
+}
+.resume-float-button:hover {
+  transform: translateY(-3px);
+  background: rgba(242, 240, 233, .12);
+  border-color: rgba(242, 240, 233, .55);
+  box-shadow: 0 14px 38px rgba(0, 0, 0, .28);
+}
+.resume-float-button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+main#top[data-theme="light"] .resume-float-button {
+  color: #191917;
+  background: rgba(247, 245, 239, .9);
+  border-color: rgba(23, 23, 21, .22);
+  box-shadow: 0 10px 32px rgba(23, 23, 21, .12);
+}
+main#top[data-theme="light"] .resume-float-button:hover {
+  background: rgba(232, 229, 221, .96);
+  border-color: rgba(23, 23, 21, .42);
+}
+@media (max-width: 520px) {
+  .resume-float-button {
+    right: 16px;
+    bottom: 16px;
+    min-height: 44px;
+    padding: 0 15px;
+    font-size: 8px;
+  }
+}
